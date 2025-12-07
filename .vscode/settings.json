@@ -1,0 +1,10 @@
+{
+	"editor.insertSpaces": false,
+	"editor.indentSize": "tabSize",
+	"cursorpyright.disableLanguageServices": false,
+	"cursorpyright.analysis.diagnosticMode": "workspace",
+	"cursorpyright.analysis.typeCheckingMode": "all",
+	"editor.codeActionsOnSave": {
+		"source.organizeImports": "always",
+	},
+}
