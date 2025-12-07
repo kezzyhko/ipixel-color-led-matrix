@@ -14,7 +14,7 @@ class Config:
 		self._set_attributes()
 
 	def _read_config(self, config_path: str):
-		self.parser: ConfigParser = ConfigParser()
+		self.parser: ConfigParser = ConfigParser(allow_unnamed_section = True)
 		with open(config_path, "r") as config_file:
 			self.parser.read_file(config_file)
 

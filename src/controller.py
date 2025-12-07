@@ -1,18 +1,20 @@
-from src.config import Config
-from src.driver import Driver
+import asyncio
+import pypixelcolor
+from .config import Config
 
 
 class Controller:
 	def __init__(self, config: Config):
 		self.config: Config = config
-		self.driver: Driver = Driver(config)
+		self.client = pypixelcolor.AsyncClient(self.config.mac_address)
 
 	@classmethod
-	async def create(cls, config: Config, auto_connect: bool = True) -> "Controller":
+	async def create_async(cls, config_path: str, auto_connect: bool = True) -> "Controller":
+		config = Config(config_path)
 		controller = cls(config)
 		if auto_connect:
 			await controller.connect()
 		return controller
 
 	async def connect(self) -> None:
-		await self.driver.connect()
+		await self.client.connect()
