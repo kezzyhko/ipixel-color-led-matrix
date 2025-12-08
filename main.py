@@ -3,7 +3,8 @@ from src.controller import Controller
 
 
 async def main():
-	controller = await Controller.create_async("config.ini")
+	controller = await Controller.create("config.ini")
+	_ = controller
 	
 
 

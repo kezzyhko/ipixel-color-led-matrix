@@ -1,0 +1,2 @@
+pypixelcolor==0.3.0
+bleak==2.0.0
