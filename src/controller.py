@@ -1,6 +1,8 @@
-import pypixelcolor
+from pypixelcolor import AsyncClient
+from pypixelcolor.lib.device_info import DeviceInfo
 from bleak import BleakScanner
 from bleak.exc import BleakDeviceNotFoundError
+from functools import cached_property
 
 from .config import Config
 
@@ -8,7 +10,11 @@ from .config import Config
 class Controller:
 	def __init__(self, config: Config):
 		self.config: Config = config
-		self.client = pypixelcolor.AsyncClient(self.config.mac_address)
+		self.client: AsyncClient = AsyncClient(self.config.mac_address)
+	
+	@cached_property
+	def device_info(self) -> DeviceInfo:
+		return self.client.get_device_info()
 
 	@staticmethod
 	async def search_devices():

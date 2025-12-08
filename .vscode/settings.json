@@ -7,5 +7,5 @@
 	"editor.codeActionsOnSave": {
 		"source.organizeImports": "always",
 	},
-	"python.defaultInterpreterPath": "${env:HOME}/miniconda3/envs/led-strip/bin/python"
+	"python.defaultInterpreterPath": "${env:HOME}/miniconda3/envs/led-strip/bin/python",
 }
