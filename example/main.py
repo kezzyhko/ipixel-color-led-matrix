@@ -1,5 +1,5 @@
 import asyncio
-from src.controller import Controller
+from ledmatrix.controller import Controller
 
 
 async def main():

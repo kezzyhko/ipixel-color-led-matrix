@@ -18,12 +18,11 @@ class Controller:
 
 	@staticmethod
 	async def search_devices():
+		print("Searching for devices...")
 		devices = await BleakScanner.discover(timeout=5.0)
-		return [
-			device
-			for device in devices
-			if device.name and device.name.startswith("LED_BLE_")
-		]
+		devices = filter(lambda device: device.name and device.name.startswith("LED_BLE_"), devices)
+		print("Found devices: ", devices)
+		return list(devices)
 
 	@classmethod
 	async def create(cls, config_path: str, auto_connect: bool = True) -> "Controller":
@@ -35,7 +34,7 @@ class Controller:
 				case 0:
 					raise BleakDeviceNotFoundError("No devices found")
 				case 1:
-					print(f"Found device: {devices[0]}")
+					print(f"Using single found device: {devices[0]}")
 					print(f"Setting it explicitly in config will make connection faster")
 					config.mac_address = devices[0].address
 				case _:

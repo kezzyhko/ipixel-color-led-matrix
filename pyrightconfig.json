@@ -1,6 +1,5 @@
 {
 	"allowedUntypedLibraries": [
-		"pypixelcolor",
+		"pypixelcolor"
 	],
 }
-
