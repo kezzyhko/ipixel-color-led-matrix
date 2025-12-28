@@ -1,3 +1,4 @@
+from pathlib import Path
 from pypixelcolor import AsyncClient
 from pypixelcolor.lib.device_info import DeviceInfo
 from bleak import BleakScanner
@@ -25,7 +26,7 @@ class Controller:
 		return list(devices)
 
 	@classmethod
-	async def create(cls, config_path: str, auto_connect: bool = True) -> "Controller":
+	async def create(cls, config_path: Path, auto_connect: bool = True) -> Controller:
 		config = Config(config_path)
 
 		if config.mac_address == "search":

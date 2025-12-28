@@ -1,4 +1,5 @@
 from configparser import ConfigParser, UNNAMED_SECTION
+from pathlib import Path
 from warnings import warn
 
 
@@ -10,12 +11,12 @@ class Config:
 	def _set_attributes(self):
 		self.mac_address: str = self.parser.get(UNNAMED_SECTION, "mac_address", fallback="search")
 
-	def __init__(self, config_path: str):
+	def __init__(self, config_path: Path):
 		self._read_config(config_path)
 		self._validate_config()
 		self._set_attributes()
 
-	def _read_config(self, config_path: str):
+	def _read_config(self, config_path: Path):
 		self.parser: ConfigParser = ConfigParser(allow_unnamed_section = True)
 		with open(config_path, "r") as config_file:
 			self.parser.read_file(config_file)
