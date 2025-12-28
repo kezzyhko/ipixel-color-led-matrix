@@ -1,7 +1,12 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "led-matrix"
 version = "0.1.0"
-packages = ["ledmatrix"]
+requires-python = ">=3.14"
 
 [tool.setuptools]
+packages = ["ledmatrix"]
 package-dir = {"" = "src"}

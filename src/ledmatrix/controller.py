@@ -6,6 +6,7 @@ from bleak.exc import BleakDeviceNotFoundError
 from functools import cached_property
 
 from .config import Config
+from .canvas import Canvas, Dimension
 
 
 class Controller:
@@ -16,6 +17,10 @@ class Controller:
 	@cached_property
 	def device_info(self) -> DeviceInfo:
 		return self.client.get_device_info()
+	
+	@cached_property
+	def canvas(self) -> Canvas:
+		return Canvas(Dimension(width=self.device_info.width, height=self.device_info.height))
 
 	@staticmethod
 	async def search_devices():
@@ -49,3 +54,4 @@ class Controller:
 
 	async def connect(self) -> None:
 		await self.client.connect()
+		await self.client.set_fun_mode(True)
