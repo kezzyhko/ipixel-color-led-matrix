@@ -2,8 +2,9 @@ from display_target.DisplayTarget import DisplayTarget
 
 
 class LedMatrixApp:
-	def __init__(self, display_target: DisplayTarget, is_debug: bool = False):
+	def __init__(self, display_target: DisplayTarget, is_debug: bool = False, fps: int = 120):
 		self.is_debug = is_debug
+		# TODO: !!! create events, pass to all services
 		# TODO: Implement services
 		self.composer_service = ComposerService()
 		self.display_service = DisplayService(display_target)
