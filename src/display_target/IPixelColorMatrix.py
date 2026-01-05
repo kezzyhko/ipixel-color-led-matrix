@@ -1,4 +1,4 @@
-from display_target.DisplayTarget import DisplayTarget
+from . import DisplayTarget
 from PIL.Image import Image
 
 

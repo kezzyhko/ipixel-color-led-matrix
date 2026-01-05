@@ -1,4 +1,4 @@
-from display_target.DisplayTarget import DisplayTarget
+from . import DisplayTarget
 import colorama
 from PIL.Image import Image
 from helpers import get_rgba_pixels
