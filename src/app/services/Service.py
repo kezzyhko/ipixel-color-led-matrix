@@ -1,7 +1,7 @@
-from abc import ABC, abstractmethod
+from abc import ABCMeta, abstractmethod
 
 
-class Service(ABC):
+class Service(metaclass=ABCMeta):
 	@abstractmethod
 	def run(self):
 		pass
