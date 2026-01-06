@@ -14,10 +14,11 @@ class Group(Component):
 			child.update()
 
 	def render(self) -> Image.Image:
-		image = Image.new("RGB", (10, 10), (0, 255, 0)) #TODO: size
+		image = Image.new("RGBA", (64, 16), (0, 0, 0, 0)) #TODO: size
 		for child in self.children:
 			render_buffer = child.render()
-			image.paste(render_buffer, (child.x, child.y))
+			mask = render_buffer if render_buffer.mode == "RGBA" else None
+			image.paste(render_buffer, (child.x, child.y), mask)
 		return image
 
 	def add_child(self, child: Component):

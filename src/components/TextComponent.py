@@ -1,5 +1,7 @@
 from abc import ABCMeta, abstractmethod
-from PIL import Image
+import platform
+from pathlib import Path
+from PIL import Image, ImageDraw, ImageFont
 from . import Component
 
 
@@ -12,4 +14,18 @@ class TextComponent(Component, metaclass=ABCMeta):
 		pass
 
 	def render(self) -> Image.Image:
-		return Image.new("RGB", (10, 10), (0, 0, 255)) # TODO: use self.text #TODO: size
+		# TODO: size
+		height = 16
+		width = 64
+		fontsize = 8
+		
+		font = ImageFont.load_default(size=fontsize)
+		
+		img = Image.new("RGBA", (width, height), (0, 0, 0, 0))
+		draw = ImageDraw.Draw(img)
+		draw.fontmode = "1"
+		
+		# Use anchor="lt" (left-top) to align from top-left instead of baseline
+		# Note: May not work with bitmap fonts, but worth trying
+		draw.text((0, 0), self.text, fill=(255, 255, 255, 255), font=font)#, anchor="lt")
+		return img

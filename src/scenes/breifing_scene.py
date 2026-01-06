@@ -3,7 +3,9 @@ from . import Scene
 
 
 def create_breifing_scene() -> Scene:
-	return Scene(DateTimeComponent())
+	return Scene(
+		DateTimeComponent(format=DateTimeComponent.SIMPLE_DATETIME),
+	)
 	return Scene(
 		HStack(
 			DateTimeComponent(),
