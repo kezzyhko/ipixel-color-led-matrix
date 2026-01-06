@@ -16,11 +16,9 @@ class TerminalDisplayTarget(DisplayTarget):
 	
 	def setup(self):
 		terminal_helpers.set_alternate_screen(True, self.output)
-		self.output.flush()
 	
 	def teardown(self):
 		terminal_helpers.set_alternate_screen(False, self.output)
-		self.output.flush()
 
 	def display(self, image: Image):
 		terminal_helpers.clear_window(self.output)

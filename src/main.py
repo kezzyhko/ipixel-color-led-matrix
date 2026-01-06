@@ -15,7 +15,7 @@ async def main():
 	try:
 		await app.run()
 	finally:
-		await app.end()
+		app.cleanup()
 
 def parse_arguments():
 	parser = ArgumentParser(description="Led Matrix App")

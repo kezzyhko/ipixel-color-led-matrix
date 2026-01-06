@@ -21,7 +21,7 @@ class LedMatrixApp:
 		# TODO: connect events?
 		await self._stop_event.wait()
 
-	async def end(self):
+	def cleanup(self):
 		self.composer_service.stop()
 		# TODO: stop with loop over an array of services
 		self._stop_event.set()
