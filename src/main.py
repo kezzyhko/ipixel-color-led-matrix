@@ -12,7 +12,10 @@ async def main():
 	else:
 		display_target = IPixelColorMatrix()
 	app = LedMatrixApp(display_target=display_target)
-	await app.run()
+	try:
+		await app.run()
+	finally:
+		await app.end()
 
 def parse_arguments():
 	parser = ArgumentParser(description="Led Matrix App")

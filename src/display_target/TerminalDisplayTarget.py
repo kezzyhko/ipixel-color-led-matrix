@@ -1,25 +1,35 @@
 from . import DisplayTarget
 import colorama
 from PIL.Image import Image
-from helpers import get_rgba_pixels
+from helpers import image as image_helpers, terminal as terminal_helpers
+import sys
+from io import TextIOWrapper
 
 
 class TerminalDisplayTarget(DisplayTarget):
 	def __init__(self):
-		colorama.just_fix_windows_console()
+		output = sys.stdout
+		if sys.platform == "win32":
+			output = colorama.AnsiToWin32(output).stream
+		output = TextIOWrapper(output.buffer, encoding='utf-8', line_buffering=False)
+		self.output: terminal_helpers.WriteableStream = output
+	
+	def setup(self):
+		terminal_helpers.set_alternate_screen(True, self.output)
+		self.output.flush()
+	
+	def teardown(self):
+		terminal_helpers.set_alternate_screen(False, self.output)
+		self.output.flush()
 
 	def display(self, image: Image):
-		pixels = get_rgba_pixels(image)
+		terminal_helpers.clear_window(self.output)
+		pixels = image_helpers.get_rgba_pixels(image)
 		for y in range(image.height):
 			for x in range(image.width):
 				r, g, b, _ = pixels[y, x]
-				self._change_color(r, g, b)
-				print("●", end="")
-			print()
-		self._clear_formatting()
-
-	def _change_color(self, r: int, g: int, b: int):
-		print(f"\033[38;2;{r};{g};{b}m", end="")
-
-	def _clear_formatting(self):
-		print("\033[0m", end="")
+				terminal_helpers.change_color(r, g, b, self.output)
+				self.output.write("●")
+			self.output.write("\n")
+		terminal_helpers.clear_formatting(self.output)
+		self.output.flush()

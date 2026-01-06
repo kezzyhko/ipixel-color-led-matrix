@@ -3,7 +3,10 @@ from PIL.Image import Image
 
 
 class IPixelColorMatrix(DisplayTarget):
-	def __init__(self):
+	def setup(self):
+		pass
+	
+	def teardown(self):
 		pass
 
 	def display(self, image: Image):

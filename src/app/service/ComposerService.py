@@ -13,10 +13,12 @@ class ComposerService(Service):
 		self._timer = MultiTimer(interval=1.0/fps, function=self.tick)
 
 	def on_start(self):
+		self.display_target.setup()
 		self._timer.start()
 
 	def on_stop(self):
 		self._timer.stop()
+		self.display_target.teardown()
 
 	def tick(self):
 		self.scene.update()
