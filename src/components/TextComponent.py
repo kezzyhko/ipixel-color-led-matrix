@@ -3,6 +3,7 @@ import platform
 from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
 from . import Component
+from bitmap_font import AsciiBitmapFont
 
 
 class TextComponent(Component, metaclass=ABCMeta):
@@ -17,9 +18,9 @@ class TextComponent(Component, metaclass=ABCMeta):
 		# TODO: size
 		height = 16
 		width = 64
-		fontsize = 8
+		fontsize = 5
 		
-		font = ImageFont.load_default(size=fontsize)
+		font = AsciiBitmapFont.get_default_font(size=fontsize)
 		
 		img = Image.new("RGBA", (width, height), (0, 0, 0, 0))
 		draw = ImageDraw.Draw(img)
