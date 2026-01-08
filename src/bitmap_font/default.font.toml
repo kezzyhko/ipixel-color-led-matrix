@@ -1,3 +1,6 @@
+[configuration]
+default_spacing = 1
+
 [[glyphs]]
 bitmap = """
  X 
@@ -6,7 +9,7 @@ XXX
 X X
 X X
 """
-letters = ["A", "a", "А", "а"]
+characters = ["A", "a", "А", "а"]
 
 [[glyphs]]
 bitmap = """
@@ -16,7 +19,7 @@ XX
 X X
 XX 
 """
-letters = ["B", "b", "В", "в"]
+characters = ["B", "b", "В", "в"]
 
 [[glyphs]]
 bitmap = """
@@ -26,7 +29,7 @@ X
 X  
  XX
 """
-letters = ["C", "c", "С", "с"]
+characters = ["C", "c", "С", "с"]
 
 [[glyphs]]
 bitmap = """
@@ -36,7 +39,7 @@ X X
 X X
 XX 
 """
-letters = ["D", "d"]
+characters = ["D", "d"]
 
 [[glyphs]]
 bitmap = """
@@ -46,7 +49,7 @@ XXX
 X  
 XXX
 """
-letters = ["E", "e", "Е", "е", "Ё", "ё"]
+characters = ["E", "e", "Е", "е", "Ё", "ё"]
 
 [[glyphs]]
 bitmap = """
@@ -56,7 +59,7 @@ XXX
 X  
 X  
 """
-letters = ["F", "f"]
+characters = ["F", "f"]
 
 [[glyphs]]
 bitmap = """
@@ -66,7 +69,7 @@ X
 X X
  XX
 """
-letters = ["G", "g"]
+characters = ["G", "g"]
 
 [[glyphs]]
 bitmap = """
@@ -76,7 +79,7 @@ XXX
 X X
 X X
 """
-letters = ["H", "h", "Н", "н"]
+characters = ["H", "h", "Н", "н"]
 
 [[glyphs]]
 bitmap = """
@@ -86,7 +89,7 @@ XXX
  X 
 XXX
 """
-letters = ["I", "i"]
+characters = ["I", "i"]
 
 [[glyphs]]
 bitmap = """
@@ -96,7 +99,7 @@ bitmap = """
 x X
  X 
 """
-letters = ["J", "j"]
+characters = ["J", "j"]
 
 [[glyphs]]
 bitmap = """
@@ -106,7 +109,7 @@ XX
 X X
 X X
 """
-letters = ["K", "k", "К", "к"]
+characters = ["K", "k", "К", "к"]
 
 [[glyphs]]
 bitmap = """
@@ -116,7 +119,7 @@ X
 X  
 XXX
 """
-letters = ["L", "l"]
+characters = ["L", "l"]
 
 [[glyphs]]
 bitmap = """
@@ -126,7 +129,7 @@ X X X
 X   X
 X   X
 """
-letters = ["M", "m", "М", "м"]
+characters = ["M", "m", "М", "м"]
 
 [[glyphs]]
 bitmap = """
@@ -136,7 +139,7 @@ X X X
 X  XX
 X   X
 """
-letters = ["N", "n"]
+characters = ["N", "n"]
 
 [[glyphs]]
 bitmap = """
@@ -146,7 +149,7 @@ X X
 X X
  X 
 """
-letters = ["O", "o", "О", "о"]
+characters = ["O", "o", "О", "о"]
 
 [[glyphs]]
 bitmap = """
@@ -156,7 +159,7 @@ XX
 X  
 X  
 """
-letters = ["P", "p", "Р", "р"]
+characters = ["P", "p", "Р", "р"]
 
 [[glyphs]]
 bitmap = """
@@ -166,7 +169,7 @@ X X
 X X 
  X X
 """
-letters = ["Q", "q"]
+characters = ["Q", "q"]
 
 [[glyphs]]
 bitmap = """
@@ -176,7 +179,7 @@ XX
 X X
 X X
 """
-letters = ["R", "r"]
+characters = ["R", "r"]
 
 [[glyphs]]
 bitmap = """
@@ -186,7 +189,7 @@ X
   X
 XX 
 """
-letters = ["S", "s"]
+characters = ["S", "s"]
 
 [[glyphs]]
 bitmap = """
@@ -196,7 +199,7 @@ XXX
  X 
  X 
 """
-letters = ["T", "T", "Т", "т"]
+characters = ["T", "T", "Т", "т"]
 
 [[glyphs]]
 bitmap = """
@@ -206,7 +209,7 @@ X X
 X X
 XXX
 """
-letters = ["U", "u"]
+characters = ["U", "u"]
 
 [[glyphs]]
 bitmap = """
@@ -216,7 +219,7 @@ X X
  X 
  X 
 """
-letters = ["V", "v"]
+characters = ["V", "v"]
 
 [[glyphs]]
 bitmap = """
@@ -226,7 +229,7 @@ X X X
 X X X
  X X 
 """
-letters = ["W", "w"]
+characters = ["W", "w"]
 
 [[glyphs]]
 bitmap = """
@@ -236,7 +239,7 @@ X X
 X X
 X X
 """
-letters = ["X", "x", "Х", "х"]
+characters = ["X", "x", "Х", "х"]
 
 [[glyphs]]
 bitmap = """
@@ -246,7 +249,7 @@ X X
  X 
  X 
 """
-letters = ["Y", "y"]
+characters = ["Y", "y"]
 
 [[glyphs]]
 bitmap = """
@@ -256,7 +259,7 @@ XXX
 X  
 XXX
 """
-letters = ["Z", "z"]
+characters = ["Z", "z"]
 
 [[glyphs]]
 bitmap = """
@@ -266,7 +269,7 @@ XX
 X X
 XX 
 """
-letters = ["Б", "б"]
+characters = ["Б", "б"]
 
 [[glyphs]]
 bitmap = """
@@ -276,7 +279,7 @@ X
 X  
 X  
 """
-letters = ["Г", "г"]
+characters = ["Г", "г"]
 
 [[glyphs]]
 bitmap = """
@@ -286,7 +289,7 @@ bitmap = """
 XXXXX
 X   X
 """
-letters = ["Д", "д"]
+characters = ["Д", "д"]
 
 [[glyphs]]
 bitmap = """
@@ -296,7 +299,7 @@ X X X
 X X X
 X X X
 """
-letters = ["Ж", "ж"]
+characters = ["Ж", "ж"]
 
 [[glyphs]]
 bitmap = """
@@ -306,7 +309,7 @@ XX
   X
 XX 
 """
-letters = ["З", "з"]
+characters = ["З", "з"]
 
 [[glyphs]]
 bitmap = """
@@ -316,7 +319,7 @@ X X X
 XX  X
 X   X
 """
-letters = ["И", "и"]
+characters = ["И", "и"]
 
 [[glyphs]]
 bitmap = """
@@ -326,7 +329,7 @@ X X X
 XX  X
 X   X
 """
-letters = ["Й", "й"]
+characters = ["Й", "й"]
 
 [[glyphs]]
 bitmap = """
@@ -336,7 +339,7 @@ bitmap = """
  X X
 X  X
 """
-letters = ["Л", "л"]
+characters = ["Л", "л"]
 
 [[glyphs]]
 bitmap = """
@@ -346,7 +349,7 @@ X X
 X X
 X X
 """
-letters = ["П", "п"]
+characters = ["П", "п"]
 
 [[glyphs]]
 bitmap = """
@@ -356,7 +359,7 @@ XXX
   X
 XX 
 """
-letters = ["У", "у"]
+characters = ["У", "у"]
 
 [[glyphs]]
 bitmap = """
@@ -366,7 +369,7 @@ X X X
   X  
   X  
 """
-letters = ["Ф", "ф"]
+characters = ["Ф", "ф"]
 
 [[glyphs]]
 bitmap = """
@@ -376,7 +379,7 @@ X X
 XXXX
    X
 """
-letters = ["Ц", "ц"]
+characters = ["Ц", "ц"]
 
 [[glyphs]]
 bitmap = """
@@ -386,7 +389,7 @@ XXX
   X
   X
 """
-letters = ["Ч", "ч"]
+characters = ["Ч", "ч"]
 
 [[glyphs]]
 bitmap = """
@@ -396,7 +399,7 @@ X X X
 X X X
 XXXXX
 """
-letters = ["Ш", "ш"]
+characters = ["Ш", "ш"]
 
 [[glyphs]]
 bitmap = """
@@ -406,7 +409,7 @@ X X X
 XXXXXX
      X
 """
-letters = ["Щ", "щ"]
+characters = ["Щ", "щ"]
 
 [[glyphs]]
 bitmap = """
@@ -416,7 +419,7 @@ XX
  X X
  XX 
 """
-letters = ["Ъ", "ъ"]
+characters = ["Ъ", "ъ"]
 
 [[glyphs]]
 bitmap = """
@@ -426,7 +429,7 @@ XX  X
 X X X
 XX  X
 """
-letters = ["Ы", "ы"]
+characters = ["Ы", "ы"]
 
 [[glyphs]]
 bitmap = """
@@ -436,7 +439,7 @@ XX
 X X
 XX 
 """
-letters = ["Ь", "ь"]
+characters = ["Ь", "ь"]
 
 [[glyphs]]
 bitmap = """
@@ -446,7 +449,7 @@ XXX
   X
 XX 
 """
-letters = ["Э", "э"]
+characters = ["Э", "э"]
 
 [[glyphs]]
 bitmap = """
@@ -456,7 +459,7 @@ XXX X
 X X X
 X  X 
 """
-letters = ["Ю", "ю"]
+characters = ["Ю", "ю"]
 
 [[glyphs]]
 bitmap = """
@@ -466,7 +469,7 @@ X X
 X X
 X X
 """
-letters = ["Я", "я"]
+characters = ["Я", "я"]
 
 [[glyphs]]
 bitmap = """
@@ -476,7 +479,7 @@ X X
 X X
 XXX
 """
-letters = ["0"]
+characters = ["0"]
 
 [[glyphs]]
 bitmap = """
@@ -486,7 +489,7 @@ X X
   X
   X
 """
-letters = ["1"]
+characters = ["1"]
 
 [[glyphs]]
 bitmap = """
@@ -496,7 +499,7 @@ X X
  X 
 XXX
 """
-letters = ["2"]
+characters = ["2"]
 
 [[glyphs]]
 bitmap = """
@@ -506,7 +509,7 @@ XX
   X
 XX 
 """
-letters = ["3"]
+characters = ["3"]
 
 [[glyphs]]
 bitmap = """
@@ -516,7 +519,7 @@ XXX
   X
   X
 """
-letters = ["4"]
+characters = ["4"]
 
 [[glyphs]]
 bitmap = """
@@ -526,7 +529,7 @@ XX
   X
 XX 
 """
-letters = ["5"]
+characters = ["5"]
 
 [[glyphs]]
 bitmap = """
@@ -536,7 +539,7 @@ XXX
 X X
 XXX
 """
-letters = ["6"]
+characters = ["6"]
 
 [[glyphs]]
 bitmap = """
@@ -546,7 +549,7 @@ XXX
  X 
  X 
 """
-letters = ["7"]
+characters = ["7"]
 
 [[glyphs]]
 bitmap = """
@@ -556,7 +559,7 @@ X X
 X X
  X 
 """
-letters = ["8"]
+characters = ["8"]
 
 [[glyphs]]
 bitmap = """
@@ -566,7 +569,7 @@ XXX
   X
 XXX  
 """
-letters = ["9"]
+characters = ["9"]
 
 [[glyphs]]
 bitmap = """
@@ -576,7 +579,7 @@ XXX
    
      
 """
-letters = ["-"]
+characters = ["-"]
 
 [[glyphs]]
 bitmap = """
@@ -586,4 +589,4 @@ bitmap = """
  X 
      
 """
-letters = [":"]
+characters = [":"]
