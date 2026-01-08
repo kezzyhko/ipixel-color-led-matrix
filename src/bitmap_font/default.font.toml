@@ -1,5 +1,6 @@
 [configuration]
 default_spacing = 1
+space_width = 3
 
 [[glyphs]]
 bitmap = """
@@ -564,29 +565,29 @@ characters = ["8"]
 [[glyphs]]
 bitmap = """
 XXX
-X X 
+X X
 XXX
   X
-XXX  
+XXX
 """
 characters = ["9"]
 
 [[glyphs]]
 bitmap = """
    
-    
+   
 XXX
    
-     
+   
 """
 characters = ["-"]
 
 [[glyphs]]
 bitmap = """
-   
- X  
-   
- X 
-     
+ 
+X
+ 
+X
+ 
 """
 characters = [":"]
