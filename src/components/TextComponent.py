@@ -10,6 +10,7 @@ class TextComponent(Component, metaclass=ABCMeta):
 	def __init__(self, text: str):
 		super().__init__()
 		self.text = text
+		self.font = AsciiBitmapFont.get_default_font(size=5) #TODO: size
 
 	def update(self):
 		pass
@@ -18,9 +19,6 @@ class TextComponent(Component, metaclass=ABCMeta):
 		# TODO: size
 		height = 16
 		width = 64
-		fontsize = 5
-		
-		font = AsciiBitmapFont.get_default_font(size=fontsize)
 		
 		img = Image.new("RGBA", (width, height), (0, 0, 0, 0))
 		draw = ImageDraw.Draw(img)
@@ -28,5 +26,5 @@ class TextComponent(Component, metaclass=ABCMeta):
 		
 		# Use anchor="lt" (left-top) to align from top-left instead of baseline
 		# Note: May not work with bitmap fonts, but worth trying
-		draw.text((0, 0), self.text, fill=(255, 255, 255, 255), font=font)#, anchor="lt")
+		draw.text((0, 0), self.text, fill=(255, 255, 255, 255), font=self.font)
 		return img
