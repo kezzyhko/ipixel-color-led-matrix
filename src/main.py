@@ -15,7 +15,7 @@ async def main():
 		display_target = TerminalDisplayTarget()
 	else:
 		display_target = IPixelColorMatrix(args.mac_address)
-	app = LedMatrixApp(display_target=display_target)
+	app = LedMatrixApp(display_target=display_target, fps=args.fps)
 	try:
 		await app.run()
 	finally:
@@ -29,6 +29,7 @@ def parse_arguments():
 	parser.add_argument('--debug-size', metavar=('WIDTH', 'HEIGHT'), type=int, nargs=2, default=(64, 32), help="Defines the size of the terminal display. Ignored if debug mode is disabled.") #TODO: use this argument
 	parser.add_argument('--mac-address', type=str, default=None, help="MAC address of the iPixel Color Matrix. Ignored if debug mode is enabled. Default - search for device and use it if only one device is found.")
 	parser.add_argument('--locale', '-l', type=str, default="en_EN", help="Locale to use (for example, for date formatting)")
+	parser.add_argument('--fps', type=float, default=30, help="Update frequency")
 	args = parser.parse_args()
 	return args
 
