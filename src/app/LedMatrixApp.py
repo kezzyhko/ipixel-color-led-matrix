@@ -14,14 +14,14 @@ class LedMatrixApp:
 		# self.http_controller_service = HttpControllerService()
 
 	async def run(self):
-		self.composer_service.start()
+		await self.composer_service.start()
 		# self.cli_controller_service.start()
 		# self.http_controller_service.start()
-		# TODO: start with loop over an array of services
+		# TODO: start with loop over an array of services, each inside own try/finally block
 		# TODO: connect events?
 		await self._stop_event.wait()
 
-	def cleanup(self):
-		self.composer_service.stop()
-		# TODO: stop with loop over an array of services
+	async def cleanup(self):
+		await self.composer_service.stop()
+		# TODO: stop with loop over an array of services, each inside own try/finally block
 		self._stop_event.set()

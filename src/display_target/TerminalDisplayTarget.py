@@ -14,13 +14,15 @@ class TerminalDisplayTarget(DisplayTarget):
 		output = TextIOWrapper(output.buffer, encoding='utf-8', line_buffering=False)
 		self.output: terminal_helpers.WriteableStream = output
 	
-	def setup(self):
+	async def setup(self):
+		print("Using terminal as display")
 		terminal_helpers.set_alternate_screen(True, self.output)
 	
-	def teardown(self):
+	async def teardown(self):
 		terminal_helpers.set_alternate_screen(False, self.output)
+		print("Exiting display emulator mode")
 
-	def display(self, image: Image):
+	async def display(self, image: Image):
 		terminal_helpers.clear_window(self.output)
 		pixels = image_helpers.get_rgba_pixels(image)
 		for y in range(image.height):

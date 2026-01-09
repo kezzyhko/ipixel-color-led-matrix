@@ -2,7 +2,7 @@ from . import Service
 from scenes import create_breifing_scene
 from display_target import DisplayTarget
 from multitimer import MultiTimer
-
+import asyncio
 
 
 class ComposerService(Service):
@@ -10,18 +10,21 @@ class ComposerService(Service):
 		super().__init__()
 		self.scene = create_breifing_scene() # TODO: initial scene should be passed as argument
 		self.display_target = display_target
-		self._timer = MultiTimer(interval=1.0/fps, function=self.tick)
+		self._timer = MultiTimer(interval=1.0/fps, function=self._tick)
 
-	def on_start(self):
-		self.display_target.setup()
+	async def on_start(self):
+		await self.display_target.setup()
 		self._timer.start()
 
-	def on_stop(self):
+	async def on_stop(self):
 		self._timer.stop()
-		self.display_target.teardown()
+		await self.display_target.teardown()
 
-	def tick(self):
+	def _tick(self):
+		asyncio.run(self._tick_async())
+
+	async def _tick_async(self):
 		self.scene.update()
 		screen_buffer = self.scene.render()
-		self.display_target.display(screen_buffer)
+		await self.display_target.display(screen_buffer)
 		
