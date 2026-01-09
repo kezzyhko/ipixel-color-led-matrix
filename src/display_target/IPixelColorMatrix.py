@@ -4,6 +4,7 @@ from bleak import BleakScanner
 from bleak.backends.device import BLEDevice
 from bleak.exc import BleakDeviceNotFoundError
 from pypixelcolor import AsyncClient
+from helpers import image as image_helpers
 
 
 class IPixelColorMatrix(DisplayTarget):
@@ -52,4 +53,6 @@ class IPixelColorMatrix(DisplayTarget):
 	async def display(self, image: Image):
 		if not self._client:
 			raise ConnectionError("Not connected to device")
-		raise NotImplementedError("IPixelColorMatrix is not implemented yet") #TODO: Implement
+		
+		png_hex = image_helpers.convert_to_png_hex(image)
+		await self._client.send_image_hex(png_hex, ".png")
