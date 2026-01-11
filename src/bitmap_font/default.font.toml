@@ -1672,111 +1672,111 @@ characters = ["я"]
 
 [[glyphs]]
 bitmap = """
- X 
-X X
-X X
-X X
-X X
- X 
+ XXX 
+X  XX
+X X X
+X X X
+XX  X
+ XXX 
 """
 characters = ["0"]
 
 [[glyphs]]
 bitmap = """
- X 
-XX 
- X 
- X 
- X 
-XXX
+  X  
+ XX  
+X X  
+  X  
+  X  
+XXXXX
 """
 characters = ["1"]
 
 [[glyphs]]
 bitmap = """
- X 
-X X
-  X
- X 
-X  
-XXX
+ XXX 
+X   X
+   X 
+ XX  
+X    
+XXXXX
 """
 characters = ["2"]
 
 [[glyphs]]
 bitmap = """
-XX 
-  X
-XX 
-  X
-  X
-XX 
+XXXX 
+    X
+ XXX 
+    X
+    X
+XXXX 
 """
 characters = ["3"]
 
 [[glyphs]]
 bitmap = """
-  X
- XX
-X X
-XXX
-  X
-  X
+   XX
+  X X
+ X  X
+XXXXX
+    X
+    X
 """
 characters = ["4"]
 
 [[glyphs]]
 bitmap = """
-XXX
-X  
-XX 
-  X
-  X
-XX 
+XXXXX
+X    
+XXXX 
+    X
+    X
+XXXX 
 """
 characters = ["5"]
 
 [[glyphs]]
 bitmap = """
- X 
-X X
-X  
-XX 
-X X
- X 
+ XXX 
+X   X
+X    
+XXXX 
+X   X
+ XXX 
 """
 characters = ["6"]
 
 [[glyphs]]
 bitmap = """
-XXX
-  X
-  X
- X 
- X 
-X  
+XXXXX
+    X
+   X 
+  X  
+  X  
+  X  
 """
 characters = ["7"]
 
 [[glyphs]]
 bitmap = """
- X 
-X X
- X 
-X X
-X X
- X 
+ XXX 
+X   X
+ XXX 
+X   X
+X   X
+ XXX 
 """
 characters = ["8"]
 
 [[glyphs]]
 bitmap = """
- X 
-X X
- XX
-  X
-X X
- X 
+ XXX 
+X   X
+ XXXX
+    X
+X   X
+ XXX 
 """
 characters = ["9"]
 
