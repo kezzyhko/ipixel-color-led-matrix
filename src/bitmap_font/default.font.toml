@@ -1697,8 +1697,8 @@ bitmap = """
  XXX 
 X   X
    X 
- XX  
-X    
+  X  
+ X    
 XXXXX
 """
 characters = ["2"]
