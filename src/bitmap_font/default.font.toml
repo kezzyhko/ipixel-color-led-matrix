@@ -639,8 +639,8 @@ characters = ["b"]
 [[glyphs]]
 bitmap = """
      
-XXX  
-X  X 
+XXXX 
+X   X
 XXXX 
 X   X
 XXXX 
