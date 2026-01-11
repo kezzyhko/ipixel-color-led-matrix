@@ -1,5 +1,25 @@
 # LED matrix
 
+## Quick start
+
+### Conda
+```
+git clone https://github.com/kezzyhko/led-matrix
+cd led-matrix
+conda env create
+conda activate led-matrix
+python .\src\main.py -c example_config.cfg --debug
+```
+
+### Python
+
+```
+git clone https://github.com/kezzyhko/led-matrix
+cd led-matrix
+pip install -r requirements.txt
+python .\src\main.py -c example_config.cfg --debug
+```
+
 ## Honorable mentions
 
 * `rpi-rgb-led-matrix-scene-composer`<br>
