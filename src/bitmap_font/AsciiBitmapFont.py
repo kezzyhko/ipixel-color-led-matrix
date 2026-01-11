@@ -44,6 +44,7 @@ class AsciiBitmapFont(ImageFont):
 		space_width = configuration['space_width']
 		self.glyphs[' '] = self._parse_glyph_bitmap([" " * space_width] * self.size)
 		self.glyphs['�'] = self._parse_glyph_bitmap([["X" if (x+y)%2 == 0 else " " for x in range(space_width)] for y in range(self.size)]) # checkerboard pattern
+		# TODO: support new line character??
 
 	# TODO: implement characters with height different from font size for letters like "Q" or "Й"
 

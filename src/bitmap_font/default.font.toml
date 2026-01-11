@@ -1802,3 +1802,24 @@ X
 """
 characters = [":"]
 
+[[glyphs]]
+bitmap = """
+ 
+ 
+ 
+ 
+ 
+"""
+characters = [" "] # thin space, same width as ":"
+
+[[glyphs]]
+bitmap = """
+ 
+ 
+ 
+ 
+ 
+ 
+"""
+characters = [" "] # thin space, same width as ":"
+
