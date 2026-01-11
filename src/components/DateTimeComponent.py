@@ -13,7 +13,7 @@ class DateTimeComponent(TextComponent):
 	FULL_WEEKDAY = "%A"
 	FULL_DATETIME = f"{FULL_DATE} {FULL_WEEKDAY} {FULL_TIME}"
 
-	def __init__(self, format: str = SIMPLE_DATETIME, case: Literal["default", "upper", "lower", "title"] = "default"):
+	def __init__(self, format: str = SIMPLE_DATETIME, case: Literal['default', 'upper', 'lower', 'title'] = 'default'):
 		self.format = format
 		self.case = case
 		super().__init__(self._get_formated_datetime())
@@ -25,13 +25,13 @@ class DateTimeComponent(TextComponent):
 		now = datetime.now()
 		formated_string = now.strftime(self.format)
 		match self.case:
-			case "default":
+			case 'default':
 				pass
-			case "upper":
+			case 'upper':
 				formated_string = formated_string.upper()
-			case "lower":
+			case 'lower':
 				formated_string = formated_string.lower()
-			case "title":
+			case 'title':
 				formated_string = formated_string.title()
 		if now.second % 2 == 0:
 			formated_string = formated_string.replace(":", " ") # thin space

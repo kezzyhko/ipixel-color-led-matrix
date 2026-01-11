@@ -1,8 +1,8 @@
 from . import Service
+import datetime
 from scenes import create_briefing_scene
 from display_target import DisplayTarget
-import asyncio
-import time
+from helpers import Timer
 
 
 class ComposerService(Service):
@@ -10,32 +10,16 @@ class ComposerService(Service):
 		super().__init__()
 		self.scene = create_briefing_scene() # TODO: initial scene should be passed as argument
 		self.display_target = display_target
-		self._fps = fps
-		self._task: asyncio.Task | None = None
+		interval = datetime.timedelta(seconds=1.0/fps)
+		self._timer = Timer(interval, self._tick)
 
 	async def on_start(self):
 		await self.display_target.setup()
-		self._running = True	
-		self._task = asyncio.create_task(self._loop())
+		self._timer.start()
 
 	async def on_stop(self):
-		self._running = False
-		if self._task:
-			await self._task
+		self._timer.stop()
 		await self.display_target.teardown()
-
-	async def _loop(self):
-		interval = 1.0 / self._fps
-		while self._running:
-			start_time = time.monotonic()
-			try:
-				await self._tick()
-			except Exception as e:
-				print(f"Error in ComposerService tick: {e}")
-			end_time = time.monotonic()
-			elapsed_time = end_time - start_time
-			if elapsed_time < interval:
-				await asyncio.sleep(interval - elapsed_time)
 
 	async def _tick(self):
 		self.scene.update()
