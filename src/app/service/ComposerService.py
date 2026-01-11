@@ -11,7 +11,7 @@ class ComposerService(Service):
 		self.scene = create_breifing_scene() # TODO: initial scene should be passed as argument
 		self.display_target = display_target
 		self._fps = fps
-		self._task: asyncio.Task
+		self._task: asyncio.Task | None = None
 
 	async def on_start(self):
 		await self.display_target.setup()
