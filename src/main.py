@@ -2,15 +2,14 @@ from configargparse import ArgumentParser
 from app import LedMatrixApp
 from display_target import TerminalDisplayTarget, IPixelColorMatrix
 import asyncio
-import locale
-from helpers import context
+from app import context
 from components import WeatherComponent
 
 
 async def main():
 	args = parse_arguments()
 
-	locale.setlocale(locale.LC_ALL, args.locale)
+	context.locale_code.set(args.locale)
 	context.weather_city.set(args.city)
 	context.weather_units.set(args.units)
 	

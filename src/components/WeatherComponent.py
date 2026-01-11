@@ -4,7 +4,7 @@ import python_weather
 from python_weather.constants import _Unit as MeasurementUnits
 import datetime
 from helpers import Timer
-from helpers import context
+from app import context
 
 
 class WeatherComponent(VStack):

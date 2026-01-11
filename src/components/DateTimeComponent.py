@@ -1,7 +1,7 @@
 from typing import Literal
 from . import TextComponent
 from datetime import datetime
-
+from app import context
 
 class DateTimeComponent(TextComponent):
 	SIMPLE_DATE = "%d %b"
@@ -13,9 +13,10 @@ class DateTimeComponent(TextComponent):
 	FULL_WEEKDAY = "%A"
 	FULL_DATETIME = f"{FULL_DATE} {FULL_WEEKDAY} {FULL_TIME}"
 
-	def __init__(self, format: str = SIMPLE_DATETIME, case: Literal['default', 'upper', 'lower', 'title'] = 'default'):
-		self.format = format
-		self.case = case
+	def __init__(self, format: str = SIMPLE_DATETIME, locale: str|None = None, case: Literal['default', 'upper', 'lower', 'title'] = 'default'):
+		self._locale = locale or context.locale_code.get() or "en"
+		self._format = format
+		self._case = case
 		super().__init__(self._get_formated_datetime())
 
 	def update(self):
@@ -23,8 +24,9 @@ class DateTimeComponent(TextComponent):
 
 	def _get_formated_datetime(self) -> str:
 		now = datetime.now()
-		formated_string = now.strftime(self.format)
-		match self.case:
+		with context.temporary_locale(self._locale):
+			formated_string = now.strftime(self._format)
+		match self._case:
 			case 'default':
 				pass
 			case 'upper':
