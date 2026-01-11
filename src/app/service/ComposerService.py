@@ -27,12 +27,12 @@ class ComposerService(Service):
 	async def _loop(self):
 		interval = 1.0 / self._fps
 		while self._running:
-			start_time = time.monotonic_ns()
+			start_time = time.monotonic()
 			try:
 				await self._tick()
 			except Exception as e:
 				print(f"Error in ComposerService tick: {e}")
-			end_time = time.monotonic_ns()
+			end_time = time.monotonic()
 			elapsed_time = end_time - start_time
 			if elapsed_time < interval:
 				await asyncio.sleep(interval - elapsed_time)

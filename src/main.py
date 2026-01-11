@@ -29,7 +29,7 @@ def parse_arguments():
 	parser.add_argument('--debug-size', metavar=('WIDTH', 'HEIGHT'), type=int, nargs=2, default=(64, 32), help="Defines the size of the terminal display. Ignored if debug mode is disabled.") #TODO: use this argument
 	parser.add_argument('--mac-address', type=str, default=None, help="MAC address of the iPixel Color Matrix. Ignored if debug mode is enabled. Default - search for device and use it if only one device is found.")
 	parser.add_argument('--locale', '-l', type=str, default="en", help="Locale to use (for example, for date formatting)")
-	parser.add_argument('--fps', type=float, default=30.0, help="Update frequency")
+	parser.add_argument('--fps', type=float, default=10.0, help="Update frequency")
 	args = parser.parse_args()
 	return args
 
