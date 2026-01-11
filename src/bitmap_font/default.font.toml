@@ -200,7 +200,7 @@ XXX
  X 
  X 
 """
-characters = ["T", "T", "Т", "т"]
+characters = ["T", "t", "Т", "т"]
 
 [[glyphs]]
 bitmap = """
