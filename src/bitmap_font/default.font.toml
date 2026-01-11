@@ -1716,12 +1716,12 @@ characters = ["3"]
 
 [[glyphs]]
 bitmap = """
-   XX
-  X X
- X  X
+   X 
+  XX 
+ X X 
 XXXXX
-    X
-    X
+   X 
+   X 
 """
 characters = ["4"]
 
