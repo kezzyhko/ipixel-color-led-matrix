@@ -18,4 +18,4 @@ class DateTimeComponent(TextComponent):
 		self.text = self._get_formated_datetime()
 
 	def _get_formated_datetime(self) -> str:
-		return datetime.now().strftime(self.format)
+		return datetime.now().strftime(self.format).upper()
