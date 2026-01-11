@@ -1,3 +1,4 @@
+from typing import Literal
 from . import TextComponent
 from datetime import datetime
 
@@ -13,8 +14,9 @@ class DateTimeComponent(TextComponent):
 	FULL_DATETIME = f"{FULL_DATE} {FULL_WEEKDAY} {FULL_TIME}"
 	# TODO: add day of week
 
-	def __init__(self, format: str = SIMPLE_DATETIME):
+	def __init__(self, format: str = SIMPLE_DATETIME, case: Literal["default", "upper", "lower", "title"] = "default"):
 		self.format = format
+		self.case = case
 		super().__init__(self._get_formated_datetime())
 
 	def update(self):
@@ -23,7 +25,15 @@ class DateTimeComponent(TextComponent):
 	def _get_formated_datetime(self) -> str:
 		now = datetime.now()
 		formated_string = now.strftime(self.format)
-		formated_string = formated_string.upper()
+		match self.case:
+			case "default":
+				pass
+			case "upper":
+				formated_string = formated_string.upper()
+			case "lower":
+				formated_string = formated_string.lower()
+			case "title":
+				formated_string = formated_string.title()
 		if now.second % 2 == 0:
 			formated_string = formated_string.replace(":", " ") # thin space
 		return formated_string
