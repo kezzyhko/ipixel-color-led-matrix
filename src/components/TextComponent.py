@@ -10,7 +10,7 @@ class TextComponent(Component, metaclass=ABCMeta):
 	def __init__(self, text: str):
 		super().__init__()
 		self.text = text
-		self.font = AsciiBitmapFont.get_default_font(size=5) #TODO: size
+		self.font = AsciiBitmapFont.get_default_font(size=6) #TODO: size
 
 	def update(self):
 		pass

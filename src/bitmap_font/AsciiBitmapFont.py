@@ -33,7 +33,9 @@ class AsciiBitmapFont(ImageFont):
 			bitmap = glyph['bitmap'].strip("\n").split("\n")
 			size = len(bitmap)
 			if (size != self.size):
-				continue # TODO: load and cache all file as a collection of fonts with different sizes
+				continue
+				# TODO: load and cache all file as a collection of fonts with different sizes
+				# TODO: support different spaceing and/or space_size for different heights
 
 			for character in glyph['characters']:
 				self.glyphs[character] = self._parse_glyph_bitmap(bitmap)

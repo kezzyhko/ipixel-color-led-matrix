@@ -591,3 +591,1214 @@ X
  
 """
 characters = [":"]
+
+[[glyphs]]
+bitmap = """
+  X  
+ X X 
+X   X
+XXXXX
+X   X
+X   X
+"""
+characters = ["A", "А"]
+
+[[glyphs]]
+bitmap = """
+     
+ XXX 
+    X
+ XXXX
+X   X
+ XXXX
+"""
+characters = ["a", "а"]
+
+[[glyphs]]
+bitmap = """
+XXXX 
+X   X
+XXXX 
+X   X
+X   X
+XXXX 
+"""
+characters = ["B", "В"]
+
+[[glyphs]]
+bitmap = """
+X    
+X    
+X    
+XXXX 
+X   X
+XXXX 
+"""
+characters = ["b"]
+
+[[glyphs]]
+bitmap = """
+     
+XXX  
+X  X 
+XXXX 
+X   X
+XXXX 
+"""
+characters = ["в"]
+
+[[glyphs]]
+bitmap = """
+ XXX 
+X   X
+X    
+X    
+X   X
+ XXX 
+"""
+characters = ["C", "С"]
+
+[[glyphs]]
+bitmap = """
+     
+ XXX 
+X   X
+X    
+X   X
+ XXX 
+"""
+characters = ["c", "с"]
+
+[[glyphs]]
+bitmap = """
+XXX  
+X  X 
+X   X
+X   X
+X  X 
+XXX  
+"""
+characters = ["D"]
+
+[[glyphs]]
+bitmap = """
+    X
+    X
+    X
+ XXXX
+X   X
+ XXXX
+"""
+characters = ["d"]
+
+[[glyphs]]
+bitmap = """
+XXXXX
+X    
+XXXX 
+X    
+X    
+XXXXX
+"""
+characters = ["E", "Е", "Ё"]
+
+[[glyphs]]
+bitmap = """
+     
+ XXX 
+X   X
+XXXXX
+X    
+ XXX 
+"""
+characters = ["e", "е", "ё"]
+
+[[glyphs]]
+bitmap = """
+XXXXX
+X    
+XXXX 
+X    
+X    
+X    
+"""
+characters = ["F"]
+
+[[glyphs]]
+bitmap = """
+  XX 
+ X  X
+XXX  
+ X   
+ X   
+ X   
+"""
+characters = ["f"]
+
+[[glyphs]]
+bitmap = """
+ XXX 
+X   X
+X    
+X  XX
+X   X
+ XXX 
+"""
+characters = ["G"]
+
+[[glyphs]]
+bitmap = """
+     
+ XXXX
+X   X
+ XXXX
+    X
+ XXX 
+"""
+characters = ["g"]
+
+[[glyphs]]
+bitmap = """
+X   X
+X   X
+XXXXX
+X   X
+X   X
+X   X
+"""
+characters = ["H", "Н"]
+
+[[glyphs]]
+bitmap = """
+X    
+X    
+X    
+XXXX 
+X   X
+X   X
+"""
+characters = ["h"]
+
+[[glyphs]]
+bitmap = """
+     
+X   X
+X   X
+XXXXX
+X   X
+X   X
+"""
+characters = ["н"]
+
+[[glyphs]]
+bitmap = """
+XXXXX
+  X  
+  X  
+  X  
+  X  
+XXXXX
+"""
+characters = ["I"]
+
+[[glyphs]]
+bitmap = """
+  X  
+     
+ XX  
+  X  
+  X  
+XXXXX
+"""
+characters = ["i"]
+
+[[glyphs]]
+bitmap = """
+    X
+    X
+    X
+    X
+X   X
+ XXX 
+"""
+characters = ["J"]
+
+[[glyphs]]
+bitmap = """
+    X
+     
+   XX
+    X
+    X
+XXXX 
+"""
+characters = ["j"]
+
+[[glyphs]]
+bitmap = """
+X   X
+X  X 
+XXX  
+X  X 
+X   X
+X   X
+"""
+characters = ["K", "К"]
+
+[[glyphs]]
+bitmap = """
+X    
+X   X
+X  X 
+XXX  
+X  X 
+X   X
+"""
+characters = ["k"]
+
+[[glyphs]]
+bitmap = """
+     
+X   X
+X  X 
+XXX  
+X  X 
+X   X
+"""
+characters = ["к"]
+
+[[glyphs]]
+bitmap = """
+X    
+X    
+X    
+X    
+X    
+XXXXX
+"""
+characters = ["L"]
+
+[[glyphs]]
+bitmap = """
+X    
+X    
+X    
+X    
+ X   
+  XXX
+"""
+characters = ["l"]
+
+[[glyphs]]
+bitmap = """
+X   X
+XX XX
+X X X
+X X X
+X   X
+X   X
+"""
+characters = ["M", "М"]
+
+[[glyphs]]
+bitmap = """
+     
+XX X 
+X X X
+X X X
+X   X
+X   X
+"""
+characters = ["m"]
+
+[[glyphs]]
+bitmap = """
+     
+X   X
+XX XX
+X X X
+X   X
+X   X
+"""
+characters = ["м"]
+
+[[glyphs]]
+bitmap = """
+X   X
+XX  X
+X X X
+X  XX
+X   X
+X   X
+"""
+characters = ["N"]
+
+[[glyphs]]
+bitmap = """
+     
+X XX 
+XX  X
+X   X
+X   X
+X   X
+"""
+characters = ["n"]
+
+[[glyphs]]
+bitmap = """
+ XXX 
+X   X
+X   X
+X   X
+X   X
+ XXX 
+"""
+characters = ["O", "О"]
+
+[[glyphs]]
+bitmap = """
+     
+ XXX 
+X   X
+X   X
+X   X
+ XXX 
+"""
+characters = ["o", "о"]
+
+[[glyphs]]
+bitmap = """
+XXXX 
+X   X
+XXXX 
+X    
+X    
+X    
+"""
+characters = ["P", "Р"]
+
+[[glyphs]]
+bitmap = """
+     
+XXXX 
+X   X
+XXXX 
+X    
+X    
+"""
+characters = ["p", "р"]
+
+[[glyphs]]
+bitmap = """
+ XXX 
+X   X
+X   X
+X   X
+X  X 
+ XX X
+"""
+characters = ["Q"]
+
+[[glyphs]]
+bitmap = """
+     
+ XXXX
+X   X
+ XXXX
+    X
+    X
+"""
+characters = ["q"]
+
+[[glyphs]]
+bitmap = """
+XXXX 
+X   X
+X  X 
+XXX  
+X  X 
+X   X
+"""
+characters = ["R"]
+
+[[glyphs]]
+bitmap = """
+     
+X XX 
+XX  X
+X    
+X    
+X    
+"""
+characters = ["r"]
+
+[[glyphs]]
+bitmap = """
+ XXX 
+X   X
+ XX  
+   X 
+X   X
+ XXX 
+"""
+characters = ["S"]
+
+[[glyphs]]
+bitmap = """
+     
+ XXXX
+X    
+ XXX 
+    X
+XXXX 
+"""
+characters = ["s"]
+
+[[glyphs]]
+bitmap = """
+XXXXX
+  X  
+  X  
+  X  
+  X  
+  X  
+"""
+characters = ["T", "Т"]
+
+[[glyphs]]
+bitmap = """
+ X   
+ X   
+XXX  
+ X   
+ X  X
+  XX 
+"""
+characters = ["t"]
+
+[[glyphs]]
+bitmap = """
+     
+XXXXX
+  X  
+  X  
+  X  
+  X  
+"""
+characters = ["т"]
+
+[[glyphs]]
+bitmap = """
+X   X
+X   X
+X   X
+X   X
+X   X
+ XXX 
+"""
+characters = ["U"]
+
+[[glyphs]]
+bitmap = """
+     
+X   X
+X   X
+X   X
+X  XX
+ XX X
+"""
+characters = ["u"]
+
+[[glyphs]]
+bitmap = """
+X   X
+X   X
+X   X
+ X X 
+ X X 
+  X  
+"""
+characters = ["V"]
+
+[[glyphs]]
+bitmap = """
+     
+X   X
+X   X
+ X X 
+ X X 
+  X  
+"""
+characters = ["v"]
+
+[[glyphs]]
+bitmap = """
+X   X
+X   X
+X X X
+X X X
+X X X
+ X X
+"""
+characters = ["W"]
+
+[[glyphs]]
+bitmap = """
+     
+X   X
+X   X
+X X X
+X X X
+ X X
+"""
+characters = ["w"]
+
+[[glyphs]]
+bitmap = """
+X   X
+ X X 
+  X  
+  X  
+ X X 
+X   X
+"""
+characters = ["X", "Х"]
+
+[[glyphs]]
+bitmap = """
+     
+X   X
+ X X 
+  X  
+ X X 
+X   X
+"""
+characters = ["x", "х"]
+
+[[glyphs]]
+bitmap = """
+X   X
+X   X
+ X X 
+  X  
+  X  
+  X  
+"""
+characters = ["Y"]
+
+[[glyphs]]
+bitmap = """
+     
+X   X
+X   X
+ XXX 
+   X 
+XXX  
+"""
+characters = ["y", "у"]
+
+[[glyphs]]
+bitmap = """
+XXXXX
+   X 
+  X  
+  X  
+ X   
+XXXXX
+"""
+characters = ["Z"]
+
+[[glyphs]]
+bitmap = """
+     
+XXXXX
+   X 
+  X  
+ X   
+XXXXX
+"""
+characters = ["z"]
+
+[[glyphs]]
+bitmap = """
+XXXXX
+X    
+XXXX 
+X   X
+X   X
+XXXX 
+"""
+characters = ["Б"]
+
+[[glyphs]]
+bitmap = """
+ XXX 
+X    
+X    
+XXXX 
+X   X
+ XXX 
+"""
+characters = ["б"]
+
+[[glyphs]]
+bitmap = """
+XXXXX
+X    
+X    
+X    
+X    
+X    
+"""
+characters = ["Г"]
+
+[[glyphs]]
+bitmap = """
+     
+XXXXX
+X    
+X    
+X    
+X    
+"""
+characters = ["г"]
+
+[[glyphs]]
+bitmap = """
+  X  
+ X X 
+ X X 
+ X X 
+XXXXX
+X   X
+"""
+characters = ["Д"]
+
+[[glyphs]]
+bitmap = """
+     
+  X  
+ X X 
+ X X 
+XXXXX
+X   X
+"""
+characters = ["д"]
+
+[[glyphs]]
+bitmap = """
+X X X
+X X X
+ XXX 
+X X X
+X X X
+X X X
+"""
+characters = ["Ж"]
+
+[[glyphs]]
+bitmap = """
+     
+X X X
+X X X
+ XXX 
+X X X
+X X X
+"""
+characters = ["ж"]
+
+[[glyphs]]
+bitmap = """
+XXXX 
+    X
+XXXX 
+    X
+    X
+XXXX 
+"""
+characters = ["З"]
+
+[[glyphs]]
+bitmap = """
+     
+XXXX 
+    X
+XXXX 
+    X
+XXXX 
+"""
+characters = ["з"]
+
+[[glyphs]]
+bitmap = """
+X   X
+X   X
+X  XX
+X X X
+XX  X
+X   X
+"""
+characters = ["И"]
+
+[[glyphs]]
+bitmap = """
+     
+X   X
+X  XX
+X X X
+XX  X
+X   X
+"""
+characters = ["и"]
+
+[[glyphs]]
+bitmap = """
+X X X
+X   X
+X  XX
+X X X
+XX  X
+X   X
+"""
+characters = ["Й"]
+
+[[glyphs]]
+bitmap = """
+  X  
+X   X
+X  XX
+X X X
+XX  X
+X   X
+"""
+characters = ["й"]
+
+[[glyphs]]
+bitmap = """
+  XXX
+ X  X
+ X  X
+ X  X
+ X  X
+X   X
+"""
+characters = ["Л"]
+
+[[glyphs]]
+bitmap = """
+     
+  XXX
+ X  X
+ X  X
+ X  X
+X   X
+"""
+characters = ["л"]
+
+[[glyphs]]
+bitmap = """
+XXXXX
+X   X
+X   X
+X   X
+X   X
+X   X
+"""
+characters = ["П"]
+
+[[glyphs]]
+bitmap = """
+     
+XXXXX
+X   X
+X   X
+X   X
+X   X
+"""
+characters = ["п"]
+
+[[glyphs]]
+bitmap = """
+X   X
+X   X
+ XXX 
+   X 
+  X  
+XX   
+"""
+characters = ["У"]
+
+[[glyphs]]
+bitmap = """
+ XXX 
+X X X
+X X X
+ XXX 
+  X  
+  X  
+"""
+characters = ["Ф"]
+
+[[glyphs]]
+bitmap = """
+     
+ XXX 
+X X X
+ XXX 
+  X  
+  X  
+"""
+characters = ["ф"]
+
+[[glyphs]]
+bitmap = """
+X  X 
+X  X 
+X  X 
+X  X 
+XXXXX
+    X
+"""
+characters = ["Ц"]
+
+[[glyphs]]
+bitmap = """
+     
+X  X 
+X  X 
+X  X 
+XXXXX
+    X
+"""
+characters = ["ц"]
+
+[[glyphs]]
+bitmap = """
+X   X
+X   X
+ XXXX
+    X
+    X
+    X
+"""
+characters = ["Ч"]
+
+[[glyphs]]
+bitmap = """
+     
+X   X
+X   X
+ XXXX
+    X
+    X
+"""
+characters = ["ч"]
+
+[[glyphs]]
+bitmap = """
+X   X
+X X X
+X X X
+X X X
+X X X
+XXXXX
+"""
+characters = ["Ш"]
+
+[[glyphs]]
+bitmap = """
+     
+X   X
+X X X
+X X X
+X X X
+XXXXX
+"""
+characters = ["ш"]
+
+[[glyphs]]
+bitmap = """
+X   X 
+X X X 
+X X X 
+X X X 
+XXXXX 
+    X
+"""
+characters = ["Щ"]
+
+[[glyphs]]
+bitmap = """
+      
+X   X 
+X X X 
+X X X 
+XXXXX 
+    X
+"""
+characters = ["щ"]
+
+[[glyphs]]
+bitmap = """
+XX   
+ X   
+ X   
+ XXX 
+ X  X
+ XXX 
+"""
+characters = ["Ъ"]
+
+[[glyphs]]
+bitmap = """
+     
+XX   
+ X   
+ XXX 
+ X  X
+ XXX 
+"""
+characters = ["ъ"]
+
+[[glyphs]]
+bitmap = """
+X   X
+X   X
+X   X
+XX  X
+X X X
+XX  X
+"""
+characters = ["Ы"]
+
+[[glyphs]]
+bitmap = """
+     
+X   X
+X   X
+XX  X
+X X X
+XX  X
+"""
+characters = ["ы"]
+
+[[glyphs]]
+bitmap = """
+X    
+X    
+X    
+XXXX 
+X   X
+XXXX 
+"""
+characters = ["Ь"]
+
+[[glyphs]]
+bitmap = """
+     
+X    
+X    
+XXXX 
+X   X
+XXXX 
+"""
+characters = ["ь"]
+
+[[glyphs]]
+bitmap = """
+XXXX 
+    X
+XXXXX
+    X
+    X
+XXXX 
+"""
+characters = ["Э"]
+
+[[glyphs]]
+bitmap = """
+     
+XXXX 
+    X
+XXXXX
+    X
+XXXX 
+"""
+characters = ["э"]
+
+[[glyphs]]
+bitmap = """
+X  X 
+X X X
+XXX X
+X X X
+X X X
+X  X 
+"""
+characters = ["Ю"]
+
+[[glyphs]]
+bitmap = """
+     
+X  X 
+X X X
+XXX X
+X X X
+X  X 
+"""
+characters = ["ю"]
+
+[[glyphs]]
+bitmap = """
+ XXXX
+X   X
+ X  X
+  XXX
+ X  X
+X   X
+"""
+characters = ["Я"]
+
+[[glyphs]]
+bitmap = """
+     
+ XXXX
+X   X
+ XXXX
+ X  X
+X   X
+"""
+characters = ["я"]
+
+[[glyphs]]
+bitmap = """
+ XXX 
+X  XX
+X X X
+X X X
+XX  X
+ XXX 
+"""
+characters = ["0"]
+
+[[glyphs]]
+bitmap = """
+  X  
+ XX  
+X X  
+  X  
+  X  
+XXXXX
+"""
+characters = ["1"]
+
+[[glyphs]]
+bitmap = """
+ XXX 
+X   X
+   X 
+ XX  
+X    
+XXXXX
+"""
+characters = ["2"]
+
+[[glyphs]]
+bitmap = """
+XXXX 
+    X
+ XXX 
+    X
+    X
+XXXX 
+"""
+characters = ["3"]
+
+[[glyphs]]
+bitmap = """
+   XX
+  X X
+ X  X
+XXXXX
+    X
+    X
+"""
+characters = ["4"]
+
+[[glyphs]]
+bitmap = """
+XXXXX
+X    
+XXXX 
+    X
+    X
+XXXX 
+"""
+characters = ["5"]
+
+[[glyphs]]
+bitmap = """
+ XXX 
+X   X
+X    
+XXXX 
+X   X
+ XXX 
+"""
+characters = ["6"]
+
+[[glyphs]]
+bitmap = """
+XXXXX
+    X
+   X 
+  X  
+  X  
+  X  
+"""
+characters = ["7"]
+
+[[glyphs]]
+bitmap = """
+ XXX 
+X   X
+ XXX 
+X   X
+X   X
+ XXX 
+"""
+characters = ["8"]
+
+[[glyphs]]
+bitmap = """
+ XXX 
+X   X
+ XXXX
+    X
+X   X
+ XXX 
+"""
+characters = ["9"]
+
+[[glyphs]]
+bitmap = """
+     
+     
+XXXXX
+     
+     
+     
+"""
+characters = ["-"]
+
+[[glyphs]]
+bitmap = """
+ 
+X
+ 
+ 
+X
+ 
+"""
+characters = [":"]
+
