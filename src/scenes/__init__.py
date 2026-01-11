@@ -1,2 +1,2 @@
 from .Scene import Scene
-from .breifing_scene import create_breifing_scene
+from .briefing_scene import create_briefing_scene

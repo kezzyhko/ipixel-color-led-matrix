@@ -1,5 +1,5 @@
 from . import Service
-from scenes import create_breifing_scene
+from scenes import create_briefing_scene
 from display_target import DisplayTarget
 import asyncio
 import time
@@ -8,7 +8,7 @@ import time
 class ComposerService(Service):
 	def __init__(self, display_target: DisplayTarget, fps: float):
 		super().__init__()
-		self.scene = create_breifing_scene() # TODO: initial scene should be passed as argument
+		self.scene = create_briefing_scene() # TODO: initial scene should be passed as argument
 		self.display_target = display_target
 		self._fps = fps
 		self._task: asyncio.Task | None = None
