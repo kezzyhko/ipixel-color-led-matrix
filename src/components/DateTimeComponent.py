@@ -12,7 +12,6 @@ class DateTimeComponent(TextComponent):
 	FULL_TIME = "%H:%M:%S"
 	FULL_WEEKDAY = "%A"
 	FULL_DATETIME = f"{FULL_DATE} {FULL_WEEKDAY} {FULL_TIME}"
-	# TODO: add day of week
 
 	def __init__(self, format: str = SIMPLE_DATETIME, case: Literal["default", "upper", "lower", "title"] = "default"):
 		self.format = format
