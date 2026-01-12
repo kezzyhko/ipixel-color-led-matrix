@@ -1,16 +1,14 @@
-from abc import ABCMeta, abstractmethod
-import platform
-from pathlib import Path
-from PIL import Image, ImageDraw, ImageFont
+from abc import ABCMeta
+from PIL import Image, ImageDraw
 from . import Component
 from bitmap_font import AsciiBitmapFont
 
 
-class TextComponent(Component, metaclass=ABCMeta):
-	def __init__(self, text: str):
+class TextComponent(Component):
+	def __init__(self, text: str, font_size: int = 6): #TODO: size
 		super().__init__()
 		self.text = text
-		self.font = AsciiBitmapFont.get_default_font(size=6) #TODO: size
+		self.font = AsciiBitmapFont.get_default_font(size=font_size)
 
 	def update(self):
 		pass

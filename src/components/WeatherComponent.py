@@ -1,6 +1,7 @@
 from . import VStack
 from app import context
 from helpers.weather import WeatherApi, WeatherLocation
+from . import TextComponent
 
 
 class WeatherComponent(VStack):
@@ -8,6 +9,11 @@ class WeatherComponent(VStack):
 		super().__init__()
 		location = location or context.weather_location.get()
 		self._weather_api: WeatherApi = WeatherApi(location)
+		
+		self.temperature_text = TextComponent("  ", font_size=5) # TODO: size
+		self.temperature_text.x = 2
+		self.temperature_text.y = 9
+		self.add_child(self.temperature_text)
 		# TODO: add precipitation icon, wind speed bar, and temperature text as separate components
 		# TODO: add loading icon
 
@@ -17,7 +23,7 @@ class WeatherComponent(VStack):
 		is_loading = weather is None
 		# TODO: show/hide components
 		if is_loading:
-			print("Loading weather data...") # TODO: remove
 			return
-		
-		print(weather) # TODO: change other components' properties
+
+		self.temperature_text.text = f"{round(weather.temperature)}°C"
+		# TODO: change other components' properties

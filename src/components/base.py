@@ -32,7 +32,7 @@ class Component(metaclass=ABCMeta):
 		pass
 
 	@abstractmethod
-	def render(self) -> Image:
+	def render(self) -> Image.Image:
 		pass
 
 
@@ -42,13 +42,14 @@ class Group(Component):
 		self.children: list[Component] = []
 		for child in children:
 			self.add_child(child)
+		self.background_color = (0, 0, 0, 0)
 
 	def update(self):
 		for child in self.children:
 			child.update()
 
 	def render(self) -> Image.Image:
-		image = Image.new("RGBA", (64, 16), (0, 0, 0, 0)) #TODO: size
+		image = Image.new("RGBA", (64, 16), self.background_color) #TODO: size
 		for child in self.children:
 			render_buffer = child.render()
 			mask = render_buffer if render_buffer.mode == "RGBA" else None

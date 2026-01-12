@@ -12,12 +12,16 @@ def create_briefing_scene() -> Scene:
 	time_component.x = 1
 	time_component.y = 9
 
+	weather_component = WeatherComponent()
+	weather_component.x = 45
+	weather_component.y = 1
+
 	return Scene(
 		HStack(
 			VStack(
 				date_component,
 				time_component,
 			),
-			WeatherComponent()
+			weather_component
 		)
 	)

@@ -1698,7 +1698,7 @@ bitmap = """
 X   X
    X 
   X  
- X    
+ X   
 XXXXX
 """
 characters = ["2"]
@@ -1782,12 +1782,12 @@ characters = ["9"]
 
 [[glyphs]]
 bitmap = """
-     
-     
-XXXXX
-     
-     
-     
+   
+   
+XXX
+   
+   
+   
 """
 characters = ["-"]
 
@@ -1822,4 +1822,46 @@ bitmap = """
  
 """
 characters = [" "] # thin space, same width as ":"
+
+[[glyphs]]
+bitmap = """
+ 
+ 
+ 
+ 
+X
+"""
+characters = ["."]
+
+[[glyphs]]
+bitmap = """
+ 
+ 
+ 
+ 
+ 
+X
+"""
+characters = ["."]
+
+[[glyphs]]
+bitmap = """
+XX
+XX
+  
+  
+  
+"""
+characters = ["°"]
+
+[[glyphs]]
+bitmap = """
+ X 
+X X
+ X 
+   
+   
+   
+"""
+characters = ["°"]
 
