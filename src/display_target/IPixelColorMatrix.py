@@ -11,6 +11,7 @@ class IPixelColorMatrix(DisplayTarget):
 	def __init__(self, mac_address: str | None = None):
 		self._requested_mac_address = mac_address
 		self._client: AsyncClient|None = None
+		self._client_connected = False
 
 	@staticmethod
 	async def search_devices(timeout: float = 5.0) -> list[BLEDevice]:
@@ -39,16 +40,21 @@ class IPixelColorMatrix(DisplayTarget):
 				raise BleakDeviceNotFoundError(f"Multiple devices found: {devices}")
 
 	async def setup(self):
+		if self._client_connected:
+			await self._client.set_fun_mode(False)
+			return
 		mac_address = self._requested_mac_address or await IPixelColorMatrix.get_single_device()
 		self._client = AsyncClient(address=mac_address)
 		await self._client.connect()
+		self._client_connected = True
 		await self._client.set_fun_mode(True)
 
 	async def teardown(self):
-		if not self._client:
+		if not self._client_connected:
 			return
 		await self._client.set_fun_mode(False)
 		await self._client.disconnect()
+		self._client_connected = False
 
 	async def display(self, image: Image):
 		if not self._client:
