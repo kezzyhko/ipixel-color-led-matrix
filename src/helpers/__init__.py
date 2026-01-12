@@ -1,5 +1,5 @@
 from . import terminal
 from . import image
+from . import weather
 from .Timer import Timer
-from .WeatherApi import WeatherApi
 from .TempLocale import TempLocale

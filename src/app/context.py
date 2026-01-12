@@ -1,8 +1,6 @@
 from contextvars import ContextVar
-from typing import Literal
-import locale
-from helpers import WeatherApi
+from helpers.weather import WeatherLocation
 
 
 locale_code: ContextVar[str] = ContextVar('locale', default='en')
-weather_api: ContextVar[WeatherApi] = ContextVar('weather_api')
+weather_location: ContextVar[WeatherLocation] = ContextVar('weather_location')

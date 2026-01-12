@@ -12,4 +12,4 @@ dependencies:
   - pip:
     - pypixelcolor==0.4.0
     - rpi-rgb-led-matrix-scene-composer==0.1.1
-    - python-weather==2.1.1
+    - freeweather==0.1.1

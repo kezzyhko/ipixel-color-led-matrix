@@ -1,21 +1,23 @@
 from . import VStack
-import python_weather
 from app import context
-from helpers import WeatherApi
+from helpers.weather import WeatherApi, WeatherLocation
 
 
 class WeatherComponent(VStack):
-	def __init__(self):
+	def __init__(self, location: WeatherLocation|None = None):
 		super().__init__()
-		self._weather_api: WeatherApi = context.weather_api.get()
+		location = location or context.weather_location.get()
+		self._weather_api: WeatherApi = WeatherApi(location)
 		# TODO: add precipitation icon, wind speed bar, and temperature text as separate components
 		# TODO: add loading icon
 
 	def update(self):
 		super().update()
-		forecast = self._weather_api.forecast
-		is_loading = forecast is None
+		weather = self._weather_api.latest_current
+		is_loading = weather is None
 		# TODO: show/hide components
 		if is_loading:
+			print("Loading weather data...") # TODO: remove
 			return
-		print(forecast.temperature, forecast.precipitation, forecast.wind_speed) # TODO: change components' properties
+		
+		print(weather) # TODO: change other components' properties
