@@ -15,11 +15,11 @@ class DateTimeComponent(TextComponent):
 	FULL_WEEKDAY = "%A"
 	FULL_DATETIME = f"{FULL_DATE} {FULL_WEEKDAY} {FULL_TIME}"
 
-	def __init__(self, format: str = SIMPLE_DATETIME, locale: str|None = None, case: Literal['default', 'upper', 'lower', 'title'] = 'default'):
+	def __init__(self, font_size: int, color: tuple[int, int, int, int]|str = '#ffffff', format: str = SIMPLE_DATETIME, locale: str|None = None, case: Literal['default', 'upper', 'lower', 'title'] = 'default'):
 		self._locale = locale or context.locale_code.get() or "en"
 		self._format = format
 		self._case = case
-		super().__init__(self._get_formated_datetime())
+		super().__init__(self._get_formated_datetime(), font_size=font_size, color=color)
 
 	def update(self):
 		self.text = self._get_formated_datetime()

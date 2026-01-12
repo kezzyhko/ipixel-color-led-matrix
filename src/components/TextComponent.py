@@ -5,9 +5,10 @@ from bitmap_font import AsciiBitmapFont
 
 
 class TextComponent(Component):
-	def __init__(self, text: str, font_size: int = 6): #TODO: size
+	def __init__(self, text: str, font_size: int = 6, color: tuple[int, int, int, int]|str = '#ffffff'): #TODO: size
 		super().__init__()
 		self.text = text
+		self.color = color
 		self.font = AsciiBitmapFont.get_default_font(size=font_size)
 
 	def update(self):
@@ -24,5 +25,5 @@ class TextComponent(Component):
 		
 		# Use anchor="lt" (left-top) to align from top-left instead of baseline
 		# Note: May not work with bitmap fonts, but worth trying
-		draw.text((0, 0), self.text, fill=(255, 255, 255, 255), font=self.font)
+		draw.text((0, 0), self.text, fill=self.color, font=self.font)
 		return img

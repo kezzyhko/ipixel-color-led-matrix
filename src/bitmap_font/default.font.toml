@@ -1673,10 +1673,10 @@ characters = ["я"]
 [[glyphs]]
 bitmap = """
  XXX 
-X  XX
-X X X
-X X X
-XX  X
+X   X
+X   X
+X   X
+X   X
  XXX 
 """
 characters = ["0"]
@@ -1773,10 +1773,10 @@ characters = ["8"]
 bitmap = """
  XXX 
 X   X
+X   X
  XXXX
-    X
-   X 
-XXX  
+    X 
+XXXX 
 """
 characters = ["9"]
 
