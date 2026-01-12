@@ -2,6 +2,8 @@ from typing import Literal
 from . import TextComponent
 from datetime import datetime
 from app import context
+from helpers import TempLocale
+import locale
 
 class DateTimeComponent(TextComponent):
 	SIMPLE_DATE = "%d %b"
@@ -24,7 +26,7 @@ class DateTimeComponent(TextComponent):
 
 	def _get_formated_datetime(self) -> str:
 		now = datetime.now()
-		with context.temporary_locale(self._locale):
+		with TempLocale(self._locale, locale.LC_ALL):
 			formated_string = now.strftime(self._format)
 		match self._case:
 			case 'default':

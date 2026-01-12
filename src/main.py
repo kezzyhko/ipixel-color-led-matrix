@@ -3,25 +3,25 @@ from app import LedMatrixApp
 from display_target import TerminalDisplayTarget, IPixelColorMatrix
 import asyncio
 from app import context
-from components import WeatherComponent
+from helpers import WeatherApi
+from contextlib import AsyncExitStack
 
 
 async def main():
-	args = parse_arguments()
+	async with AsyncExitStack() as exit_stack:
+		args = parse_arguments()
+		weather_api = await exit_stack.enter_async_context(WeatherApi(args.city, args.units))
 
-	context.locale_code.set(args.locale)
-	context.weather_city.set(args.city)
-	context.weather_units.set(args.units)
-	
-	if args.debug:
-		display_target = TerminalDisplayTarget()
-	else:
-		display_target = IPixelColorMatrix(args.mac_address)
-	app = LedMatrixApp(display_target=display_target, fps=args.fps)
-	try:
-		await app.run()
-	finally:
-		await app.cleanup()
+		context.locale_code.set(args.locale)
+		context.weather_api.set(weather_api)
+
+		display_target = TerminalDisplayTarget() if args.debug else IPixelColorMatrix(args.mac_address)
+		app = LedMatrixApp(display_target=display_target, fps=args.fps)
+
+		try:
+			await app.run()
+		finally:
+			await app.cleanup()
 
 def parse_arguments():
 	parser = ArgumentParser(description="Led Matrix App", add_help=False)
@@ -33,7 +33,7 @@ def parse_arguments():
 	parser.add_argument('--locale', type=str, default="en", help="Locale to use (for example, for date formatting)")
 	parser.add_argument('--fps', type=float, default=10.0, help="Update frequency")
 	parser.add_argument('--city', type=str, required=True, help="City to get weather data from") #TODO: allow full address
-	parser.add_argument('--units', choices=WeatherComponent.UNITS.keys(), default='metric', help="Units to use for weather data")
+	parser.add_argument('--units', choices=WeatherApi.UNIT_KEYS, default=WeatherApi.DEFAULT_UNITS, help="Units to use for weather data")
 	args = parser.parse_args()
 	return args
 

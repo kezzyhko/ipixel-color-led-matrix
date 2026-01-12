@@ -8,7 +8,7 @@ class LedMatrixApp:
 		# TODO: create events, pass to all services??
 		# TODO: Implement services
 		self._stop_event = asyncio.Event()
-		self.composer_service = ComposerService(display_target, fps) # TODO: pass fps from config
+		self.composer_service = ComposerService(display_target, fps)
 		# self.cli_controller_service = CliControllerService()
 		# self.http_controller_service = HttpControllerService()
 
