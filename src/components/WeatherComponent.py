@@ -2,6 +2,8 @@ from . import VStack
 from app import context
 from helpers.weather import WeatherApi, WeatherLocation
 from . import TextComponent
+from . import Icon
+from assets import get_asset_path
 
 
 class WeatherComponent(VStack):
@@ -14,6 +16,12 @@ class WeatherComponent(VStack):
 		self.temperature_text.x = 2
 		self.temperature_text.y = 9
 		self.add_child(self.temperature_text)
+		
+		self.type_icon = Icon(get_asset_path("weather/rain.icon.toml")) # TODO: size
+		self.type_icon.x = 0
+		self.type_icon.y = 0
+		self.add_child(self.type_icon)
+		
 		# TODO: add precipitation icon, wind speed bar, and temperature text as separate components
 		# TODO: add loading icon
 
