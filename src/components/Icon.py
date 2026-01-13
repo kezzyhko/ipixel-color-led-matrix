@@ -1,8 +1,9 @@
 from . import Component
 from pathlib import Path
-from PIL import Image, ImageColor
+from PIL import Image
 import tomllib
 from datetime import datetime
+from helpers import Color
 
 
 class Icon(Component):
@@ -20,7 +21,7 @@ class Icon(Component):
 	
 		palette = {}
 		for character, color in icon_data['palette'].items():
-			palette[character] = ImageColor.getrgb(color)
+			palette[character] = Color(color).rgba_tuple_int
 		if " " not in palette:
 			palette[" "] = (0, 0, 0, 0)
 		

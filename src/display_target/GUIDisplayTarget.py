@@ -2,6 +2,7 @@ from . import DisplayTarget
 from PIL import Image, ImageTk
 from helpers import image as image_helpers
 import tkinter as tk
+from helpers import Color
 
 
 class GUIDisplayTarget(DisplayTarget):
@@ -50,5 +51,5 @@ class GUIDisplayTarget(DisplayTarget):
 		new_size = (image.width * self._pixel_size, image.height * self._pixel_size)
 		resized = image.resize(new_size, Image.Resampling.NEAREST)
 		tk_image = ImageTk.PhotoImage(resized)
-		self._image.configure(image=tk_image, bg="#000000")
+		self._image.configure(image=tk_image, bg=Color("black").tk)
 		self._window.update()
