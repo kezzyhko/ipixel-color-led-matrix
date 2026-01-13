@@ -11,11 +11,13 @@ class Icon(Component):
 		self.path = path
 		self._load_file()
 		
+		self._current_frame_index = 0
+		self._last_frame_time = None
+		self._frames_to_advance = 0
+		
 	def _load_file(self):
 		with open(self.path, "rb") as f:
 			icon_data = tomllib.load(f)
-			
-		self.fps = icon_data['configuration']['fps']
 	
 		palette = {}
 		for character, color in icon_data['palette'].items():
@@ -29,7 +31,7 @@ class Icon(Component):
 			self.frames.append(self._parse_frame_bitmap(bitmap, palette))
 
 		self.frames_amount = len(self.frames)
-
+		self.fps = icon_data['configuration']['fps']
 
 	def _parse_frame_bitmap(self, bitmap, palette) -> Image.Image:
 		height = len(bitmap)
@@ -42,11 +44,17 @@ class Icon(Component):
 		return frame
 
 	def update(self):
-		pass
+		current_time = datetime.now().timestamp()
+		time_elapsed = (current_time - self._last_frame_time) if self._last_frame_time else 0
+		self._frames_to_advance += time_elapsed * self.fps
+
+		# Only advance if at least one full frame duration has passed
+		if self._frames_to_advance >= 1:
+			self._current_frame_index += 1
+			self._current_frame_index %= self.frames_amount
+			self._frames_to_advance -= 1
+
+		self._last_frame_time = current_time
 
 	def render(self) -> Image.Image:
-		seconds = datetime.now().timestamp()
-		frame_index = (seconds * self.fps) % self.frames_amount
-		frame_index = int(frame_index)
-		frame = self.frames[frame_index]
-		return frame
+		return self.frames[self._current_frame_index]
