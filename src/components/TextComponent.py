@@ -1,11 +1,10 @@
-from abc import ABCMeta
 from PIL import Image, ImageDraw
 from . import Component
 from bitmap_font import AsciiBitmapFont
 
 
 class TextComponent(Component):
-	def __init__(self, text: str, font_size: int = 6, color: tuple[int, int, int, int]|str = '#ffffff'): #TODO: size
+	def __init__(self, text: str, font_size: int, color: tuple[int, int, int, int]|str = '#ffffff'): #TODO: size
 		super().__init__()
 		self.text = text
 		self.color = color
