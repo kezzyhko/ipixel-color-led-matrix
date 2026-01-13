@@ -1,6 +1,7 @@
 from PIL import Image
 from PIL.ImageFont import ImageFont
 import tomllib
+from assets import get_asset_path
 from pathlib import Path
 
 
@@ -9,7 +10,7 @@ class AsciiBitmapFont(ImageFont):
 
 	@staticmethod
 	def get_default_font(size: int) -> AsciiBitmapFont:
-		path = Path(__file__).parent / "default.font.toml"
+		path = get_asset_path("default.font.toml")
 		return AsciiBitmapFont(path, size)
 
 	def __init__(self, path: str | Path, size: int, spacing: int | None = None):
@@ -46,7 +47,7 @@ class AsciiBitmapFont(ImageFont):
 		self.glyphs['�'] = self._parse_glyph_bitmap([["X" if (x+y)%2 == 0 else " " for x in range(space_width)] for y in range(self.size)]) # checkerboard pattern
 		# TODO: support new line character??
 
-	# TODO: implement characters with height different from font size for letters like "Q" or "Й"
+	# TODO: implement characters with height different from font size for letters like "Q" or "Й"?
 
 	def _parse_glyph_bitmap(self, bitmap) -> Image.Image:
 		width = max(len(bitmap[i]) for i in range(len(bitmap)))
