@@ -18,7 +18,7 @@ class WeatherComponent(VStack):
 		self.add_child(self.temperature_text)
 		
 		self.type_icon = Icon(get_asset_path("weather/rain.icon.toml")) # TODO: size
-		self.type_icon.x = 0
+		self.type_icon.x = 4
 		self.type_icon.y = 0
 		self.add_child(self.type_icon)
 		
