@@ -11,9 +11,8 @@ class Icon(Component):
 		self.path = path
 		self._load_file()
 		
-		self._current_frame_index = 0
+		self._current_frame_index: float = 0
 		self._last_frame_time = None
-		self._frames_to_advance = 0
 		
 	def _load_file(self):
 		with open(self.path, "rb") as f:
@@ -46,15 +45,9 @@ class Icon(Component):
 	def update(self):
 		current_time = datetime.now().timestamp()
 		time_elapsed = (current_time - self._last_frame_time) if self._last_frame_time else 0
-		self._frames_to_advance += time_elapsed * self.fps
-
-		# Only advance if at least one full frame duration has passed
-		if self._frames_to_advance >= 1:
-			self._current_frame_index += 1
-			self._current_frame_index %= self.frames_amount
-			self._frames_to_advance -= 1
-
+		self._current_frame_index += time_elapsed * self.fps
+		self._current_frame_index %= self.frames_amount
 		self._last_frame_time = current_time
 
 	def render(self) -> Image.Image:
-		return self.frames[self._current_frame_index]
+		return self.frames[int(self._current_frame_index)]
