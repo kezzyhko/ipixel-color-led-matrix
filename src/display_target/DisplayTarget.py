@@ -14,3 +14,5 @@ class DisplayTarget(metaclass=ABCMeta):
 	@abstractmethod
 	async def display(self, image: Image):
 		pass
+		# TODO: Allow program stopping from this function.
+		# TODO: For example, when user closes the window or bluetooth device disconnects.

@@ -17,3 +17,6 @@ def convert_to_png_hex(image: Image) -> str:
 	file_bytes = output.getvalue()
 	hex = file_bytes.hex()
 	return hex
+
+def convert_to_hex(color: tuple[int, int, int, int]) -> str:
+	return f'#{color[0]:02x}{color[1]:02x}{color[2]:02x}{color[3]:02x}'

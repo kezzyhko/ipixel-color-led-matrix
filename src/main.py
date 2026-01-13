@@ -1,6 +1,6 @@
 from configargparse import ArgumentParser
 from app import LedMatrixApp
-from display_target import TerminalDisplayTarget, IPixelColorMatrix
+from display_target import GUIDisplayTarget, IPixelColorMatrix
 import asyncio
 from app import context
 from helpers.weather import WeatherLocation
@@ -14,7 +14,7 @@ async def main():
 		*args.weather_coordinates, city=args.city
 	))
 
-	display_target = TerminalDisplayTarget() if args.debug else IPixelColorMatrix(args.mac_address)
+	display_target = GUIDisplayTarget() if args.debug else IPixelColorMatrix(args.mac_address)
 	app = LedMatrixApp(display_target=display_target, fps=args.fps)
 
 	try:
@@ -28,7 +28,7 @@ def parse_arguments():
 	general = parser.add_argument_group('General')
 	general.add_argument('--help', '-h', action="help", help="Show this help message and exit.")
 	general.add_argument('--config', '-c', metavar='PATH', required=False, is_config_file=True, help="Path to config file.")
-	general.add_argument('--debug', '-d', action="store_true", help="Enable debug mode. Uses terminal display instead of physical display.")
+	general.add_argument('--debug', '-d', action="store_true", help="Enable debug mode. Uses GUI display instead of physical display.")
 
 	display = parser.add_argument_group('Display')
 	display.add_argument('--debug-size', metavar=('WIDTH', 'HEIGHT'), type=int, nargs=2, default=(64, 32), help="Defines the size of the terminal display. Ignored if debug mode is disabled.") #TODO: use this argument
