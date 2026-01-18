@@ -1,6 +1,6 @@
 from PIL import Image, ImageDraw
 from . import Component
-from bitmap_font import AsciiBitmapFont
+from helpers import AsciiBitmapFont
 
 
 class TextComponent(Component):
