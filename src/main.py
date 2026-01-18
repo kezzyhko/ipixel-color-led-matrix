@@ -14,7 +14,7 @@ async def main():
 		*args.weather_coordinates, city=args.city
 	))
 
-	display_target = GUIDisplayTarget() if args.debug else IPixelColorMatrix(args.mac_address)
+	display_target = GUIDisplayTarget(*args.debug_size) if args.debug else IPixelColorMatrix(args.mac_address)
 	app = LedMatrixApp(display_target=display_target, fps=args.fps)
 
 	try:

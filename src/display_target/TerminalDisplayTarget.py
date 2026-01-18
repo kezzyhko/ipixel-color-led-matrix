@@ -7,7 +7,10 @@ from io import TextIOWrapper
 
 
 class TerminalDisplayTarget(DisplayTarget):
-	def __init__(self):
+	def __init__(self, width: int, height: int):
+		self._width = width
+		self._height = height
+
 		output = sys.stdout
 		if sys.platform == "win32":
 			output = colorama.AnsiToWin32(output).stream
@@ -25,9 +28,9 @@ class TerminalDisplayTarget(DisplayTarget):
 	async def display(self, image: Image):
 		terminal_helpers.clear_window(self.output)
 		pixels = image_helpers.get_rgba_pixels(image)
-		for y in range(image.height):
-			for x in range(image.width):
-				r, g, b, _ = pixels[y, x]
+		for y in range(self._height):
+			for x in range(self._width):
+				r, g, b, _ = pixels[y, x] if x < image.width and y < image.height else (0, 0, 0, 0)
 				terminal_helpers.change_color(r, g, b, self.output)
 				self.output.write("●")
 			self.output.write("\n")
