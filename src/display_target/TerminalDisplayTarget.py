@@ -16,6 +16,14 @@ class TerminalDisplayTarget(DisplayTarget):
 			output = colorama.AnsiToWin32(output).stream
 		output = TextIOWrapper(output.buffer, encoding='utf-8', line_buffering=False)
 		self.output: terminal_helpers.WriteableStream = output
+
+	@property
+	def width(self) -> int:
+		return self._width
+	
+	@property
+	def height(self) -> int:
+		return self._height
 	
 	async def setup(self):
 		print("Using terminal as display")

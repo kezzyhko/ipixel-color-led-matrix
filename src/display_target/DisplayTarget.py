@@ -3,6 +3,17 @@ from PIL.Image import Image
 
 
 class DisplayTarget(metaclass=ABCMeta):
+	
+	@property
+	@abstractmethod
+	def width(self):
+		pass
+	
+	@property
+	@abstractmethod
+	def height(self):
+		pass
+	
 	@abstractmethod
 	async def setup(self):
 		pass

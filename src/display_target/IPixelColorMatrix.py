@@ -41,6 +41,14 @@ class IPixelColorMatrix(DisplayTarget):
 	@property
 	def is_connected(self) -> bool:
 		return self._client and self._client._session.is_connected
+	
+	@property
+	def width(self) -> int:
+		return self._client.get_device_info().width
+	
+	@property
+	def height(self) -> int:
+		return self._client.get_device_info().height
 
 	async def setup(self):
 		if not self._client:

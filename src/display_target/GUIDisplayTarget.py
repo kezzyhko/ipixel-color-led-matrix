@@ -23,6 +23,14 @@ class GUIDisplayTarget(DisplayTarget):
 		self._window.destroy()
 
 	@property
+	def width(self) -> int:
+		return self._width
+	
+	@property
+	def height(self) -> int:
+		return self._height
+
+	@property
 	def is_window_available(self) -> bool:
 		try:
 			self._window.winfo_exists()
