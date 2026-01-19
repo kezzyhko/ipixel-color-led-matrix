@@ -3,10 +3,10 @@ from PIL.Image import Image
 
 class Scene:
 	def __init__(self, *children: Component):
-		self.root = Group(*children)
+		self._root = Group(*children)
 
 	def update(self):
-		self.root.update()
+		self._root.update()
 
-	def render(self) -> Image:
-		return self.root.render()
+	def render() -> Image:
+		return self._root.render()
