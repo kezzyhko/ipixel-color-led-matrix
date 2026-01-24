@@ -8,5 +8,5 @@ class Scene:
 	def update(self):
 		self._root.update()
 
-	def render() -> Image:
+	def render(self) -> Image:
 		return self._root.render()
