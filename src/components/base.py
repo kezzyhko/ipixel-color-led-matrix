@@ -63,6 +63,6 @@ class Group(Component):
 		child.parent = self
 
 	def remove_child(self, child: Component):
-		if not child in self.children:
+		if child not in self.children:
 			return
 		child.parent = None
