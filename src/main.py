@@ -39,7 +39,7 @@ def parse_arguments():
 	locale.add_argument('--locale', type=str, default="en", help="Locale to use (for example, for date formatting)")
 	weather = locale.add_mutually_exclusive_group(required=True)
 	weather.add_argument('--city', type=str, help="City to get weather data from.")
-	weather.add_argument('--weather-coordinates', metavar=('LATITUDE', 'LONGITUDE'), type=float, nargs=2, help="Coordinates to get weather data from.")
+	weather.add_argument('--weather-coordinates', metavar=('LATITUDE', 'LONGITUDE'), type=float, nargs=2, default=[None, None], help="Coordinates to get weather data from.")
 
 	args = parser.parse_args()
 	return args
