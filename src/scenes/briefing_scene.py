@@ -1,8 +1,7 @@
-from components import HStack, VStack, DateTimeComponent, WeatherComponent
-from . import Scene
+from components import Component, HStack, VStack, DateTimeComponent, WeatherComponent
 
 
-def create_briefing_scene() -> Scene:
+def create_briefing_scene() -> Component:
 
 	date_component = DateTimeComponent(format=DateTimeComponent.SIMPLE_DATE, case="lower", font_size=6)
 	date_component.x = 1
@@ -20,15 +19,13 @@ def create_briefing_scene() -> Scene:
 	weather_component.x = 40
 	weather_component.y = 1
 
-	return Scene(
-		HStack(
-			VStack(
-				date_component,
-				HStack(
-					weekday_component,
-					time_component,
-				),
+	return HStack(
+		VStack(
+			date_component,
+			HStack(
+				weekday_component,
+				time_component,
 			),
-			weather_component,
-		)
+		),
+		weather_component,
 	)
