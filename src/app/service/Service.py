@@ -19,8 +19,8 @@ class Service(metaclass=ABCMeta):
 	
 	@abstractmethod
 	async def on_start(self):
-		pass
+		...
 	
 	@abstractmethod
 	async def on_stop(self):
-		pass
+		...

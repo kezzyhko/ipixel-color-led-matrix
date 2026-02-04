@@ -29,11 +29,11 @@ class Component(metaclass=ABCMeta):
 
 	@abstractmethod
 	def update(self):
-		pass
+		...
 
 	@abstractmethod
 	def render(self) -> Image.Image:
-		pass
+		...
 
 
 class Group(Component):
