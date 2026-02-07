@@ -72,7 +72,10 @@ class AsciiBitmapFont(ImageFont):
 			if not glyph:
 				glyph = self.glyphs['�']
 			length += glyph.width
-		length += self.spacing * (len(text) - 1)
+		
+		characters_amount = len(text)
+		if characters_amount > 1:
+			length += self.spacing * (characters_amount - 1)
 		return length
 
 	def getmask2(self, text: str, mode='1', *args, **kwargs) -> tuple[Image.core.ImagingCore, tuple[int, int]]:
