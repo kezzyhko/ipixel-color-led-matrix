@@ -13,13 +13,13 @@ class WeatherComponent(Stack):
 		self._weather_api: WeatherApi = WeatherApi(location)
 		
 		self.temperature_text = TextComponent("", font_size=5, **text_params) # TODO: size
-		self.temperature_text.x = 2
-		self.temperature_text.y = 9
+		self.temperature_text.placement.position_x = 2
+		self.temperature_text.placement.position_y = 9
 		self.add_child(self.temperature_text)
 		
 		self.type_icon = Icon(get_asset_path("weather/rain.icon.toml")) # TODO: size
-		self.type_icon.x = 4
-		self.type_icon.y = 0
+		self.type_icon.placement.position_x = 4
+		self.type_icon.placement.position_y = 0
 		self.add_child(self.type_icon)
 		
 		# TODO: add precipitation icon, wind speed bar, and temperature text as separate components

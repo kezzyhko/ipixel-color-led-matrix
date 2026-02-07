@@ -6,10 +6,31 @@ from typing import Literal
 SizingMode = Literal['input', 'output']
 
 
+class Placement:
+	def __init__(self, **kwargs):
+		self.position_x: float = kwargs.get('position_x', 0)
+		self.position_y: float = kwargs.get('position_y', 0)
+		self.size_x: float|None = kwargs.get('size_x', 1.0)
+		self.size_y: float|None = kwargs.get('size_y', 1.0)
+		self.weight_x: float|None = kwargs.get('weight_x', None)
+		self.weight_y: float|None = kwargs.get('weight_y', None)
+
+	@property
+	def position(self) -> tuple[float, float]:
+		return (self.position_x, self.position_y)
+
+	@property
+	def size(self) -> tuple[float|None, float|None]:
+		return (self.size_x, self.size_y)
+
+	@property
+	def weight(self) -> tuple[float|None, float|None]:
+		return (self.weight_x, self.weight_y)
+
+
 class Component(metaclass=ABCMeta):
 	def __init__(self):
-		self.x = 0
-		self.y = 0
+		self.placement = Placement()
 		self._parent: Group|None = None
 
 	@property
@@ -67,7 +88,9 @@ class Group(Component):
 		for child in self.children:
 			render_buffer = child.render()
 			mask = render_buffer if render_buffer.mode == "RGBA" else None
-			image.paste(render_buffer, (child.x, child.y), mask)
+			x = round(child.placement.position_x * image.width); #TODO: size
+			y = round(child.placement.position_y * image.height); #TODO: size
+			image.paste(render_buffer, (x, y), mask)
 		return image
 
 	def add_child(self, child: Component):
