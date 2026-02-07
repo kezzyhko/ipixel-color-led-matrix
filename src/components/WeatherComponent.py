@@ -1,4 +1,4 @@
-from . import Stack
+from . import Stack, StackAlignment
 from app import context
 from helpers.weather import WeatherApi, WeatherLocation
 from . import TextComponent
@@ -7,8 +7,8 @@ from assets import get_asset_path
 
 
 class WeatherComponent(Stack):
-	def __init__(self, location: WeatherLocation|None = None):
-		super().__init__("vertical")
+	def __init__(self, location: WeatherLocation|None = None, alignment: StackAlignment = "center_center"):
+		super().__init__("vertical", alignment)
 		location = location or context.weather_location.get()
 		self._weather_api: WeatherApi = WeatherApi(location)
 		

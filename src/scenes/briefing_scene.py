@@ -19,10 +19,10 @@ def create_briefing_scene() -> Component:
 	weather_component.x = 40
 	weather_component.y = 1
 
-	return Stack("horizontal",
-		Stack("vertical",
+	return Stack("horizontal", "center_center",
+		Stack("vertical", "left_center",
 			date_component,
-			Stack("horizontal",
+			Stack("horizontal", "left_bottom",
 				weekday_component,
 				time_component,
 			),
