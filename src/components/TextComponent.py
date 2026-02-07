@@ -1,6 +1,7 @@
 from PIL import Image, ImageDraw
 from . import Component
 from helpers import AsciiBitmapFont
+from .base import SizingMode
 
 
 class TextComponent(Component):
@@ -9,6 +10,9 @@ class TextComponent(Component):
 		self.text = text
 		self.color = color
 		self.font = AsciiBitmapFont.get_default_font(size=font_size)
+
+	def get_sizing_mode(self) -> tuple[SizingMode, SizingMode]:
+		return 'output', 'input'
 
 	def update(self):
 		pass

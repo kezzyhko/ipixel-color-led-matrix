@@ -1,5 +1,9 @@
 from abc import ABCMeta, abstractmethod
 from PIL import Image
+from typing import Literal
+
+
+SizingMode = Literal['input', 'output']
 
 
 class Component(metaclass=ABCMeta):
@@ -28,6 +32,10 @@ class Component(metaclass=ABCMeta):
 		self._parent = None
 
 	@abstractmethod
+	def get_sizing_mode(self) -> tuple[SizingMode, SizingMode]:
+		...
+
+	@abstractmethod
 	def update(self):
 		...
 
@@ -43,6 +51,12 @@ class Group(Component):
 		for child in children:
 			self.add_child(child)
 		self.background_color = (0, 0, 0, 0)
+		
+	def get_sizing_mode(self) -> tuple[SizingMode, SizingMode]:
+		children_sizing_modes = [child.get_sizing_mode() for child in self.children]
+		def _get_sizing_mode(index: int):
+			return 'input' if any(child_sizing_modes[index] == 'input' for child_sizing_modes in children_sizing_modes) else 'output'
+		return _get_sizing_mode(0), _get_sizing_mode(1)
 
 	def update(self):
 		for child in self.children:

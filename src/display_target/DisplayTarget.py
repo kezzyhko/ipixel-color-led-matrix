@@ -6,12 +6,12 @@ class DisplayTarget(metaclass=ABCMeta):
 	
 	@property
 	@abstractmethod
-	def width(self):
+	def width(self) -> int:
 		...
 	
 	@property
 	@abstractmethod
-	def height(self):
+	def height(self) -> int:
 		...
 	
 	@abstractmethod

@@ -4,6 +4,7 @@ from PIL import Image
 import tomllib
 from datetime import datetime
 from helpers import Color
+from .base import SizingMode
 
 
 class Icon(Component):
@@ -42,6 +43,9 @@ class Icon(Component):
 				color = palette[pixel]
 				frame.putpixel((x, y), color)
 		return frame
+
+	def get_sizing_mode(self) -> tuple[SizingMode, SizingMode]:
+		return 'output', 'output'
 
 	def update(self):
 		current_time = datetime.now().timestamp()

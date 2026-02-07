@@ -1,4 +1,4 @@
-from . import VStack
+from . import Stack
 from app import context
 from helpers.weather import WeatherApi, WeatherLocation
 from . import TextComponent
@@ -6,9 +6,9 @@ from . import Icon
 from assets import get_asset_path
 
 
-class WeatherComponent(VStack):
+class WeatherComponent(Stack):
 	def __init__(self, location: WeatherLocation|None = None):
-		super().__init__()
+		super().__init__("vertical")
 		location = location or context.weather_location.get()
 		self._weather_api: WeatherApi = WeatherApi(location)
 		

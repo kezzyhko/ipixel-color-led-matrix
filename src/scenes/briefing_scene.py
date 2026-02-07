@@ -1,4 +1,4 @@
-from components import Component, HStack, VStack, DateTimeComponent, WeatherComponent
+from components import Component, Stack, DateTimeComponent, WeatherComponent
 
 
 def create_briefing_scene() -> Component:
@@ -19,10 +19,10 @@ def create_briefing_scene() -> Component:
 	weather_component.x = 40
 	weather_component.y = 1
 
-	return HStack(
-		VStack(
+	return Stack("horizontal",
+		Stack("vertical",
 			date_component,
-			HStack(
+			Stack("horizontal",
 				weekday_component,
 				time_component,
 			),
