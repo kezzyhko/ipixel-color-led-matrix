@@ -7,25 +7,12 @@ SizingMode = Literal['input', 'output']
 
 
 class Placement:
-	def __init__(self):
+	def __init__(self, x: float = 0.0, y: float = 0.0, width: float|None = None, height: float|None = None, weight: float = 1.0):
 		self.x: float = 0.0
 		self.y: float = 0.0
 		self.width: float|None = None
 		self.height: float|None = None
 		self.weight: float = 1.0
-
-	@staticmethod
-	def create_from_values(x: float = 0.0, y: float = 0.0, width: float|None = None, height: float|None = None, weight: float = 1.0):
-		placement = Placement()
-		placement.x = x
-		placement.y = y
-		placement.width = width
-		placement.height = height
-		placement.weight = weight
-
-	@staticmethod
-	def create_from_tuples(position: tuple[float, float] = (0.0, 0.0), size: tuple[float|None, float|None] = (None, None), weight: float = 1.0):
-		return Placement.create_from_values(position[0], position[1], size[0], size[1], weight)
 
 	@property
 	def position(self) -> tuple[float, float]:
