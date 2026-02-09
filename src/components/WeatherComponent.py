@@ -1,5 +1,6 @@
 from . import Stack, StackAlignment
 from app import context
+from helpers import AsciiBitmapFont
 from helpers.weather import WeatherApi, WeatherLocation
 from . import TextComponent
 from . import Icon
@@ -15,11 +16,15 @@ class WeatherComponent(Stack):
 		self.temperature_text = TextComponent("", color=temperature_color, font=temperature_font) # TODO: size
 		self.temperature_text.placement.x = 2
 		self.temperature_text.placement.y = 9
+		self.temperature_text.placement.width = 1
+		self.temperature_text.placement.height = 5/16
 		self.add_child(self.temperature_text)
 		
 		self.type_icon = Icon(get_asset_path("weather/rain.icon.toml")) # TODO: size
 		self.type_icon.placement.x = 4
 		self.type_icon.placement.y = 0
+		self.type_icon.placement.width = 1
+		self.type_icon.placement.height = 1
 		self.add_child(self.type_icon)
 		
 		# TODO: add precipitation icon, wind speed bar, and temperature text as separate components

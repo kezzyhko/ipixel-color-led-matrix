@@ -23,6 +23,8 @@ class ComposerService(Service):
 
 	async def _tick(self):
 		self.scene.init_render_pass()
+		self.scene._render_properties._max_width = self.display_target.width
+		self.scene._render_properties._max_height = self.display_target.height
 		self.scene.update()
 		self.scene.update_sizing_mode()
 		self.scene.update_children_constraints()
