@@ -1,5 +1,5 @@
 [configuration]
-default_spacing = 1
+spacing = 1
 space_width = 3
 
 [[glyphs]]

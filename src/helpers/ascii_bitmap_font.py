@@ -3,8 +3,11 @@ from PIL.ImageFont import ImageFont
 import tomllib
 from assets import get_asset_path
 from pathlib import Path
+from collections.abc import Sequence
 from typing import Any
-import copy
+
+
+AsciiBitmap = Sequence[Sequence[str]]
 
 
 class FontData:
@@ -13,12 +16,38 @@ class FontData:
 		self._size_specific_configuration = size_specific_configuration
 
 		self.height: int = height
-		self.spacing: int = self._get_configuration_value('default_spacing')
+		self.spacing: int = self._get_configuration_value('spacing')
 		self.space_width: int = self._get_configuration_value('space_width')
 		self.glyphs: dict[str, Image.Image] = {}
+		self.add_glyphs([' '], FontData._get_empty_askii_bitmap(self.space_width, self.height))
+		self.add_glyphs(['�'], FontData._get_checkerboard_askii_bitmap(self.space_width, self.height))
+		# TODO: support new line character and wrapping??
+
+	@staticmethod
+	def _get_empty_askii_bitmap(width: int, height: int) -> AsciiBitmap:
+		return [" " * width] * height
+
+	@staticmethod
+	def _get_checkerboard_askii_bitmap(width: int, height: int) -> AsciiBitmap:
+		return [["X" if (x+y)%2 == 0 else " " for x in range(width)] for y in range(height)]
+
+	def add_glyphs(self, characters: list[str], bitmap: AsciiBitmap):
+		glyph_mask = self._parse_askii_bitmap(bitmap)
+		for character in characters:
+			self.glyphs[character] = glyph_mask
 
 	def _get_configuration_value(self, key: str) -> Any:
 		return self._size_specific_configuration.get(key, self._global_configuration.get(key))
+	
+	def _parse_askii_bitmap(self, bitmap: AsciiBitmap) -> Image.Image:
+		height = len(bitmap)
+		width = max(len(bitmap[i]) for i in range(len(bitmap)))
+		mask = Image.new('1', (width, height), 0)
+		for y, row in enumerate(bitmap):
+			for x, pixel in enumerate(row):
+				if pixel not in [' ', '0']:
+					mask.putpixel((x, y), 1)
+		return mask
 
 
 #TODO: add types, check font file for errors when parsing
@@ -38,34 +67,16 @@ class AsciiBitmapFont():
 
 	def _load_file(self):
 		with open(self._path, "rb") as f:
-			self.font_data = tomllib.load(f)
+			self._font_data = tomllib.load(f)
 		global_configuration = self._font_data.get('configuration', {})
 
-		for glyph in self.font_data['glyphs']:
+		for glyph in self._font_data['glyphs']:
 			bitmap = glyph['bitmap'].strip("\n").split("\n")
 			height = len(bitmap)
 			if height not in self._fonts:
 				size_specific_configuration = self._font_data.get(f'configuration_height{height}', {})
 				self._fonts[height] = FontData(height, global_configuration, size_specific_configuration)
-
-			for character in glyph['characters']:
-				self._fonts[height].glyphs[character] = self._parse_glyph_bitmap(bitmap)
-
-		for height in self._fonts:
-			space_width = self._fonts[height].space_width
-			self._fonts[height].glyphs[' '] = self._parse_glyph_bitmap([" " * space_width] * height)
-			self._fonts[height].glyphs['�'] = self._parse_glyph_bitmap([["X" if (x+y)%2 == 0 else " " for x in range(space_width)] for y in range(height)]) # checkerboard pattern
-			# TODO: support new line character and wrapping??
-	
-	def _parse_glyph_bitmap(self, bitmap) -> Image.Image:
-		height = len(bitmap)
-		width = max(len(bitmap[i]) for i in range(len(bitmap)))
-		mask = Image.new('1', (width, height), 0)
-		for y, row in enumerate(bitmap):
-			for x, pixel in enumerate(row):
-				if pixel not in [' ', '0']:
-					mask.putpixel((x, y), 1)
-		return mask
+			self._fonts[height].add_glyphs(glyph['characters'], bitmap)
 
 AsciiBitmapFont.DEFAULT = AsciiBitmapFont(get_asset_path("default.font.toml"))
 
