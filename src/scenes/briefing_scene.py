@@ -1,7 +1,7 @@
-from components import Component, Stack, DateTimeComponent, WeatherComponent
+from components import Group, Stack, DateTimeComponent, WeatherComponent
 
 
-def create_briefing_scene() -> Component:
+def create_briefing_scene() -> Group:
 
 	date_component = DateTimeComponent(format=DateTimeComponent.SIMPLE_DATE, case="lower", font_size=6)
 	date_component.placement.x = 1

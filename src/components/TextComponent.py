@@ -11,13 +11,13 @@ class TextComponent(Component):
 		self.color = color
 		self.font = AsciiBitmapFont.get_default_font(size=font_size)
 
-	def get_sizing_mode(self) -> tuple[SizingMode, SizingMode]:
+	def _calculate_sizing_mode(self) -> tuple[SizingMode, SizingMode]:
 		return 'output', 'input'
 
 	def update(self):
 		pass
 
-	def render(self) -> Image.Image:
+	def _render_implementation(self) -> Image.Image:
 		# TODO: size
 		height = 16
 		width = 64

@@ -31,9 +31,56 @@ class Placement:
 		self.width, self.height = new_size
 
 
+class RenderProperties:
+	def __init__(self):
+		self._sizing_mode_x: SizingMode = 'output'
+		self._sizing_mode_y: SizingMode = 'output'
+		self._x: int|None = None
+		self._y: int|None = None
+		self._max_width: int|None = None
+		self._max_height: int|None = None
+		self._width: int
+		self._height: int
+
+	@property
+	def position(self) -> tuple[int, int]:
+		if self._x is None or self._y is None:
+			raise ValueError(f"Position is not set (x={self._x}, y={self._y})")
+		return (self._x, self._y)
+
+	@property
+	def max_width(self) -> int:
+		if self._max_width is None:
+			raise ValueError(f"Width is not set (width={self._max_width})")
+		return self._max_width
+
+	@property
+	def max_height(self) -> int:
+		if self._max_height is None:
+			raise ValueError(f"Height is not set (height={self._max_height})")
+		return self._max_height
+
+	@property
+	def size(self) -> tuple[int, int]:
+		return (self._width, self._height)
+
+	@size.setter
+	def size(self, new_size: tuple[int, int]):
+		self._width, self._height = new_size
+
+	@property
+	def sizing_mode(self) -> tuple[SizingMode, SizingMode]:
+		return (self._sizing_mode_x, self._sizing_mode_y)
+
+	@sizing_mode.setter
+	def sizing_mode(self, new_sizing_mode: tuple[SizingMode, SizingMode]):
+		self._sizing_mode_x, self._sizing_mode_y = new_sizing_mode
+
+
 class Component(metaclass=ABCMeta):
 	def __init__(self):
 		self.placement = Placement()
+		self._render_properties: RenderProperties
 		self._parent: Group|None = None
 
 	@property
@@ -55,17 +102,28 @@ class Component(metaclass=ABCMeta):
 		self._parent.remove_child(self)
 		self._parent = None
 
-	@abstractmethod
-	def get_sizing_mode(self) -> tuple[SizingMode, SizingMode]:
-		...
+	def init_render_pass(self):
+		self._render_properties = RenderProperties()
 
 	@abstractmethod
 	def update(self):
 		...
 
+	def update_sizing_mode(self):
+		self._render_properties.sizing_mode = self._calculate_sizing_mode()
+
 	@abstractmethod
-	def render(self) -> Image.Image:
+	def _calculate_sizing_mode(self) -> tuple[SizingMode, SizingMode]:
 		...
+
+	@abstractmethod
+	def _render_implementation(self) -> Image.Image:
+		...
+
+	def render(self) -> Image.Image:
+		image = self._render_implementation()
+		self._render_properties.size = image.size
+		return image
 
 
 class Group(Component):
@@ -75,25 +133,47 @@ class Group(Component):
 		for child in children:
 			self.add_child(child)
 		self.background_color = (0, 0, 0, 0)
-		
-	def get_sizing_mode(self) -> tuple[SizingMode, SizingMode]:
-		children_sizing_modes = [child.get_sizing_mode() for child in self.children]
-		def _get_sizing_mode(index: int):
-			return 'input' if any(child_sizing_modes[index] == 'input' for child_sizing_modes in children_sizing_modes) else 'output'
-		return _get_sizing_mode(0), _get_sizing_mode(1)
+
+	def init_render_pass(self):
+		super().init_render_pass()
+		for child in self.children:
+			child.init_render_pass()
 
 	def update(self):
 		for child in self.children:
 			child.update()
+		
+	def _calculate_sizing_mode(self) -> tuple[SizingMode, SizingMode]:
+		sizing_mode_x = sizing_mode_y = 'output'
+		for child in self.children:
+			child.update_sizing_mode()
+			if child._render_properties._sizing_mode_x == 'input':
+				sizing_mode_x = 'input'
+			if child._render_properties._sizing_mode_y == 'input':
+				sizing_mode_y = 'input'
+		return (sizing_mode_x, sizing_mode_y)
 
-	def render(self) -> Image.Image:
-		image = Image.new("RGBA", (64, 16), self.background_color) #TODO: size
+	def update_children_constraints(self):
+		max_width = self._render_properties.max_width
+		max_height = self._render_properties.max_height
+		
+		for child in self.children:
+			if child._render_properties._sizing_mode_x == 'input' and child.placement.width is None:
+				raise ValueError(f"Width is not set for Group's child")
+			if child._render_properties._sizing_mode_y == 'input' and child.placement.height is None:
+				raise ValueError(f"Height is not set for Group's child")
+			child._render_properties._x = round(child.placement.x * max_width)
+			child._render_properties._y = round(child.placement.y * max_height)
+			child._render_properties._max_width = round((child.placement.width or 1) * max_width)
+			child._render_properties._max_height = round((child.placement.height or 1) * max_height)
+
+	def _render_implementation(self) -> Image.Image:
+		size = (self._render_properties.max_width, self._render_properties.max_height) # TODO: shrink if necessary
+		image = Image.new("RGBA", size, self.background_color)
 		for child in self.children:
 			render_buffer = child.render()
 			mask = render_buffer if render_buffer.mode == "RGBA" else None
-			x = round(child.placement.x * image.width); #TODO: size
-			y = round(child.placement.y * image.height); #TODO: size
-			image.paste(render_buffer, (x, y), mask)
+			image.paste(render_buffer, child._render_properties.position, mask)
 		return image
 
 	def add_child(self, child: Component):

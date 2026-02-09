@@ -44,7 +44,7 @@ class Icon(Component):
 				frame.putpixel((x, y), color)
 		return frame
 
-	def get_sizing_mode(self) -> tuple[SizingMode, SizingMode]:
+	def _calculate_sizing_mode(self) -> tuple[SizingMode, SizingMode]:
 		return 'output', 'output'
 
 	def update(self):
@@ -54,5 +54,5 @@ class Icon(Component):
 		self._current_frame_index %= self.frames_amount
 		self._last_frame_time = current_time
 
-	def render(self) -> Image.Image:
+	def _render_implementation(self) -> Image.Image:
 		return self.frames[int(self._current_frame_index)]
