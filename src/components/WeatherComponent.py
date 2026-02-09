@@ -7,12 +7,12 @@ from assets import get_asset_path
 
 
 class WeatherComponent(Stack):
-	def __init__(self, location: WeatherLocation|None = None, alignment: StackAlignment = "center_center", **text_params):
+	def __init__(self, location: WeatherLocation|None = None, alignment: StackAlignment = "center_center", temperature_color: tuple[int, int, int, int]|str = '#ffffff', temperature_font: AsciiBitmapFont = AsciiBitmapFont.DEFAULT):
 		super().__init__("vertical", alignment)
 		location = location or context.weather_location.get()
 		self._weather_api: WeatherApi = WeatherApi(location)
 		
-		self.temperature_text = TextComponent("", **text_params) # TODO: size
+		self.temperature_text = TextComponent("", color=temperature_color, font=temperature_font) # TODO: size
 		self.temperature_text.placement.x = 2
 		self.temperature_text.placement.y = 9
 		self.add_child(self.temperature_text)
