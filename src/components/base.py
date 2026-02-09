@@ -7,25 +7,41 @@ SizingMode = Literal['input', 'output']
 
 
 class Placement:
-	def __init__(self, **kwargs):
-		self.position_x: float = kwargs.get('position_x', 0)
-		self.position_y: float = kwargs.get('position_y', 0)
-		self.size_x: float|None = kwargs.get('size_x', 1.0)
-		self.size_y: float|None = kwargs.get('size_y', 1.0)
-		self.weight_x: float|None = kwargs.get('weight_x', None)
-		self.weight_y: float|None = kwargs.get('weight_y', None)
+	def __init__(self):
+		self.x: float = 0.0
+		self.y: float = 0.0
+		self.width: float|None = None
+		self.height: float|None = None
+		self.weight: float = 1.0
+
+	@staticmethod
+	def create_from_values(x: float = 0.0, y: float = 0.0, width: float|None = None, height: float|None = None, weight: float = 1.0):
+		placement = Placement()
+		placement.x = x
+		placement.y = y
+		placement.width = width
+		placement.height = height
+		placement.weight = weight
+
+	@staticmethod
+	def create_from_tuples(position: tuple[float, float] = (0.0, 0.0), size: tuple[float|None, float|None] = (None, None), weight: float = 1.0):
+		return Placement.create_from_values(position[0], position[1], size[0], size[1], weight)
 
 	@property
 	def position(self) -> tuple[float, float]:
-		return (self.position_x, self.position_y)
+		return (self.x, self.y)
+
+	@position.setter
+	def position(self, new_position: tuple[float, float]):
+		self.x, self.y = new_position
 
 	@property
 	def size(self) -> tuple[float|None, float|None]:
-		return (self.size_x, self.size_y)
+		return (self.width, self.height)
 
-	@property
-	def weight(self) -> tuple[float|None, float|None]:
-		return (self.weight_x, self.weight_y)
+	@size.setter
+	def size(self, new_size: tuple[float|None, float|None]):
+		self.width, self.height = new_size
 
 
 class Component(metaclass=ABCMeta):
@@ -88,8 +104,8 @@ class Group(Component):
 		for child in self.children:
 			render_buffer = child.render()
 			mask = render_buffer if render_buffer.mode == "RGBA" else None
-			x = round(child.placement.position_x * image.width); #TODO: size
-			y = round(child.placement.position_y * image.height); #TODO: size
+			x = round(child.placement.x * image.width); #TODO: size
+			y = round(child.placement.y * image.height); #TODO: size
 			image.paste(render_buffer, (x, y), mask)
 		return image
 
