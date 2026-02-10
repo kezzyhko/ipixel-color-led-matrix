@@ -32,7 +32,8 @@ class Placement:
 
 
 class RenderProperties:
-	def __init__(self):
+	def __init__(self, component: Component):
+		self._component: Component = component
 		self._sizing_mode_x: SizingMode = 'output'
 		self._sizing_mode_y: SizingMode = 'output'
 		self._x: int|None = None
@@ -46,7 +47,7 @@ class RenderProperties:
 	@property
 	def position(self) -> tuple[int, int]:
 		if self._x is None or self._y is None:
-			raise ValueError(f"Position is not set (x={self._x}, y={self._y})")
+			raise ValueError(f"Position is not set (x={self._x}, y={self._y}): {self._component.get_full_path()}")
 		return (self._x, self._y)
 
 	@position.setter
@@ -56,13 +57,13 @@ class RenderProperties:
 	@property
 	def max_width(self) -> int:
 		if self._max_width is None:
-			raise ValueError(f"Width is not set (width={self._max_width})")
+			raise ValueError(f"Max width was not set: {self._component.get_full_path()}")
 		return self._max_width
 
 	@property
 	def max_height(self) -> int:
 		if self._max_height is None:
-			raise ValueError(f"Height is not set (height={self._max_height})")
+			raise ValueError(f"Max height was not set: {self._component.get_full_path()}")
 		return self._max_height
 
 	@property
@@ -102,12 +103,16 @@ class RenderProperties:
 	@property
 	def rendered_image(self) -> Image.Image:
 		if self._rendered_image is None:
-			raise ValueError(f"Component was not rendered yet")
+			raise ValueError(f"Component was not rendered yet: {self._component.get_full_path()}")
 		return self._rendered_image
 
 	@rendered_image.setter
 	def rendered_image(self, new_rendered_image: Image.Image):
 		self._rendered_image = new_rendered_image
+
+	@property
+	def is_rendered(self) -> bool:
+		return self._rendered_image is not None
 
 
 class Component(metaclass=ABCMeta):
@@ -141,7 +146,7 @@ class Component(metaclass=ABCMeta):
 		self._parent = None
 
 	def init_render_pass(self):
-		self._render_properties = RenderProperties()
+		self._render_properties = RenderProperties(self)
 
 	@abstractmethod
 	def update(self):
@@ -159,7 +164,7 @@ class Component(metaclass=ABCMeta):
 		...
 
 	def render(self):
-		if self._render_properties.rendered_image is not None:
+		if self._render_properties.is_rendered:
 			return
 		image = self._render_implementation()
 		self._render_properties.rendered_image = image
@@ -187,13 +192,13 @@ class Group(Component):
 		sizing_mode_x = sizing_mode_y = 'output'
 		for child in self.children:
 			child.update_sizing_mode()
-			if child._render_properties._sizing_mode_x == 'input':
+			if child._render_properties._sizing_mode_x == 'input' or child.placement.width is not None:
 				sizing_mode_x = 'input'
-			if child._render_properties._sizing_mode_y == 'input':
+			if child._render_properties._sizing_mode_y == 'input' or child.placement.height is not None:
 				sizing_mode_y = 'input'
 		return (sizing_mode_x, sizing_mode_y)
 
-	def update_children_constraints(self):
+	def _calculate_children_constraints(self):
 		max_width = self._render_properties.max_width
 		max_height = self._render_properties.max_height
 		
@@ -216,6 +221,12 @@ class Group(Component):
 			mask = rendered_image if rendered_image.mode == "RGBA" else None
 			image.paste(rendered_image, child._render_properties.position, mask)
 		return image
+
+	def render(self):
+		if self._render_properties.is_rendered:
+			return
+		self._calculate_children_constraints()
+		super().render()
 
 	def add_child(self, child: Component):
 		if child in self.children:

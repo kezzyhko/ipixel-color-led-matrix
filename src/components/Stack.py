@@ -13,7 +13,7 @@ class Stack(Group):
 		self._alignment = alignment
 		self._spacing = spacing
 
-	def calculate_children_constraints(self):
+	def _calculate_children_constraints(self):
 		main_axis, cross_axis = (0, 1) if self._direction == 'horizontal' else (1, 0)
 		stack_size = self._render_properties.max_size
 		

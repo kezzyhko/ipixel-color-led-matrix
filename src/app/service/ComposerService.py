@@ -27,7 +27,6 @@ class ComposerService(Service):
 		self.scene._render_properties._max_height = self.display_target.height
 		self.scene.update()
 		self.scene.update_sizing_mode()
-		self.scene.update_children_constraints()
 		self.scene.render()
 		await self.display_target.display(self.scene._render_properties.rendered_image)
 		
