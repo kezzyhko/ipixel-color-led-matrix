@@ -49,6 +49,10 @@ class RenderProperties:
 			raise ValueError(f"Position is not set (x={self._x}, y={self._y})")
 		return (self._x, self._y)
 
+	@position.setter
+	def position(self, new_position: tuple[int, int]):
+		self._x, self._y = new_position
+
 	@property
 	def max_width(self) -> int:
 		if self._max_width is None:
@@ -86,10 +90,14 @@ class RenderProperties:
 		self._sizing_mode_x, self._sizing_mode_y = new_sizing_mode
 
 	@property
-	def is_max_size_ready(self) -> bool:
+	def is_max_size_axis_ready(self) -> tuple[bool, bool]:
 		is_max_width_ready = self._sizing_mode_x == 'output' or self._max_width is not None
 		is_max_height_ready = self._sizing_mode_y == 'output' or self._max_height is not None
-		return is_max_width_ready and is_max_height_ready
+		return (is_max_width_ready, is_max_height_ready)
+
+	@property
+	def is_max_size_ready(self) -> bool:
+		return all(self.is_max_size_axis_ready)
 
 	@property
 	def rendered_image(self) -> Image.Image:

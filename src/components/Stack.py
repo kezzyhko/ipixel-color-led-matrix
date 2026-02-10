@@ -30,7 +30,7 @@ class Stack(Group):
 			child_max_size = self._get_xy_from_maincross(pixels_max_main_size, pixels_max_cross_size)
 			child._render_properties.max_size = child_max_size
 
-			if child_main_size is None and child._render_properties.sizing_mode[main_axis] == 'input':
+			if child._render_properties.is_max_size_axis_ready[main_axis]:
 				total_weight += child.placement.weight
 
 			if child._render_properties.is_max_size_ready:
@@ -41,13 +41,24 @@ class Stack(Group):
 
 		# Pass 2: render rest of components by weight
 		for child in self.children:
-			if child._render_properties.max_size[main_axis] is not None:
+			if child._render_properties.is_max_size_axis_ready[main_axis]:
 				continue
 			pixels_max_main_size = round(main_size_left * child.placement.weight / total_weight)
 			child._render_properties.max_size = self._get_xy_from_maincross(pixels_max_main_size, child._render_properties.max_size[cross_axis])
 			child.render()
+			max_cross_size = max(max_cross_size, child._render_properties.size[cross_axis])
 
-	def _get_xy_from_maincross(self, main: int|None, cross: int|None) -> tuple[int|None, int|None]:
+		# Pass 3: calculate positions
+		main_position = 0
+		for child in self.children:
+			cross_position = 0
+			child._render_properties.position = self._get_xy_from_maincross(main_position, cross_position)
+			main_position += child._render_properties.size[main_axis]
+		
+		#TODO LAYOUT implement spacing
+		#TODO LAYOUT implement alignment
+
+	def _get_xy_from_maincross[T](self, main: T, cross: T) -> tuple[T, T]:
 		return (main, cross) if self._direction == 'horizontal' else (cross, main)
 
 	def _render_implementation(self) -> Image.Image:
