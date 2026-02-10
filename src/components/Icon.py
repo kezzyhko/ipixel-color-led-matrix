@@ -8,8 +8,8 @@ from .base import SizingMode
 
 
 class Icon(Component):
-	def __init__(self, path: Path | str):
-		super().__init__()
+	def __init__(self, path: Path | str, name: str|None = None):
+		super().__init__(name=name)
 		self.path = path
 		self._load_file()
 		

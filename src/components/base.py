@@ -1,6 +1,6 @@
 from abc import ABCMeta, abstractmethod
 from PIL import Image
-from typing import Literal
+from typing import Literal, Iterable
 
 
 SizingMode = Literal['input', 'output']
@@ -111,10 +111,15 @@ class RenderProperties:
 
 
 class Component(metaclass=ABCMeta):
-	def __init__(self):
+	def __init__(self, name: str|None = None):
+		self.name = name if name is not None else f"{type(self).__name__}_{id(self)}"
 		self.placement = Placement()
 		self._render_properties: RenderProperties
 		self._parent: Group|None = None
+
+	def get_full_path(self):
+		parent_path = self.parent.get_full_path() if self.parent else ""
+		return f"{parent_path}/{self.name}"
 
 	@property
 	def parent(self) -> Group|None:
@@ -162,8 +167,8 @@ class Component(metaclass=ABCMeta):
 
 
 class Group(Component):
-	def __init__(self, *children: Component):
-		super().__init__()
+	def __init__(self, name: str|None = None, children: Iterable[Component] = []):
+		super().__init__(name)
 		self.children: list[Component] = []
 		for child in children:
 			self.add_child(child)
@@ -194,9 +199,9 @@ class Group(Component):
 		
 		for child in self.children:
 			if child._render_properties._sizing_mode_x == 'input' and child.placement.width is None:
-				raise ValueError(f"Width is not set for Group's child")
+				raise ValueError(f"Width is not set for Group's child: {child.get_full_path()}")
 			if child._render_properties._sizing_mode_y == 'input' and child.placement.height is None:
-				raise ValueError(f"Height is not set for Group's child")
+				raise ValueError(f"Height is not set for Group's child: {child.get_full_path()}")
 			child._render_properties._x = round(child.placement.x * max_width)
 			child._render_properties._y = round(child.placement.y * max_height)
 			child._render_properties._max_width = round((child.placement.width or 1) * max_width)

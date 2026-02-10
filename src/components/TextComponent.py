@@ -5,8 +5,8 @@ from .base import SizingMode
 
 
 class TextComponent(Component):
-	def __init__(self, text: str, color: tuple[int, int, int, int]|str = '#ffffff', font: AsciiBitmapFont = AsciiBitmapFont.DEFAULT):
-		super().__init__()
+	def __init__(self, text: str, color: tuple[int, int, int, int]|str = '#ffffff', font: AsciiBitmapFont = AsciiBitmapFont.DEFAULT, name: str|None = None):
+		super().__init__(name=name)
 		self.text = text
 		self.color = color
 		self.font = font
