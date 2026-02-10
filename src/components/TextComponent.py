@@ -20,7 +20,7 @@ class TextComponent(Component):
 	def _render_implementation(self) -> Image.Image:
 		height = self._render_properties.max_height
 		font_implementation = self.font.get_implementation(height = height)
-		width = font.getlength(self.text)
+		width = font_implementation.getlength(self.text)
 		
 		img = Image.new("RGBA", (width, height), (0, 0, 0, 0))
 		draw = ImageDraw.Draw(img)

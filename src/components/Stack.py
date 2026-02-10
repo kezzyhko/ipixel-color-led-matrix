@@ -7,7 +7,7 @@ Direction = Literal['vertical', 'horizontal']
 Alignment = Literal['left_top', 'left_center', 'left_bottom', 'center_top', 'center_center', 'center_bottom', 'right_top', 'right_center', 'right_bottom']
 
 class Stack(Group):
-	def __init__(self, direction: Direction, alignment: Alignment, spacing: float = 0.0, *children: Component):
+	def __init__(self, *children: Component, direction: Direction, alignment: Alignment, spacing: float = 0.0):
 		super().__init__(*children)
 		self._direction = direction
 		self._alignment = alignment
@@ -36,9 +36,9 @@ class Stack(Group):
 		size = (self._render_properties.max_width, self._render_properties.max_height) # TODO: shrink if necessary
 		image = Image.new("RGBA", size, self.background_color)
 		for child in self.children:
-			render_buffer = child.render()
-			mask = render_buffer if render_buffer.mode == "RGBA" else None
-			image.paste(render_buffer, child._render_properties.position, mask)
+			rendered_image = child._render_properties.rendered_image
+			mask = rendered_image if rendered_image.mode == "RGBA" else None
+			image.paste(rendered_image, child._render_properties.position, mask)
 		return image
 
 	# TODO: implement

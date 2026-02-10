@@ -28,6 +28,6 @@ class ComposerService(Service):
 		self.scene.update()
 		self.scene.update_sizing_mode()
 		self.scene.update_children_constraints()
-		screen_buffer = self.scene.render()
-		await self.display_target.display(screen_buffer)
+		self.scene.render()
+		await self.display_target.display(self.scene._render_properties.rendered_image)
 		

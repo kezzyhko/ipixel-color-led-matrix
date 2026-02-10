@@ -41,6 +41,7 @@ class RenderProperties:
 		self._max_height: int|None = None
 		self._width: int
 		self._height: int
+		self._rendered_image: Image.Image|None = None
 
 	@property
 	def position(self) -> tuple[int, int]:
@@ -59,12 +60,6 @@ class RenderProperties:
 		if self._max_height is None:
 			raise ValueError(f"Height is not set (height={self._max_height})")
 		return self._max_height
-
-	@property
-	def max_width(self) -> int:
-		if self._max_width is None:
-			raise ValueError(f"Width is not set (width={self._max_width})")
-		return self._max_width
 
 	@property
 	def max_size(self) -> tuple[int, int]:
@@ -95,6 +90,16 @@ class RenderProperties:
 		is_max_width_ready = self._sizing_mode_x == 'output' or self._max_width is not None
 		is_max_height_ready = self._sizing_mode_y == 'output' or self._max_height is not None
 		return is_max_width_ready and is_max_height_ready
+
+	@property
+	def rendered_image(self) -> Image.Image:
+		if self._rendered_image is None:
+			raise ValueError(f"Component was not rendered yet")
+		return self._rendered_image
+
+	@rendered_image.setter
+	def rendered_image(self, new_rendered_image: Image.Image):
+		self._rendered_image = new_rendered_image
 
 
 class Component(metaclass=ABCMeta):
@@ -140,10 +145,12 @@ class Component(metaclass=ABCMeta):
 	def _render_implementation(self) -> Image.Image:
 		...
 
-	def render(self) -> Image.Image:
+	def render(self):
+		if self._render_properties.rendered_image is not None:
+			return
 		image = self._render_implementation()
+		self._render_properties.rendered_image = image
 		self._render_properties.size = image.size
-		return image
 
 
 class Group(Component):
@@ -191,9 +198,10 @@ class Group(Component):
 		size = (self._render_properties.max_width, self._render_properties.max_height) # TODO: shrink if necessary
 		image = Image.new("RGBA", size, self.background_color)
 		for child in self.children:
-			render_buffer = child.render()
-			mask = render_buffer if render_buffer.mode == "RGBA" else None
-			image.paste(render_buffer, child._render_properties.position, mask)
+			child.render()
+			rendered_image = child._render_properties.rendered_image
+			mask = rendered_image if rendered_image.mode == "RGBA" else None
+			image.paste(rendered_image, child._render_properties.position, mask)
 		return image
 
 	def add_child(self, child: Component):
