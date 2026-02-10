@@ -17,20 +17,24 @@ class Stack(Group):
 		main_axis, cross_axis = (0, 1) if self._direction == 'horizontal' else (1, 0)
 		stack_size = self._render_properties.max_size
 		
+		max_cross_size = 0
+		total_main_size = 0
+
 		for child in self.children:
 			child_main_size = child.placement.size[main_axis]
 			child_cross_size = child.placement.size[cross_axis]
-			pixels_cross_size = round(child_cross_size * stack_size[cross_axis]) if child_cross_size is not None else stack_size[cross_axis]
-			pixels_main_size = round(child_main_size * stack_size[main_axis]) if child_main_size is not None else None			
-			child_size = (pixels_main_size, pixels_cross_size) if self._direction == 'horizontal' else (pixels_cross_size, pixels_main_size)
+			pixels_max_cross_size = round(child_cross_size * stack_size[cross_axis]) if child_cross_size is not None else stack_size[cross_axis]
+			pixels_max_main_size = round(child_main_size * stack_size[main_axis]) if child_main_size is not None else None			
+			child_max_size = (pixels_max_main_size, pixels_max_cross_size) if self._direction == 'horizontal' else (pixels_max_cross_size, pixels_max_main_size)
 
-			child._render_properties.max_size = child_size
+			child._render_properties.max_size = child_max_size
 			if child._render_properties.is_max_size_ready:
 				child.render()
-			# child._render_properties._x = round(child.placement.x * max_width)
-			# child._render_properties._y = round(child.placement.y * max_height)
-			# child._render_properties._max_width = round((child.placement.width or 1) * max_width)
-			# child._render_properties._max_height = round((child.placement.height or 1) * max_height)
+				child_size = child._render_properties.size
+				total_main_size += child_size[main_axis]
+				max_cross_size = max(max_cross_size, child_size[cross_axis])
+
+		for child in self.children:
 
 	def _render_implementation(self) -> Image.Image:
 		size = (self._render_properties.max_width, self._render_properties.max_height) # TODO: shrink if necessary
