@@ -61,6 +61,20 @@ class RenderProperties:
 		return self._max_height
 
 	@property
+	def max_width(self) -> int:
+		if self._max_width is None:
+			raise ValueError(f"Width is not set (width={self._max_width})")
+		return self._max_width
+
+	@property
+	def max_size(self) -> tuple[int, int]:
+		return (self.max_width, self.max_height)
+
+	@max_size.setter
+	def max_size(self, new_max_size: tuple[int|None, int|None]):
+		self._max_width, self._max_height = new_max_size
+
+	@property
 	def size(self) -> tuple[int, int]:
 		return (self._width, self._height)
 
@@ -75,6 +89,12 @@ class RenderProperties:
 	@sizing_mode.setter
 	def sizing_mode(self, new_sizing_mode: tuple[SizingMode, SizingMode]):
 		self._sizing_mode_x, self._sizing_mode_y = new_sizing_mode
+
+	@property
+	def is_max_size_ready(self) -> bool:
+		is_max_width_ready = self._sizing_mode_x == 'output' or self._max_width is not None
+		is_max_height_ready = self._sizing_mode_y == 'output' or self._max_height is not None
+		return is_max_width_ready and is_max_height_ready
 
 
 class Component(metaclass=ABCMeta):

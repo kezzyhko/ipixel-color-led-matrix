@@ -2,38 +2,13 @@ from components import Group, Stack, DateTimeComponent, WeatherComponent
 
 
 def create_briefing_scene() -> Group:
-
-	date_component = DateTimeComponent(format=DateTimeComponent.SIMPLE_DATE, case="lower")
-	date_component.placement.x = 1
-	date_component.placement.y = 1
-	date_component.placement.width = 1
-	date_component.placement.height = 1
-
-	weekday_component = DateTimeComponent(format=DateTimeComponent.SIMPLE_WEEKDAY, case="upper", color='#0425cc')
-	weekday_component.placement.x = 1
-	weekday_component.placement.y = 10
-	weekday_component.placement.width = 1
-	weekday_component.placement.height = 0.8
-
-	time_component = DateTimeComponent(format=DateTimeComponent.SIMPLE_TIME)
-	time_component.placement.x = 9
-	time_component.placement.y = 9
-	time_component.placement.width = 1
-	time_component.placement.height = 1
-
-	weather_component = WeatherComponent()
-	weather_component.placement.x = 40
-	weather_component.placement.y = 1
-	weather_component.placement.width = 1
-	weather_component.placement.height = 1
-
 	return Stack("horizontal", "center_center",
 		Stack("vertical", "left_center",
-			date_component,
+			DateTimeComponent(format=DateTimeComponent.SIMPLE_DATE, case="lower"),
 			Stack("horizontal", "left_bottom",
-				weekday_component,
-				time_component,
+				DateTimeComponent(format=DateTimeComponent.SIMPLE_WEEKDAY, case="upper", color='#0425cc'),
+				DateTimeComponent(format=DateTimeComponent.SIMPLE_TIME),
 			),
 		),
-		weather_component,
+		WeatherComponent(),
 	)
