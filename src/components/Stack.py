@@ -30,7 +30,7 @@ class Stack(Group):
 			child_max_size = self._get_xy_from_maincross(pixels_max_main_size, pixels_max_cross_size)
 			child._render_properties.max_size = child_max_size
 
-			if child._render_properties.is_max_size_axis_ready[main_axis]:
+			if not child._render_properties.is_max_size_axis_ready[main_axis]:
 				total_weight += child.placement.weight
 
 			if child._render_properties.is_max_size_ready:
@@ -44,7 +44,8 @@ class Stack(Group):
 			if child._render_properties.is_max_size_axis_ready[main_axis]:
 				continue
 			pixels_max_main_size = round(main_size_left * child.placement.weight / total_weight)
-			child._render_properties.max_size = self._get_xy_from_maincross(pixels_max_main_size, child._render_properties.max_size[cross_axis])
+			pixels_max_cross_size = child._render_properties.max_height if self._direction == 'horizontal' else child._render_properties.max_width # avoid max_size getter (value on main axis is not ready yet)
+			child._render_properties.max_size = self._get_xy_from_maincross(pixels_max_main_size, pixels_max_cross_size)
 			child.render()
 			max_cross_size = max(max_cross_size, child._render_properties.size[cross_axis])
 
