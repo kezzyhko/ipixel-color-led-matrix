@@ -15,7 +15,7 @@ class DateTimeComponent(TextComponent):
 	FULL_WEEKDAY = "%A"
 	FULL_DATETIME = f"{FULL_DATE} {FULL_WEEKDAY} {FULL_TIME}"
 
-	def __init__(self, format: str = SIMPLE_DATETIME, locale: str|None = None, case: Literal['default', 'upper', 'lower', 'title'] = 'default', color: tuple[int, int, int, int]|str = '#ffffff', font: AsciiBitmapFont = AsciiBitmapFont.DEFAULT, name: str|None = None, placement: Placement = Placement()):
+	def __init__(self, format: str = SIMPLE_DATETIME, locale: str|None = None, case: Literal['default', 'upper', 'lower', 'title'] = 'default', color: tuple[int, int, int, int]|str = '#ffffff', font: AsciiBitmapFont = AsciiBitmapFont.DEFAULT, name: str|None = None, placement: Placement|None = None):
 		self._locale = locale or context.locale_code.get() or "en"
 		self._format = format
 		self._case = case

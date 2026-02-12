@@ -5,7 +5,7 @@ from . import SizingMode, Placement
 
 
 class TextComponent(Component):
-	def __init__(self, text: str, color: tuple[int, int, int, int]|str = '#ffffff', font: AsciiBitmapFont = AsciiBitmapFont.DEFAULT, name: str|None = None, placement: Placement = Placement()):
+	def __init__(self, text: str, color: tuple[int, int, int, int]|str = '#ffffff', font: AsciiBitmapFont = AsciiBitmapFont.DEFAULT, name: str|None = None, placement: Placement|None = None):
 		super().__init__(name=name, placement=placement)
 		self.text = text
 		self.color = color

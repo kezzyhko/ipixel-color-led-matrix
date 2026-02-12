@@ -7,7 +7,7 @@ from assets import get_asset_path
 
 
 class WeatherComponent(Stack):
-	def __init__(self, location: WeatherLocation|None = None, alignment: StackAlignment = "center_center", temperature_color: tuple[int, int, int, int]|str = '#ffffff', temperature_font: AsciiBitmapFont = AsciiBitmapFont.DEFAULT, name: str|None = None, placement: Placement = Placement()):
+	def __init__(self, location: WeatherLocation|None = None, alignment: StackAlignment = "center_center", temperature_color: tuple[int, int, int, int]|str = '#ffffff', temperature_font: AsciiBitmapFont = AsciiBitmapFont.DEFAULT, name: str|None = None, placement: Placement|None = None):
 		location = location or context.weather_location.get()
 		self._weather_api: WeatherApi = WeatherApi(location)
 		

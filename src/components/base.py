@@ -9,11 +9,11 @@ SizingMode = Literal['input', 'output']
 
 class Placement:
 	def __init__(self, x: float = 0.0, y: float = 0.0, width: float|None = None, height: float|None = None, weight: float = 1.0):
-		self.x: float = 0.0
-		self.y: float = 0.0
-		self.width: float|None = None
-		self.height: float|None = None
-		self.weight: float = 1.0
+		self.x = x
+		self.y = y
+		self.width = width
+		self.height = height
+		self.weight = weight
 
 	@property
 	def position(self) -> tuple[float, float]:
@@ -154,9 +154,9 @@ class RenderProperties:
 
 
 class Component(metaclass=ABCMeta):
-	def __init__(self, name: str|None = None, placement: Placement = Placement()):
+	def __init__(self, name: str|None = None, placement: Placement|None = None):
 		self.name = name if name is not None else f"{type(self).__name__}_{id(self)}"
-		self.placement = placement
+		self.placement = placement if placement is not None else Placement()
 		self._render_properties: RenderProperties
 		self._parent: Group|None = None
 
@@ -228,7 +228,7 @@ class Component(metaclass=ABCMeta):
 
 
 class Group(Component):
-	def __init__(self, name: str|None = None, placement: Placement = Placement(), children: Iterable[Component] = []):
+	def __init__(self, name: str|None = None, placement: Placement|None = None, children: Iterable[Component] = []):
 		super().__init__(name=name, placement=placement)
 		self.children: list[Component] = []
 		for child in children:
