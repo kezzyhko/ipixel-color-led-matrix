@@ -63,12 +63,10 @@ class Stack(Group):
 		return (main, cross) if self._direction == 'horizontal' else (cross, main)
 
 	def _render_implementation(self) -> Image.Image:
-		size = (self._render_properties.max_width, self._render_properties.max_height) # TODO: shrink if necessary
+		size = (self._render_properties.max_width, self._render_properties.max_height) # TODO LAYOUT shrink if necessary
 		image = Image.new("RGBA", size, self.background_color)
 		for child in self.children:
 			rendered_image = child._render_properties.rendered_image
 			mask = rendered_image if rendered_image.mode == "RGBA" else None
 			image.paste(rendered_image, child._render_properties.position, mask)
 		return image
-
-	# TODO: implement
