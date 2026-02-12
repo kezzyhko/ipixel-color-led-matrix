@@ -7,18 +7,21 @@ Direction = Literal['vertical', 'horizontal']
 Alignment = Literal['left_top', 'left_center', 'left_bottom', 'center_top', 'center_center', 'center_bottom', 'right_top', 'right_center', 'right_bottom']
 
 class Stack(Group):
-	def __init__(self, direction: Direction, alignment: Alignment = 'center_center', spacing: float = 0.0, children: Iterable[Component] = [], name: str|None = None):
+	def __init__(self, direction: Direction, alignment: Alignment = 'center_center', spacing: float = 0.0, padding: float = 0.0, children: Iterable[Component] = [], name: str|None = None):
 		super().__init__(name=name, children=children)
 		self._direction = direction
 		self._alignment = alignment
 		self._spacing = spacing
+		self._padding = padding
 
 	def _calculate_children_constraints(self):
 		main_axis, cross_axis = (0, 1) if self._direction == 'horizontal' else (1, 0)
 		stack_size = self._render_properties.max_size
+		pixels_spacing = round(self._spacing * stack_size[main_axis])
+		pixels_padding = round(self._padding * stack_size[main_axis])
 		
 		max_cross_size: int = 0
-		main_size_left: int = stack_size[main_axis]
+		main_size_left: int = stack_size[main_axis] - pixels_spacing * (len(self.children) - 1) - pixels_padding * 2
 		total_weight: float = 0.0
 
 		# Pass 1: render already defined sizes and get stats for pass 2
@@ -50,14 +53,12 @@ class Stack(Group):
 			max_cross_size = max(max_cross_size, child._render_properties.size[cross_axis])
 
 		# Pass 3: calculate positions
-		main_position = 0
+		#TODO LAYOUT implement alignment
+		main_position = pixels_padding
 		for child in self.children:
 			cross_position = 0
 			child._render_properties.position = self._get_xy_from_maincross(main_position, cross_position)
-			main_position += child._render_properties.size[main_axis]
-		
-		#TODO LAYOUT implement spacing
-		#TODO LAYOUT implement alignment
+			main_position += child._render_properties.size[main_axis] + pixels_spacing
 
 	def _get_xy_from_maincross[T](self, main: T, cross: T) -> tuple[T, T]:
 		return (main, cross) if self._direction == 'horizontal' else (cross, main)

@@ -14,12 +14,14 @@ class WeatherComponent(Stack):
 		
 		self.type_icon = Icon(name="weather_type_icon", path=get_asset_path("weather/rain.icon.toml"))
 		self.temperature_text = TextComponent(name="temperature_text", text="", color=temperature_color, font=temperature_font)
-		
+
 		super().__init__(
 			name = name,
 			children = [self.type_icon, self.temperature_text],
 			direction = 'vertical',
 			alignment = alignment,
+			spacing = 1/16,
+			padding = 1/16,
 		)
 		
 		# TODO: add precipitation icon, wind speed bar, and temperature text as separate components
