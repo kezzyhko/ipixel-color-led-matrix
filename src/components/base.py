@@ -41,15 +41,27 @@ class RenderProperties:
 		self._y: int|None = None
 		self._max_width: int|None = None
 		self._max_height: int|None = None
-		self._width: int
-		self._height: int
+		self._width: int|None = None
+		self._height: int|None = None
 		self._rendered_image: Image.Image|None = None
+
+
+	def _value_if_set[T](self, value: T|None, name: str) -> T:
+		if value is None:
+			raise ValueError(f"{name} is not set: {self._component.get_full_path()}")
+		return value
+
+	@property
+	def x(self) -> int:
+		return self._value_if_set(self._x, "X")
+
+	@property
+	def y(self) -> int:
+		return self._value_if_set(self._y, "Y")
 
 	@property
 	def position(self) -> tuple[int, int]:
-		if self._x is None or self._y is None:
-			raise ValueError(f"Position is not set (x={self._x}, y={self._y}): {self._component.get_full_path()}")
-		return (self._x, self._y)
+		return (self.x, self.y)
 
 	@position.setter
 	def position(self, new_position: tuple[int, int]):
@@ -86,8 +98,16 @@ class RenderProperties:
 		self._max_width, self._max_height = new_max_size
 
 	@property
+	def width(self) -> int:
+		return self._value_if_set(self._width, "Width")
+
+	@property
+	def height(self) -> int:
+		return self._value_if_set(self._height, "Height")
+
+	@property
 	def size(self) -> tuple[int, int]:
-		return (self._width, self._height)
+		return (self.width, self.height)
 
 	@size.setter
 	def size(self, new_size: tuple[int, int]):
@@ -113,9 +133,7 @@ class RenderProperties:
 
 	@property
 	def rendered_image(self) -> Image.Image:
-		if self._rendered_image is None:
-			raise ValueError(f"Component was not rendered yet: {self._component.get_full_path()}")
-		return self._rendered_image
+		return self._value_if_set(self._rendered_image, "Rendered image")
 
 	@rendered_image.setter
 	def rendered_image(self, new_rendered_image: Image.Image):
