@@ -1,12 +1,12 @@
 from PIL import Image, ImageDraw
 from . import Component
 from helpers import AsciiBitmapFont
-from .base import SizingMode
+from . import SizingMode, Placement
 
 
 class TextComponent(Component):
-	def __init__(self, text: str, color: tuple[int, int, int, int]|str = '#ffffff', font: AsciiBitmapFont = AsciiBitmapFont.DEFAULT, name: str|None = None):
-		super().__init__(name=name)
+	def __init__(self, text: str, color: tuple[int, int, int, int]|str = '#ffffff', font: AsciiBitmapFont = AsciiBitmapFont.DEFAULT, name: str|None = None, placement: Placement = Placement()):
+		super().__init__(name=name, placement=placement)
 		self.text = text
 		self.color = color
 		self.font = font

@@ -1,4 +1,4 @@
-from . import Group, Component
+from . import Group, Component, Placement
 from typing import Literal, Iterable
 from PIL import Image
 
@@ -7,8 +7,8 @@ Direction = Literal['vertical', 'horizontal']
 Alignment = Literal['left_top', 'left_center', 'left_bottom', 'center_top', 'center_center', 'center_bottom', 'right_top', 'right_center', 'right_bottom']
 
 class Stack(Group):
-	def __init__(self, direction: Direction, alignment: Alignment = 'center_center', spacing: float = 0.0, padding: float = 0.0, children: Iterable[Component] = [], name: str|None = None):
-		super().__init__(name=name, children=children)
+	def __init__(self, direction: Direction, alignment: Alignment = 'center_center', spacing: float = 0.0, padding: float = 0.0, children: Iterable[Component] = [], name: str|None = None, placement: Placement = Placement()):
+		super().__init__(name=name, placement=placement, children=children)
 		self._direction = direction
 		self._alignment = alignment
 		self._spacing = spacing

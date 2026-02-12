@@ -1,12 +1,7 @@
-from components import Group, Stack, DateTimeComponent, WeatherComponent
+from components import Group, Stack, DateTimeComponent, WeatherComponent, Placement
 
 
 def create_briefing_scene() -> Group:
-
-	weekday = DateTimeComponent(name="weekday", format=DateTimeComponent.SIMPLE_WEEKDAY, case='upper', color='#0425cc')
-	weekday.placement.height = 0.8
-	# TODO LAYOUT change placement params from constructor
-
 	return Stack(
 		name = "root",
 		direction = 'horizontal',
@@ -28,7 +23,7 @@ def create_briefing_scene() -> Group:
 						alignment = 'left_bottom',
 						spacing = 1/32,
 						children = [
-							weekday,
+							DateTimeComponent(name="weekday", format=DateTimeComponent.SIMPLE_WEEKDAY, case='upper', color='#0425cc', placement=Placement(height=5/6)),
 							DateTimeComponent(name="time", format=DateTimeComponent.SIMPLE_TIME),
 						],
 					),

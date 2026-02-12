@@ -4,12 +4,12 @@ from PIL import Image
 import tomllib
 from datetime import datetime
 from helpers import Color
-from .base import SizingMode
+from . import SizingMode, Placement
 
 
 class Icon(Component):
-	def __init__(self, path: Path | str, name: str|None = None):
-		super().__init__(name=name)
+	def __init__(self, path: Path | str, name: str|None = None, placement: Placement = Placement()):
+		super().__init__(name=name, placement=placement)
 		self.path = path
 		self._load_file()
 		

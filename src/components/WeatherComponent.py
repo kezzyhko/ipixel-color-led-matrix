@@ -2,13 +2,12 @@ from . import Stack, StackAlignment
 from app import context
 from helpers import AsciiBitmapFont
 from helpers.weather import WeatherApi, WeatherLocation
-from . import TextComponent
-from . import Icon
+from . import Icon, TextComponent, Placement
 from assets import get_asset_path
 
 
 class WeatherComponent(Stack):
-	def __init__(self, location: WeatherLocation|None = None, alignment: StackAlignment = "center_center", temperature_color: tuple[int, int, int, int]|str = '#ffffff', temperature_font: AsciiBitmapFont = AsciiBitmapFont.DEFAULT, name: str|None = None):
+	def __init__(self, location: WeatherLocation|None = None, alignment: StackAlignment = "center_center", temperature_color: tuple[int, int, int, int]|str = '#ffffff', temperature_font: AsciiBitmapFont = AsciiBitmapFont.DEFAULT, name: str|None = None, placement: Placement = Placement()):
 		location = location or context.weather_location.get()
 		self._weather_api: WeatherApi = WeatherApi(location)
 		
@@ -17,6 +16,7 @@ class WeatherComponent(Stack):
 
 		super().__init__(
 			name = name,
+			placement = placement,
 			children = [self.type_icon, self.temperature_text],
 			direction = 'vertical',
 			alignment = alignment,

@@ -1,4 +1,4 @@
-from .base import SizingMode, Component, Group
+from .base import SizingMode, Component, Group, Placement
 from .Stack import Stack, Direction as StackDirection, Alignment as StackAlignment
 from .Icon import Icon
 from .TextComponent import TextComponent

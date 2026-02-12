@@ -149,9 +149,9 @@ class RenderProperties:
 
 
 class Component(metaclass=ABCMeta):
-	def __init__(self, name: str|None = None):
+	def __init__(self, name: str|None = None, placement: Placement = Placement()):
 		self.name = name if name is not None else f"{type(self).__name__}_{id(self)}"
-		self.placement = Placement()
+		self.placement = placement
 		self._render_properties: RenderProperties
 		self._parent: Group|None = None
 
@@ -219,8 +219,8 @@ class Component(metaclass=ABCMeta):
 
 
 class Group(Component):
-	def __init__(self, name: str|None = None, children: Iterable[Component] = []):
-		super().__init__(name)
+	def __init__(self, name: str|None = None, placement: Placement = Placement(), children: Iterable[Component] = []):
+		super().__init__(name=name, placement=placement)
 		self.children: list[Component] = []
 		for child in children:
 			self.add_child(child)
