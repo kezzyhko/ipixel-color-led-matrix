@@ -5,6 +5,7 @@ from assets import get_asset_path
 from pathlib import Path
 from collections.abc import Sequence
 from typing import Any
+import warnings
 
 
 AsciiBitmap = Sequence[Sequence[str]]
@@ -22,6 +23,14 @@ class FontData:
 		self.add_glyphs([' '], FontData._get_empty_askii_bitmap(self.space_width, self.height))
 		self.add_glyphs(['�'], FontData._get_checkerboard_askii_bitmap(self.space_width, self.height))
 		# TODO: support new line character and wrapping??
+
+	@staticmethod
+	def create_stub(height: int, global_configuration: dict[str, Any]) -> FontData:
+		fallback_configuration = {
+			'spacing': int(height**0.5 / 2),
+			'space_width': int(height / 2),
+		}
+		return FontData(height, fallback_configuration, global_configuration)
 
 	@staticmethod
 	def _get_empty_askii_bitmap(width: int, height: int) -> AsciiBitmap:
@@ -59,23 +68,27 @@ class AsciiBitmapFont():
 		self._path: str | Path = path
 		self._font_data: dict[str, Any] = {}
 		self._fonts: dict[int, FontData] = {}
+		self._global_configuration: dict[str, Any] = {}
 		self._load_file()
 
 	def get_implementation(self, height: int) -> AsciiBitmapFontImplementation:
 		#TODO: allow configuration overwrites from file's defaults
+		if height not in self._fonts:
+			warnings.warn(f"Font data for height {height} not found, creating stub")
+			return AsciiBitmapFontImplementation(FontData.create_stub(height, self._global_configuration))
 		return AsciiBitmapFontImplementation(self._fonts[height])
 
 	def _load_file(self):
 		with open(self._path, "rb") as f:
 			self._font_data = tomllib.load(f)
-		global_configuration = self._font_data.get('configuration', {})
+		self._global_configuration = self._font_data.get('configuration', {})
 
 		for glyph in self._font_data['glyphs']:
 			bitmap = glyph['bitmap'].strip("\n").split("\n")
 			height = len(bitmap)
 			if height not in self._fonts:
 				size_specific_configuration = self._font_data.get(f'configuration_height{height}', {})
-				self._fonts[height] = FontData(height, global_configuration, size_specific_configuration)
+				self._fonts[height] = FontData(height, self._global_configuration, size_specific_configuration)
 			self._fonts[height].add_glyphs(glyph['characters'], bitmap)
 
 AsciiBitmapFont.DEFAULT = AsciiBitmapFont(get_asset_path("default.font.toml"))
@@ -85,7 +98,7 @@ class AsciiBitmapFontImplementation(ImageFont):
 
 	def __init__(self, font_data: FontData):
 		super().__init__()
-		self._font_data: FontData
+		self._font_data: FontData = font_data
 
 	# TODO: implement characters with height different from font size for letters like "Q" or "Й"?
 	# TODO: support new line character and wrapping??

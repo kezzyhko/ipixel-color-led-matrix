@@ -56,21 +56,25 @@ class RenderProperties:
 
 	@property
 	def max_width(self) -> int:
-		if self._max_width is None:
-			if self._sizing_mode_x == 'input':
-				raise ValueError(f"Max width was not set: {self._component.get_full_path()}")
-			else:
-				return 99999 #TODO LAYOUT use parent's size
-		return self._max_width
+		if self._max_width is not None:
+			return self._max_width
+		elif self._sizing_mode_x == 'input':
+			raise ValueError(f"Max width was not set: {self._component.get_full_path()}")
+		elif self._component.parent is not None:
+			return self._component.parent._render_properties.max_width
+		else:
+			raise ValueError(f"Max width was not set, and component has no parent: {self._component.get_full_path()}")
 
 	@property
 	def max_height(self) -> int:
-		if self._max_height is None:
-			if self._sizing_mode_y == 'input':
-				raise ValueError(f"Max height was not set: {self._component.get_full_path()}")
-			else:
-				return 99999 #TODO LAYOUT use parent's size
-		return self._max_height
+		if self._max_height is not None:
+			return self._max_height
+		elif self._sizing_mode_y == 'input':
+			raise ValueError(f"Max height was not set: {self._component.get_full_path()}")
+		elif self._component.parent is not None:
+			return self._component.parent._render_properties.max_height
+		else:
+			raise ValueError(f"Max height was not set, and component has no parent: {self._component.get_full_path()}")
 
 	@property
 	def max_size(self) -> tuple[int, int]:

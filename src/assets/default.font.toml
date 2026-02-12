@@ -1,4 +1,8 @@
-[configuration]
+[configuration_height5]
+spacing = 1
+space_width = 3
+
+[configuration_height6]
 spacing = 1
 space_width = 3
 
