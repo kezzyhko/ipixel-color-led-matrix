@@ -30,6 +30,11 @@ class Placement:
 	@size.setter
 	def size(self, new_size: tuple[float|None, float|None]):
 		self.width, self.height = new_size
+	
+	def _get_tree_lines(self) -> Iterable[str]:
+		yield f"Position: {self.position}"
+		yield f"Size: {self.size}"
+		yield f"Weight: {self.weight}"
 
 
 class RenderProperties:
@@ -203,17 +208,21 @@ class Component(metaclass=ABCMeta):
 		self._render_properties.rendered_image = image
 		self._render_properties.size = image.size
 
-	def print_tree(self, description: str = "", *args, **kwargs):
+	def print_tree(self, description: str = "", include_placement_info: bool = False, include_render_info: bool = False):
 		print("===== TREE START =====")
 		if description != "":
 			print(f"Description: {description}")
 			print()
-		for line in self._get_tree_lines(*args, **kwargs):
+		for line in self._get_tree_lines(include_placement_info, include_render_info):
 			print(line)
 		print("===== TREE END =====")
 
-	def _get_tree_lines(self, include_render_info: bool = False) -> Iterable[str]:
+	def _get_tree_lines(self, include_placement_info: bool = False, include_render_info: bool = False) -> Iterable[str]:
 		yield f"{self.name}"
+		if include_placement_info:
+			yield from terminal_helpers.add_indent(self.placement._get_tree_lines())
+		if include_placement_info and include_render_info:
+			yield ""
 		if include_render_info and self.parent is not None:
 			yield from terminal_helpers.add_indent(self._render_properties._get_tree_lines())
 
@@ -275,12 +284,14 @@ class Group(Component):
 		self._calculate_children_constraints()
 		super().render()
 
-	def _get_tree_lines(self, include_render_info: bool = False) -> Iterable[str]:
-		yield from super()._get_tree_lines(include_render_info)
-		if include_render_info:
+	def _get_tree_lines(self, include_placement_info: bool = False, include_render_info: bool = False) -> Iterable[str]:
+		yield from super()._get_tree_lines(include_placement_info, include_render_info)
+		if include_render_info or include_placement_info:
 			yield ""
 		for child in self.children:
-			yield from terminal_helpers.add_indent(child._get_tree_lines(include_render_info))
+			yield from terminal_helpers.add_indent(child._get_tree_lines(include_placement_info, include_render_info))
+			yield ""
+			
 
 	def add_child(self, child: Component):
 		if child in self.children:

@@ -52,7 +52,7 @@ def parse_arguments():
 	general = parser.add_argument_group('General')
 	general.add_argument('--help', '-h', action="help", help="Show this help message and exit")
 	general.add_argument('--config', '-c', metavar='PATH', required=False, is_config_file=True, help="Path to config file")
-	general.add_argument('--debug-system', '-d', metavar='SYSTEM_NAME', choices=['scene', 'render'], help="System to show debug info from")
+	general.add_argument('--debug-system', '-d', metavar='SYSTEM_NAME', nargs=argparse.ONE_OR_MORE, choices=['scene', 'render', 'placement'], help="System to show debug info from")
 
 	display = parser.add_argument_group('Display')
 	display.add_argument('--emulator', '-e', action="store_true", help="Use GUI display instead of physical display")

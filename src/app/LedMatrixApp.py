@@ -4,7 +4,7 @@ from display_target import DisplayTarget
 
 
 class LedMatrixApp:
-	def __init__(self, display_target: DisplayTarget, fps: float, debug_system: str | None = None):
+	def __init__(self, display_target: DisplayTarget, fps: float, debug_system: list[str] = []):
 		# TODO: create events, pass to all services??
 		# TODO: Implement services
 		self._stop_event = asyncio.Event()
@@ -12,8 +12,9 @@ class LedMatrixApp:
 		self.composer_service = ComposerService(
 			display_target,
 			fps,
-			debug_scene = (debug_system == 'scene'),
-			debug_render = (debug_system == 'render')
+			debug_scene = ('scene' in debug_system),
+			debug_render = ('render' in debug_system),
+			debug_placement = ('placement' in debug_system),
 		)
 
 		# self.cli_controller_service = CliControllerService()
