@@ -14,8 +14,8 @@ async def main():
 		*args.weather_coordinates, city=args.city
 	))
 
-	display_target = GUIDisplayTarget(*args.debug_size) if args.debug else IPixelColorMatrix(args.mac_address)
-	app = LedMatrixApp(display_target=display_target, fps=args.fps)
+	display_target = GUIDisplayTarget(*args.emulator_size) if args.emulator else IPixelColorMatrix(args.mac_address)
+	app = LedMatrixApp(display_target=display_target, fps=args.fps, debug_system=args.debug_system)
 
 	try:
 		await app.run()
@@ -28,10 +28,11 @@ def parse_arguments():
 	general = parser.add_argument_group('General')
 	general.add_argument('--help', '-h', action="help", help="Show this help message and exit.")
 	general.add_argument('--config', '-c', metavar='PATH', required=False, is_config_file=True, help="Path to config file.")
-	general.add_argument('--debug', '-d', action="store_true", help="Enable debug mode. Uses GUI display instead of physical display.")
+	general.add_argument('--debug-system', '-d', metavar='SYSTEM_NAME', choices=['scene', 'render'], help="System to show debug info from.")
 
 	display = parser.add_argument_group('Display')
-	display.add_argument('--debug-size', metavar=('WIDTH', 'HEIGHT'), type=int, nargs=2, default=(64, 32), help="Defines the size of the terminal display. Ignored if debug mode is disabled.") #TODO: use this argument
+	display.add_argument('--emulator', '-e', action="store_true", help="Uses GUI display instead of physical display.")
+	display.add_argument('--emulator-size', metavar=('WIDTH', 'HEIGHT'), type=int, nargs=2, default=(64, 32), help="Defines the size of the terminal display. Ignored if debug mode is disabled.") #TODO: use this argument
 	display.add_argument('--mac-address', type=str, default=None, help="MAC address of the iPixel Color Matrix. Ignored if debug mode is enabled. Default - search for device and use it if only one device is found.")
 	display.add_argument('--fps', type=float, default=10.0, help="Update frequency")
 

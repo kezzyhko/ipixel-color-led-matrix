@@ -1,6 +1,7 @@
 from abc import ABCMeta, abstractmethod
 from PIL import Image
 from typing import Literal, Iterable
+from helpers import terminal as terminal_helpers
 
 
 SizingMode = Literal['input', 'output']
@@ -124,6 +125,10 @@ class RenderProperties:
 	def is_rendered(self) -> bool:
 		return self._rendered_image is not None
 
+	def _get_tree_lines(self) -> Iterable[str]:
+		yield f"Position: {self.position}"
+		yield f"Size: {self.size}"
+
 
 class Component(metaclass=ABCMeta):
 	def __init__(self, name: str|None = None):
@@ -179,6 +184,20 @@ class Component(metaclass=ABCMeta):
 		image = self._render_implementation()
 		self._render_properties.rendered_image = image
 		self._render_properties.size = image.size
+
+	def print_tree(self, description: str = "", *args, **kwargs):
+		print("===== TREE START =====")
+		if description != "":
+			print(f"Description: {description}")
+			print()
+		for line in self._get_tree_lines(*args, **kwargs):
+			print(line)
+		print("===== TREE END =====")
+
+	def _get_tree_lines(self, include_render_info: bool = False) -> Iterable[str]:
+		yield f"{self.name}"
+		if include_render_info and self.parent is not None:
+			yield from terminal_helpers.add_indent(self._render_properties._get_tree_lines())
 
 
 class Group(Component):
@@ -237,6 +256,13 @@ class Group(Component):
 			return
 		self._calculate_children_constraints()
 		super().render()
+
+	def _get_tree_lines(self, include_render_info: bool = False) -> Iterable[str]:
+		yield from super()._get_tree_lines(include_render_info)
+		if include_render_info:
+			yield ""
+		for child in self.children:
+			yield from terminal_helpers.add_indent(child._get_tree_lines(include_render_info))
 
 	def add_child(self, child: Component):
 		if child in self.children:
