@@ -12,11 +12,12 @@ class WeatherComponent(Stack):
 		location = location or context.weather_location.get()
 		self._weather_api: WeatherApi = WeatherApi(location)
 		
-		self.temperature_text = TextComponent(name="temperature_text", text="", color=temperature_color, font=temperature_font)
 		self.type_icon = Icon(name="weather_type_icon", path=get_asset_path("weather/rain.icon.toml"))
+		self.temperature_text = TextComponent(name="temperature_text", text="", color=temperature_color, font=temperature_font)
+		
 		super().__init__(
 			name = name,
-			children = [self.temperature_text, self.type_icon],
+			children = [self.type_icon, self.temperature_text],
 			direction = 'vertical',
 			alignment = alignment,
 		)
