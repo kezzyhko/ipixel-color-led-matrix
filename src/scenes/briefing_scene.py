@@ -6,8 +6,8 @@ def create_briefing_scene() -> Group:
 		name = "root",
 		direction = 'horizontal',
 		alignment = 'center_center',
-		spacing = 3/32,
-		padding = 1/32,
+		spacing = 3/64,
+		padding = 1/64,
 		children = [
 			Stack(
 				name = "datetime",
@@ -21,7 +21,7 @@ def create_briefing_scene() -> Group:
 						name = "bottom_line",
 						direction = 'horizontal',
 						alignment = 'left_bottom',
-						spacing = 1/32,
+						spacing = 1/64,
 						children = [
 							DateTimeComponent(name="weekday", format=DateTimeComponent.SIMPLE_WEEKDAY, case='upper', color='#0425cc', placement=Placement(height=5/6)),
 							DateTimeComponent(name="time", format=DateTimeComponent.SIMPLE_TIME),
