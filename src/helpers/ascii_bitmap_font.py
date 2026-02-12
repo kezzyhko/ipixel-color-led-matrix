@@ -13,6 +13,9 @@ AsciiBitmap = Sequence[Sequence[str]]
 
 class FontData:
 	def __init__(self, height: int, global_configuration: dict[str, Any], size_specific_configuration: dict[str, Any]):
+		if height <= 0:
+			raise ValueError(f"Height must be positive, got {height}")
+
 		self._global_configuration = global_configuration
 		self._size_specific_configuration = size_specific_configuration
 
@@ -26,6 +29,8 @@ class FontData:
 
 	@staticmethod
 	def create_stub(height: int, global_configuration: dict[str, Any]) -> FontData:
+		if height <= 0:
+			raise ValueError(f"Height must be positive, got {height}")
 		fallback_configuration = {
 			'spacing': int(height**0.5 / 2),
 			'space_width': int(height / 2),
