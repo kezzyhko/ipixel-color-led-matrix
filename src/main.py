@@ -43,6 +43,9 @@ class HelpFormatter(argparse.HelpFormatter):
 		if ('%(choices)' not in help) and (action.choices is not None):
 			help += ' Choices: %(choices)s.'
 
+		if (isinstance(action.nargs, int) and action.nargs > 0) or (isinstance(action.nargs, str) and action.nargs in [argparse.ONE_OR_MORE, argparse.ZERO_OR_MORE]):
+			help += ' Multiple values allowed.'
+
 		return help
 
 
@@ -52,7 +55,7 @@ def parse_arguments():
 	general = parser.add_argument_group('General')
 	general.add_argument('--help', '-h', action="help", help="Show this help message and exit")
 	general.add_argument('--config', '-c', metavar='PATH', required=False, is_config_file=True, help="Path to config file")
-	general.add_argument('--debug-system', '-d', metavar='SYSTEM_NAME', nargs=argparse.ONE_OR_MORE, choices=['scene', 'render', 'placement'], help="System to show debug info from")
+	general.add_argument('--debug-system', '-d', metavar='SYSTEM_NAME', nargs=argparse.ONE_OR_MORE, default=[], choices=['scene', 'render', 'placement'], help="System to show debug info from")
 
 	display = parser.add_argument_group('Display')
 	display.add_argument('--emulator', '-e', action="store_true", help="Use GUI display instead of physical display")
