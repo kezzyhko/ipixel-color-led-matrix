@@ -3,6 +3,7 @@ import datetime
 import time
 from typing import Callable
 import traceback
+import warnings
 
 
 class Timer:
@@ -39,3 +40,5 @@ class Timer:
 			seconds_to_sleep = self._interval.total_seconds() - elapsed_time
 			if seconds_to_sleep > 0:
 				await asyncio.sleep(seconds_to_sleep)
+			if seconds_to_sleep < 0:
+				warnings.warn(f"Timer can not keep up: Time taken ({elapsed_time}s) > Interval ({self._interval.total_seconds()}s)")
