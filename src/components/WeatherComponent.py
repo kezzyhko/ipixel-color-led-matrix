@@ -1,4 +1,4 @@
-from . import Stack, StackAlignment
+from . import Stack
 from app import context
 from helpers import AsciiBitmapFont
 from helpers.weather import WeatherApi, WeatherLocation
@@ -7,7 +7,7 @@ from assets import get_asset_path
 
 
 class WeatherComponent(Stack):
-	def __init__(self, location: WeatherLocation|None = None, alignment: StackAlignment = "center_center", temperature_color: tuple[int, int, int, int]|str = '#ffffff', temperature_font: AsciiBitmapFont = AsciiBitmapFont.DEFAULT, name: str|None = None, placement: Placement|None = None):
+	def __init__(self, location: WeatherLocation|None = None, temperature_color: tuple[int, int, int, int]|str = '#ffffff', temperature_font: AsciiBitmapFont = AsciiBitmapFont.DEFAULT, name: str|None = None, placement: Placement|None = None):
 		location = location or context.weather_location.get()
 		self._weather_api: WeatherApi = WeatherApi(location)
 		
@@ -19,7 +19,7 @@ class WeatherComponent(Stack):
 			placement = placement,
 			children = [self.type_icon, self.temperature_text],
 			direction = 'vertical',
-			alignment = alignment,
+			alignment = 'center',
 			spacing = 1/16,
 			padding = 1/16,
 		)
