@@ -85,7 +85,7 @@ bitmap = """
   XOOXOOOOXX  
  XOOOOOOOOOOX 
   XXXXXXXXXX  
-   |    |     
+  |     |     
               
      |     |  
 """

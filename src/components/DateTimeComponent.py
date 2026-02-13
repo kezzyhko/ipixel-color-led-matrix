@@ -1,8 +1,8 @@
 from typing import Literal
-from . import TextComponent
+from . import TextComponent, Placement
 from datetime import datetime
 from app import context
-from helpers import TempLocale
+from helpers import TempLocale, AsciiBitmapFont
 import locale
 
 class DateTimeComponent(TextComponent):
@@ -15,11 +15,11 @@ class DateTimeComponent(TextComponent):
 	FULL_WEEKDAY = "%A"
 	FULL_DATETIME = f"{FULL_DATE} {FULL_WEEKDAY} {FULL_TIME}"
 
-	def __init__(self, font_size: int, color: tuple[int, int, int, int]|str = '#ffffff', format: str = SIMPLE_DATETIME, locale: str|None = None, case: Literal['default', 'upper', 'lower', 'title'] = 'default'):
+	def __init__(self, format: str = SIMPLE_DATETIME, locale: str|None = None, case: Literal['default', 'upper', 'lower', 'title'] = 'default', color: tuple[int, int, int, int]|str = '#ffffff', font: AsciiBitmapFont = AsciiBitmapFont.DEFAULT, name: str|None = None, placement: Placement|None = None):
 		self._locale = locale or context.locale_code.get() or "en"
 		self._format = format
 		self._case = case
-		super().__init__(self._get_formated_datetime(), font_size=font_size, color=color)
+		super().__init__(name=name, placement=placement, text=self._get_formated_datetime(), color=color, font=font)
 
 	def update(self):
 		self.text = self._get_formated_datetime()

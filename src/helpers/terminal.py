@@ -1,5 +1,5 @@
 import sys
-from typing import Protocol
+from typing import Iterable, Protocol
 
 
 ESCAPE_CODE = "\033["
@@ -29,3 +29,8 @@ def set_alternate_screen(is_enabled: bool, stream: WriteableStream = sys.stdout,
 
 def clear_window(stream: WriteableStream = sys.stdout):
 	stream.write(f"{ESCAPE_CODE}2J{ESCAPE_CODE}H")
+
+def add_indent(lines: Iterable[str], indent_size: int = 1, indent_char: str = "\t"):
+	indent_str = indent_char * indent_size
+	for line in lines:
+		yield indent_str + line

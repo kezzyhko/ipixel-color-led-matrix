@@ -1,26 +1,28 @@
-from . import VStack
+from . import Stack, StackAlignment
 from app import context
+from helpers import AsciiBitmapFont
 from helpers.weather import WeatherApi, WeatherLocation
-from . import TextComponent
-from . import Icon
+from . import Icon, TextComponent, Placement
 from assets import get_asset_path
 
 
-class WeatherComponent(VStack):
-	def __init__(self, location: WeatherLocation|None = None):
-		super().__init__()
+class WeatherComponent(Stack):
+	def __init__(self, location: WeatherLocation|None = None, alignment: StackAlignment = "center_center", temperature_color: tuple[int, int, int, int]|str = '#ffffff', temperature_font: AsciiBitmapFont = AsciiBitmapFont.DEFAULT, name: str|None = None, placement: Placement|None = None):
 		location = location or context.weather_location.get()
 		self._weather_api: WeatherApi = WeatherApi(location)
 		
-		self.temperature_text = TextComponent("  ", font_size=5) # TODO: size
-		self.temperature_text.x = 2
-		self.temperature_text.y = 9
-		self.add_child(self.temperature_text)
-		
-		self.type_icon = Icon(get_asset_path("weather/rain.icon.toml")) # TODO: size
-		self.type_icon.x = 4
-		self.type_icon.y = 0
-		self.add_child(self.type_icon)
+		self.type_icon = Icon(name="weather_type_icon", path=get_asset_path("weather/rain.icon.toml"))
+		self.temperature_text = TextComponent(name="temperature_text", text="", color=temperature_color, font=temperature_font)
+
+		super().__init__(
+			name = name,
+			placement = placement,
+			children = [self.type_icon, self.temperature_text],
+			direction = 'vertical',
+			alignment = alignment,
+			spacing = 1/16,
+			padding = 1/16,
+		)
 		
 		# TODO: add precipitation icon, wind speed bar, and temperature text as separate components
 		# TODO: add loading icon

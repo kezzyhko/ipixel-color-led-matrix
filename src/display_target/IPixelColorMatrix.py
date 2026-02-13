@@ -10,7 +10,7 @@ from helpers import image as image_helpers
 class IPixelColorMatrix(DisplayTarget):
 	def __init__(self, mac_address: str | None = None):
 		self._requested_mac_address = mac_address
-		self._client: AsyncClient|None = None
+		self._client: AsyncClient
 
 	@staticmethod
 	async def search_devices(timeout: float = 5.0) -> list[BLEDevice]:
@@ -40,7 +40,15 @@ class IPixelColorMatrix(DisplayTarget):
 
 	@property
 	def is_connected(self) -> bool:
-		return self._client and self._client._session.is_connected
+		return self._client is not None and self._client._session.is_connected  # pyright: ignore[reportAttributeAccessIssue]
+	
+	@property
+	def width(self) -> int:
+		return self._client.get_device_info().width
+	
+	@property
+	def height(self) -> int:
+		return self._client.get_device_info().height
 
 	async def setup(self):
 		if not self._client:

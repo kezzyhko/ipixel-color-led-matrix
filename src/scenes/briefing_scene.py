@@ -1,34 +1,34 @@
-from components import HStack, VStack, DateTimeComponent, WeatherComponent
-from . import Scene
+from components import Group, Stack, DateTimeComponent, WeatherComponent, Placement
 
 
-def create_briefing_scene() -> Scene:
-
-	date_component = DateTimeComponent(format=DateTimeComponent.SIMPLE_DATE, case="lower", font_size=6)
-	date_component.x = 1
-	date_component.y = 1
-
-	weekday_component = DateTimeComponent(format=DateTimeComponent.SIMPLE_WEEKDAY, case="upper", font_size=5, color='#0425cc')
-	weekday_component.x = 1
-	weekday_component.y = 10
-
-	time_component = DateTimeComponent(format=DateTimeComponent.SIMPLE_TIME, font_size=6)
-	time_component.x = 9
-	time_component.y = 9
-
-	weather_component = WeatherComponent()
-	weather_component.x = 40
-	weather_component.y = 1
-
-	return Scene(
-		HStack(
-			VStack(
-				date_component,
-				HStack(
-					weekday_component,
-					time_component,
-				),
+def create_briefing_scene() -> Group:
+	return Stack(
+		name = "root",
+		direction = 'horizontal',
+		alignment = 'center_center',
+		spacing = 3/64,
+		padding = 1/64,
+		children = [
+			Stack(
+				name = "datetime",
+				direction = 'vertical',
+				alignment = 'left_center',
+				spacing = 2/16,
+				padding = 1/16,
+				children = [
+					DateTimeComponent(name="date", format=DateTimeComponent.SIMPLE_DATE, case='lower'),
+					Stack(
+						name = "bottom_line",
+						direction = 'horizontal',
+						alignment = 'left_bottom',
+						spacing = 1/64,
+						children = [
+							DateTimeComponent(name="weekday", format=DateTimeComponent.SIMPLE_WEEKDAY, case='upper', color='#0425cc', placement=Placement(height=5/6)),
+							DateTimeComponent(name="time", format=DateTimeComponent.SIMPLE_TIME),
+						],
+					),
+				],
 			),
-			weather_component,
-		)
+			WeatherComponent(name="weather"),
+		],
 	)

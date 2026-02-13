@@ -1,22 +1,26 @@
 from PIL import Image, ImageDraw
 from . import Component
-from bitmap_font import AsciiBitmapFont
+from helpers import AsciiBitmapFont
+from . import SizingMode, Placement
 
 
 class TextComponent(Component):
-	def __init__(self, text: str, font_size: int, color: tuple[int, int, int, int]|str = '#ffffff'): #TODO: size
-		super().__init__()
+	def __init__(self, text: str, color: tuple[int, int, int, int]|str = '#ffffff', font: AsciiBitmapFont = AsciiBitmapFont.DEFAULT, name: str|None = None, placement: Placement|None = None):
+		super().__init__(name=name, placement=placement)
 		self.text = text
 		self.color = color
-		self.font = AsciiBitmapFont.get_default_font(size=font_size)
+		self.font = font
+
+	def _calculate_sizing_mode(self) -> tuple[SizingMode, SizingMode]:
+		return 'output', 'input'
 
 	def update(self):
 		pass
 
-	def render(self) -> Image.Image:
-		# TODO: size
-		height = 16
-		width = 64
+	def _render_implementation(self) -> Image.Image:
+		height = self._render_properties.max_height
+		font_implementation = self.font.get_implementation(height = height)
+		width = font_implementation.getlength(self.text)
 		
 		img = Image.new("RGBA", (width, height), (0, 0, 0, 0))
 		draw = ImageDraw.Draw(img)
@@ -24,5 +28,5 @@ class TextComponent(Component):
 		
 		# Use anchor="lt" (left-top) to align from top-left instead of baseline
 		# Note: May not work with bitmap fonts, but worth trying
-		draw.text((0, 0), self.text, fill=self.color, font=self.font)
+		draw.text((0, 0), self.text, fill=self.color, font=font_implementation)
 		return img
