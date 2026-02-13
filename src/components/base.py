@@ -1,19 +1,21 @@
 from abc import ABCMeta, abstractmethod
 from PIL import Image
-from typing import Literal, Iterable
+from typing import Literal, Iterable, Sequence
 from helpers import terminal as terminal_helpers
+import warnings
 
 
 SizingMode = Literal['input', 'output']
 
 
 class Placement:
-	def __init__(self, x: float = 0.0, y: float = 0.0, width: float|None = None, height: float|None = None, weight: float = 1.0):
+	def __init__(self, x: float = 0.0, y: float = 0.0, width: float|None = None, height: float|None = None, weight: float = 1.0, enabled: bool = True):
 		self.x = x
 		self.y = y
 		self.width = width
 		self.height = height
 		self.weight = weight
+		self.enabled = enabled
 
 	@property
 	def position(self) -> tuple[float, float]:
@@ -32,6 +34,7 @@ class Placement:
 		self.width, self.height = new_size
 	
 	def _get_tree_lines(self) -> Iterable[str]:
+		yield f"Enabled: {self.enabled}"
 		yield f"Position: {self.position}"
 		yield f"Size: {self.size}"
 		yield f"Weight: {self.weight}"
@@ -49,7 +52,6 @@ class RenderProperties:
 		self._width: int|None = None
 		self._height: int|None = None
 		self._rendered_image: Image.Image|None = None
-
 
 	def _value_if_set[T](self, value: T|None, name: str) -> T:
 		if value is None:
@@ -149,6 +151,7 @@ class RenderProperties:
 		return self._rendered_image is not None
 
 	def _get_tree_lines(self) -> Iterable[str]:
+		yield f"Is rendered: {self.is_rendered}"
 		yield f"Position: {self.position}"
 		yield f"Size: {self.size}"
 
@@ -202,6 +205,9 @@ class Component(metaclass=ABCMeta):
 		...
 
 	def render(self):
+		if not self.placement.enabled:
+			warnings.warn(f"Component is not enabled, but was asked to render: {self.get_full_path()}")
+			return Image.new("RGBA", (0, 0), (0, 0, 0, 0))
 		if self._render_properties.is_rendered:
 			return
 		image = self._render_implementation()
@@ -235,18 +241,21 @@ class Group(Component):
 			self.add_child(child)
 		self.background_color = (0, 0, 0, 0)
 
+	def _get_enabled_children(self) -> Sequence[Component]:
+		return [child for child in self.children if child.placement.enabled]
+
 	def init_render_pass(self):
 		super().init_render_pass()
 		for child in self.children:
 			child.init_render_pass()
 
 	def update(self):
-		for child in self.children:
+		for child in self._get_enabled_children():
 			child.update()
 		
 	def _calculate_sizing_mode(self) -> tuple[SizingMode, SizingMode]:
 		sizing_mode_x = sizing_mode_y = 'output'
-		for child in self.children:
+		for child in self._get_enabled_children():
 			child.update_sizing_mode()
 			if child._render_properties._sizing_mode_x == 'input' or child.placement.width is not None:
 				sizing_mode_x = 'input'
@@ -258,7 +267,7 @@ class Group(Component):
 		max_width = self._render_properties.max_width
 		max_height = self._render_properties.max_height
 		
-		for child in self.children:
+		for child in self._get_enabled_children():
 			if child._render_properties._sizing_mode_x == 'input' and child.placement.width is None:
 				raise ValueError(f"Width is not set for Group's child: {child.get_full_path()}")
 			if child._render_properties._sizing_mode_y == 'input' and child.placement.height is None:
@@ -269,13 +278,15 @@ class Group(Component):
 			child._render_properties._max_height = round((child.placement.height or 1) * max_height)
 
 	def _render_implementation(self) -> Image.Image:
-		size = (self._render_properties.max_width, self._render_properties.max_height) # TODO: shrink if necessary
-		image = Image.new("RGBA", size, self.background_color)
-		for child in self.children:
-			child.render()
+		image = Image.new("RGBA", self._render_properties.max_size, self.background_color)
+		width = height = 0
+		for child in self._get_enabled_children():
 			rendered_image = child._render_properties.rendered_image
 			mask = rendered_image if rendered_image.mode == "RGBA" else None
 			image.paste(rendered_image, child._render_properties.position, mask)
+			width = max(width, child._render_properties.x + child._render_properties.width)
+			height = max(height, child._render_properties.y + child._render_properties.height)
+		image = image.crop((0, 0, width, height))
 		return image
 
 	def render(self):

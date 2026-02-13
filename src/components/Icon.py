@@ -10,14 +10,25 @@ from . import SizingMode, Placement
 class Icon(Component):
 	def __init__(self, path: Path | str, name: str|None = None, placement: Placement|None = None):
 		super().__init__(name=name, placement=placement)
-		self.path = path
+		self._path: Path
+		self._current_frame_index: float
+		self._last_frame_time: float|None
+
+		self.path = Path(path)
+
+	@property
+	def path(self) -> Path:
+		return self._path
+
+	@path.setter
+	def path(self, new_path: Path):
+		self._path = new_path
 		self._load_file()
-		
-		self._current_frame_index: float = 0
+		self._current_frame_index = 0
 		self._last_frame_time = None
 		
 	def _load_file(self):
-		with open(self.path, "rb") as f:
+		with open(self._path, "rb") as f:
 			icon_data = tomllib.load(f)
 	
 		palette = {}
