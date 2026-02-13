@@ -11,7 +11,7 @@ class WeatherComponent(Stack):
 		location = location or context.weather_location.get()
 		self._weather_api: WeatherApi = WeatherApi(location)
 		
-		self.type_icon = Icon(name="weather_type_icon", path=get_asset_path("weather/rain.icon.toml"))
+		self.type_icon = Icon(name="weather_type_icon", path=get_asset_path("loading.icon.toml"))
 		self.temperature_text = TextComponent(name="temperature_text", text="", color=temperature_color, font=temperature_font)
 
 		super().__init__(
@@ -24,16 +24,16 @@ class WeatherComponent(Stack):
 			padding = 1/16,
 		)
 		
-		# TODO: add precipitation icon, wind speed bar, and temperature text as separate components
-		# TODO: add loading icon
+		# TODO: wind speed bar as separate component
 
 	def update(self):
 		super().update()
 		weather = self._weather_api.latest_current
-		is_loading = weather is None
-		# TODO: show/hide components
-		if is_loading:
+		if weather is None:
+			self.temperature_text.placement.enabled = False
+			self.type_icon.path = get_asset_path("loading.icon.toml")
 			return
 
+		self.temperature_text.placement.enabled = True
+		self.type_icon.path = get_asset_path(f"weather/rain.icon.toml") # TODO: select actual icon
 		self.temperature_text.text = f"{round(weather.temperature)}°C"
-		# TODO: change other components' properties

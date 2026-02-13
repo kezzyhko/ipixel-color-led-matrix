@@ -22,6 +22,8 @@ class Icon(Component):
 
 	@path.setter
 	def path(self, new_path: Path):
+		if new_path == self._path:
+			return
 		self._path = new_path
 		self._load_file()
 		self._current_frame_index = 0
