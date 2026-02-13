@@ -158,7 +158,7 @@ class Component(metaclass=ABCMeta):
 		self.name = name if name is not None else f"{type(self).__name__}_{id(self)}"
 		self.placement = placement if placement is not None else Placement()
 		self._render_properties: RenderProperties
-		self._parent: Group|None = None
+		self._parent: Group|None = None # TODO: pass parrent from all components for easier scene creation
 
 	def get_full_path(self):
 		parent_path = self.parent.get_full_path() if self.parent else ""
