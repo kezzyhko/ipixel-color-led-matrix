@@ -2,7 +2,7 @@ from weather.weather import GeocodingClient, OpenMeteoClient, TTLCacheDecorator,
 from pydantic import BaseModel
 import datetime
 import asyncio
-from typing import Callable, Type, Optional
+from typing import Callable, Type, Optional, Literal
 
 
 class WeatherApi:
@@ -104,3 +104,52 @@ class WeatherLocation():
 			latitude or coordinates['latitude'],
 			longitude or coordinates['longitude']
 		)
+
+
+WeatherType = Literal['clouds', 'fog', 'rain', 'snowrain', 'snow', 'thunderstorm_hail']
+
+class WeatherTypeInfo:
+	def __init__(self, code: int, type: WeatherType, power: float, description: str):
+		if power < 0.0 or power > 1.0:
+			raise ValueError("Power must be between 0.0 and 1.0")
+		self.code: int = code
+		self.description: str = description
+		self.type: WeatherType = type
+		self.power: float = power
+
+	WEATHER_CODES: dict[int, WeatherTypeInfo]
+	
+	@staticmethod
+	def from_code(code: int) -> WeatherTypeInfo:
+		return WeatherTypeInfo.WEATHER_CODES[code]
+	
+WeatherTypeInfo.WEATHER_CODES = {
+	 0: WeatherTypeInfo( 0,            'clouds', 0.00, "Clear sky"),
+	 1: WeatherTypeInfo( 1,            'clouds', 0.25, "Mainly clear"),
+	 2: WeatherTypeInfo( 2,            'clouds', 0.50, "Partly cloudy"),
+	 3: WeatherTypeInfo( 3,            'clouds', 1.00, "Overcast"),
+	45: WeatherTypeInfo(45,               'fog', 0.50, "Fog"),
+	48: WeatherTypeInfo(48,               'fog', 1.00, "Depositing rime fog"),
+	51: WeatherTypeInfo(51,              'rain', 0.15, "Light drizzle"),
+	53: WeatherTypeInfo(53,              'rain', 0.35, "Moderate drizzle"),
+	55: WeatherTypeInfo(55,              'rain', 0.50, "Dense drizzle"),
+	56: WeatherTypeInfo(56,          'snowrain', 0.25, "Light freezing drizzle"),
+	57: WeatherTypeInfo(57,          'snowrain', 0.50, "Dense freezing drizzle"),
+	61: WeatherTypeInfo(61,              'rain', 0.40, "Slight rain"),
+	63: WeatherTypeInfo(63,              'rain', 0.65, "Moderate rain"),
+	65: WeatherTypeInfo(65,              'rain', 0.90, "Heavy rain"),
+	66: WeatherTypeInfo(66,          'snowrain', 0.60, "Light freezing rain"),
+	67: WeatherTypeInfo(67,          'snowrain', 1.00, "Heavy freezing rain"),
+	71: WeatherTypeInfo(71,              'snow', 0.25, "Slight snow fall"),
+	73: WeatherTypeInfo(73,              'snow', 0.50, "Moderate snow fall"),
+	75: WeatherTypeInfo(75,              'snow', 0.90, "Heavy snow fall"),
+	77: WeatherTypeInfo(77,          'snowrain', 0.35, "Snow grains"),
+	80: WeatherTypeInfo(80,              'rain', 0.45, "Slight rain showers"),
+	81: WeatherTypeInfo(81,              'rain', 0.70, "Moderate rain showers"),
+	82: WeatherTypeInfo(82,              'rain', 1.00, "Violent rain showers"),
+	85: WeatherTypeInfo(85,              'snow', 0.40, "Slight snow showers"),
+	86: WeatherTypeInfo(86,              'snow', 1.00, "Heavy snow showers"),
+	95: WeatherTypeInfo(95, 'thunderstorm_hail', 0.10, "Thunderstorm"),
+	96: WeatherTypeInfo(96, 'thunderstorm_hail', 0.50, "Thunderstorm with slight hail"),
+	99: WeatherTypeInfo(99, 'thunderstorm_hail', 1.00, "Thunderstorm with heavy hail"),
+}
