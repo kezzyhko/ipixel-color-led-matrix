@@ -152,8 +152,9 @@ class RenderProperties:
 
 	def _get_tree_lines(self) -> Iterable[str]:
 		yield f"Is rendered: {self.is_rendered}"
-		yield f"Position: {self.position}"
-		yield f"Size: {self.size}"
+		if self.is_rendered:
+			yield f"Position: {self.position}"
+			yield f"Size: {self.size}"
 
 
 class Component(metaclass=ABCMeta):
