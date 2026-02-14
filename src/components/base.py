@@ -1,7 +1,7 @@
 from abc import ABCMeta, abstractmethod
 from PIL import Image
 from typing import Literal, Iterable, Sequence
-from helpers import terminal as terminal_helpers
+from helpers import terminal as terminal_helpers, image as image_helpers
 import warnings
 
 
@@ -206,14 +206,24 @@ class Component(metaclass=ABCMeta):
 		...
 
 	def render(self):
-		if not self.placement.enabled:
-			warnings.warn(f"Component is not enabled, but was asked to render: {self.get_full_path()}")
-			return Image.new("RGBA", (0, 0), (0, 0, 0, 0))
 		if self._render_properties.is_rendered:
 			return
-		image = self._render_implementation()
+		image = self._get_rendered_image()
 		self._render_properties.rendered_image = image
 		self._render_properties.size = image.size
+	
+	def _get_rendered_image(self) -> Image.Image:
+		if not self.placement.enabled:
+			warnings.warn(f"Component is not enabled, but was asked to render: {self.get_full_path()}")
+			return image_helpers.EMPTY_IMAGE
+
+		props = self._render_properties
+		x, y, w, h = props._x, props._y, props._max_width, props._max_height
+		if x is not None and x < 0 or y is not None and y < 0 or w is not None and w < 0 or h is not None and h < 0:
+			warnings.warn(f"Component has invalid position/size (x: {x}, y: {y}, w: {w}, h: {h}), but was asked to render: {self.get_full_path()}")
+			return image_helpers.EMPTY_IMAGE
+		
+		return self._render_implementation()
 
 	def print_tree(self, description: str = "", include_placement_info: bool = False, include_render_info: bool = False):
 		print("===== TREE START =====")

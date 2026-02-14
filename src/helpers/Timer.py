@@ -49,7 +49,7 @@ class Timer:
 		self.reported_errors.append(current_error)
 		start_line = "========== ERROR IN TIMER CALLBACK =========="
 		end_line = "============================================="
-		previous_errors_info = f"Errors reported so far: {len(self.reported_errors)}"
+		previous_errors_info = f"TIMER errors reported so far: {len(self.reported_errors)}"
 		warning_text = f"\n{start_line}\n{traceback.format_exc()}\n{previous_errors_info}\n{end_line}"
 		warnings.warn(warning_text)
 
