@@ -1,9 +1,10 @@
 from . import Stack, StackAlignment
 from app import context
 from helpers import AsciiBitmapFont
-from helpers.weather import WeatherApi, WeatherLocation, WeatherTypeInfo
+from helpers.weather import WeatherApi, WeatherLocation, WeatherTypeInfo, CurrentWeather
 from . import Icon, TextComponent, Placement
 from assets import get_asset_path
+from datetime import datetime
 
 
 class WeatherComponent(Stack):
@@ -36,12 +37,20 @@ class WeatherComponent(Stack):
 
 		self.temperature_text.placement.enabled = True
 		self.temperature_text.text = f"{round(weather.temperature)}°C"
-		icon_name = self._get_icon_name(weather.weathercode)
+		icon_name = self._get_icon_name(weather)
 		self.type_icon.path = get_asset_path(f"weather/{icon_name}.icon.toml")
 
-	def _get_icon_name(self, weathercode: int) -> str:
-		weather_type_info = WeatherTypeInfo.from_code(weathercode)
+	def _get_icon_name(self, weather: CurrentWeather) -> str:
+		weather_type_info = WeatherTypeInfo.from_code(weather.weathercode)
+
+		# Special case for clear sky - depends on more stuff
+		base_icon_name = weather_type_info.type
+		if base_icon_name == 'clear':
+			hour = datetime.fromisoformat(weather.time).hour # TODO: Use time for actual sunrise/sunset
+			is_night_time = hour < 6 or hour >= 19
+			base_icon_name = "moon" if is_night_time else "sun" #TODO: Include lunar phase? Detect rotation of moon based on location??
 		
+		# Choose power name
 		match weather_type_info.power:
 			case p if p > 0.66:
 				power_name = "severe"
@@ -52,7 +61,8 @@ class WeatherComponent(Stack):
 			case _:
 				power_name = None
 
-		icon_name = weather_type_info.type
+		# Choose and return icon name
+		icon_name = base_icon_name
 		if power_name:
 			icon_name += f"_{power_name}"
 		return icon_name
