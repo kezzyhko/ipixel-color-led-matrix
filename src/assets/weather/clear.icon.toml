@@ -1,0 +1,79 @@
+[configuration]
+fps = 2
+
+[palette]
+"O" = "#f9c434"
+"o" = "#f9c434"
+"X" = "#f9aa34"
+
+# [[frames]]
+# bitmap = """
+#   oooo  
+#  oOOOOo 
+# oOOOOOOo
+# oOOOOOOo
+# oOOOOOOo
+# oOOOOOOo
+#  oOOOOo 
+#   oooo  
+# """
+
+[[frames]]
+bitmap = """
+  oooo  
+ oOOOOo 
+oOOOOOOo
+oOOOOOOo
+oOOOOOOo
+oOOOOOOo
+ oOOOOo 
+  oooo  
+"""
+
+[[frames]]
+bitmap = """
+  oooo  
+ oOOOOo 
+oOOOOOOo
+oOOXXOOo
+oOOXXOOo
+oOOOOOOo
+ oOOOOo 
+  oooo  
+"""
+
+[[frames]]
+bitmap = """
+  oooo  
+ oOOOOo 
+oOOXXOOo
+oOXOOXOo
+oOXOOXOo
+oOOXXOOo
+ oOOOOo 
+  oooo  
+"""
+
+[[frames]]
+bitmap = """
+  oooo  
+ oXXXXo 
+oXOOOOXo
+oXOOOOXo
+oXOOOOXo
+oXOOOOXo
+ oXXXXo 
+  oooo  
+"""
+
+[[frames]]
+bitmap = """
+  XXXX  
+ XOOOOX 
+XOOOOOOX
+XOOOOOOX
+XOOOOOOX
+XOOOOOOX
+ XOOOOX 
+  XXXX  
+"""
