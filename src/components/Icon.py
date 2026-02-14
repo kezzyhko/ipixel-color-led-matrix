@@ -13,8 +13,7 @@ class Icon(Component):
 		self._path: Path
 		self._current_frame_index: float
 		self._last_frame_time: float|None
-
-		self.path = Path(path)
+		self._set_path_and_reload(Path(path))
 
 	@property
 	def path(self) -> Path:
@@ -24,13 +23,16 @@ class Icon(Component):
 	def path(self, new_path: Path):
 		if new_path == self._path:
 			return
+		self._set_path_and_reload(new_path)
+
+	def _set_path_and_reload(self, new_path: Path):
 		self._path = new_path
 		self._load_file()
 		self._current_frame_index = 0
 		self._last_frame_time = None
 		
 	def _load_file(self):
-		with open(self._path, "rb") as f:
+		with open(self.path, "rb") as f:
 			icon_data = tomllib.load(f)
 	
 		palette = {}
