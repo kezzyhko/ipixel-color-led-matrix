@@ -3,5 +3,6 @@
 		"ms-python.python",
 		"ms-python.debugpy",
 		"anysphere.cursorpyright",
+		"tamasfe.even-better-toml",
 	]
 }
