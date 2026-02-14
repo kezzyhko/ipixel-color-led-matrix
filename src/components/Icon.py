@@ -12,7 +12,10 @@ class Icon(Component):
 		super().__init__(name=name, placement=placement)
 		self._path: Path
 		self._current_frame_index: float
-		self._last_frame_time: float|None
+		self._last_update_time: float|None
+		self.frames: list[Image.Image] = []
+		self.frames_amount: int
+		self.fps: float
 		self._set_path_and_reload(Path(path))
 
 	@property
@@ -29,7 +32,7 @@ class Icon(Component):
 		self._path = new_path
 		self._load_file()
 		self._current_frame_index = 0
-		self._last_frame_time = None
+		self._last_update_time = None
 		
 	def _load_file(self):
 		with open(self.path, "rb") as f:
@@ -64,10 +67,10 @@ class Icon(Component):
 
 	def update(self):
 		current_time = datetime.now().timestamp()
-		time_elapsed = (current_time - self._last_frame_time) if self._last_frame_time else 0
+		time_elapsed = (current_time - self._last_update_time) if self._last_update_time else 0
 		self._current_frame_index += time_elapsed * self.fps
 		self._current_frame_index %= self.frames_amount
-		self._last_frame_time = current_time
+		self._last_update_time = current_time
 
 	def _render_implementation(self) -> Image.Image:
 		return self.frames[int(self._current_frame_index)]
