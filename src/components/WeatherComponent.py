@@ -44,9 +44,9 @@ class WeatherComponent(Stack):
 		
 		match weather_type_info.power:
 			case p if p > 0.66:
-				power_name = "heavy"
+				power_name = "severe"
 			case p if p > 0.33:
-				power_name = "medium"
+				power_name = "moderate"
 			case p if p > 0.00:
 				power_name = "light"
 			case _:
