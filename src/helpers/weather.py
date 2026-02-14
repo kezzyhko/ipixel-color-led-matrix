@@ -106,7 +106,7 @@ class WeatherLocation():
 		)
 
 
-WeatherType = Literal['clouds', 'fog', 'rain', 'snowrain', 'snow', 'thunderstorm_hail']
+WeatherType = Literal['clear', 'clouds', 'fog', 'rain', 'snowrain', 'snow', 'thunderstorm_hail']
 
 class WeatherTypeInfo:
 	def __init__(self, code: int, type: WeatherType, power: float, description: str):
@@ -124,7 +124,7 @@ class WeatherTypeInfo:
 		return WeatherTypeInfo.WEATHER_CODES[code]
 	
 WeatherTypeInfo.WEATHER_CODES = {
-	 0: WeatherTypeInfo( 0,            'clouds', 0.00, "Clear sky"),
+	 0: WeatherTypeInfo( 0,             'clear', 0.00, "Clear sky"),
 	 1: WeatherTypeInfo( 1,            'clouds', 0.25, "Mainly clear"),
 	 2: WeatherTypeInfo( 2,            'clouds', 0.50, "Partly cloudy"),
 	 3: WeatherTypeInfo( 3,            'clouds', 1.00, "Overcast"),
@@ -139,7 +139,7 @@ WeatherTypeInfo.WEATHER_CODES = {
 	63: WeatherTypeInfo(63,              'rain', 0.65, "Moderate rain"),
 	65: WeatherTypeInfo(65,              'rain', 0.90, "Heavy rain"),
 	66: WeatherTypeInfo(66,          'snowrain', 0.60, "Light freezing rain"),
-	67: WeatherTypeInfo(67,          'snowrain', 1.00, "Heavy freezing rain"),
+	67: WeatherTypeInfo(67,          'snowrain', 0.95, "Heavy freezing rain"),
 	71: WeatherTypeInfo(71,              'snow', 0.25, "Slight snow fall"),
 	73: WeatherTypeInfo(73,              'snow', 0.50, "Moderate snow fall"),
 	75: WeatherTypeInfo(75,              'snow', 0.90, "Heavy snow fall"),

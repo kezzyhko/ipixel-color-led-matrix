@@ -1,7 +1,7 @@
 from . import Stack, StackAlignment
 from app import context
 from helpers import AsciiBitmapFont
-from helpers.weather import WeatherApi, WeatherLocation
+from helpers.weather import WeatherApi, WeatherLocation, WeatherTypeInfo
 from . import Icon, TextComponent, Placement
 from assets import get_asset_path
 
@@ -35,5 +35,24 @@ class WeatherComponent(Stack):
 			return
 
 		self.temperature_text.placement.enabled = True
-		self.type_icon.path = get_asset_path(f"weather/rain.icon.toml") # TODO: select actual icon
 		self.temperature_text.text = f"{round(weather.temperature)}°C"
+		icon_name = self._get_icon_name(weather.weathercode)
+		self.type_icon.path = get_asset_path(f"weather/{icon_name}.icon.toml")
+
+	def _get_icon_name(self, weathercode: int) -> str:
+		weather_type_info = WeatherTypeInfo.from_code(weathercode)
+		
+		match weather_type_info.power:
+			case p if p > 0.66:
+				power_name = "heavy"
+			case p if p > 0.33:
+				power_name = "medium"
+			case p if p > 0.00:
+				power_name = "light"
+			case _:
+				power_name = None
+
+		icon_name = weather_type_info.type
+		if power_name:
+			icon_name += f"_{power_name}"
+		return icon_name
