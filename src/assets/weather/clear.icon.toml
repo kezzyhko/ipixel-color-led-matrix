@@ -2,78 +2,77 @@
 fps = 2
 
 [palette]
-"O" = "#f9c434"
-"o" = "#f9c434"
-"X" = "#f9aa34"
+"-" = "#f9c434"
+"O" = "#f9aa34"
 
 # [[frames]]
 # bitmap = """
-#   oooo  
-#  oOOOOo 
-# oOOOOOOo
-# oOOOOOOo
-# oOOOOOOo
-# oOOOOOOo
-#  oOOOOo 
-#   oooo  
+#   ----  
+#  ------ 
+# --------
+# --------
+# --------
+# --------
+#  ------ 
+#   ----  
 # """
 
 [[frames]]
 bitmap = """
-  oooo  
- oOOOOo 
-oOOOOOOo
-oOOOOOOo
-oOOOOOOo
-oOOOOOOo
- oOOOOo 
-  oooo  
+  ----  
+ ------ 
+--------
+--------
+--------
+--------
+ ------ 
+  ----  
 """
 
 [[frames]]
 bitmap = """
-  oooo  
- oOOOOo 
-oOOOOOOo
-oOOXXOOo
-oOOXXOOo
-oOOOOOOo
- oOOOOo 
-  oooo  
+  ----  
+ ------ 
+--------
+---OO---
+---OO---
+--------
+ ------ 
+  ----  
 """
 
 [[frames]]
 bitmap = """
-  oooo  
- oOOOOo 
-oOOXXOOo
-oOXOOXOo
-oOXOOXOo
-oOOXXOOo
- oOOOOo 
-  oooo  
+  ----  
+ ------ 
+---OO---
+--O--O--
+--O--O--
+---OO---
+ ------ 
+  ----  
 """
 
 [[frames]]
 bitmap = """
-  oooo  
- oXXXXo 
-oXOOOOXo
-oXOOOOXo
-oXOOOOXo
-oXOOOOXo
- oXXXXo 
-  oooo  
+  ----  
+ -OOOO- 
+-O----O-
+-O----O-
+-O----O-
+-O----O-
+ -OOOO- 
+  ----  
 """
 
 [[frames]]
 bitmap = """
-  XXXX  
- XOOOOX 
-XOOOOOOX
-XOOOOOOX
-XOOOOOOX
-XOOOOOOX
- XOOOOX 
-  XXXX  
+  OOOO  
+ O----O 
+O------O
+O------O
+O------O
+O------O
+ O----O 
+  OOOO  
 """
