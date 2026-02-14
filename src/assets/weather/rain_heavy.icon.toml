@@ -13,8 +13,8 @@ fps = 2
 #   XOOXOOOOXX  
 #  XOOOOOOOOOOX 
 #   XXXXXXXXXX  
-#   |  |  |  |  
-#   |     |     
+#               
+#               
 #               
 # """
 
@@ -25,9 +25,9 @@ bitmap = """
   XOOXOOOOXX  
  XOOOOOOOOOOX 
   XXXXXXXXXX  
-  |     |     
-  |     |     
-              
+    |     |   
+    |   |     
+      | |     
 """
 
 [[frames]]
@@ -37,9 +37,9 @@ bitmap = """
   XOOXOOOOXX  
  XOOOOOOOOOOX 
   XXXXXXXXXX  
-              
-  |     |     
-  |     |     
+  |       |   
+    |     |   
+    |   |     
 """
 
 [[frames]]
@@ -49,9 +49,9 @@ bitmap = """
   XOOXOOOOXX  
  XOOOOOOOOOOX 
   XXXXXXXXXX  
-     |     |  
-              
-  |     |     
+  |   |       
+  |       |   
+    |     |   
 """
 
 [[frames]]
@@ -61,9 +61,9 @@ bitmap = """
   XOOXOOOOXX  
  XOOOOOOOOOOX 
   XXXXXXXXXX  
-     |     |  
-     |     |  
-              
+      | |     
+  |   |       
+  |       |   
 """
 
 [[frames]]
@@ -73,19 +73,7 @@ bitmap = """
   XOOXOOOOXX  
  XOOOOOOOOOOX 
   XXXXXXXXXX  
-              
-     |     |  
-     |     |  
-"""
-
-[[frames]]
-bitmap = """
-       XX     
-   XX XOOX    
-  XOOXOOOOXX  
- XOOOOOOOOOOX 
-  XXXXXXXXXX  
-  |     |     
-              
-     |     |  
+    |   |     
+      | |     
+  |   |       
 """
