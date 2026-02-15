@@ -11,11 +11,12 @@ fps = 0.7
 
 [[frames]]
 bitmap = """
-       xx           
-   xx xoox          
-  xooxooooxXX       
- xoooooXXoXOOX      
-  xxxxXOOXOOOOXX    
-     XOOOOOOOOOOX   
-      XXXXXXXXXX    
+                
+      xx # ##   
+  xx xoo#@#@@#  
+ xooxoo#@@@@@#  
+xoooooXX#####   
+ xxxxXOOOOOOOXX 
+    XOOOOOOOOOOX
+     XXXXXXXXXX 
 """
