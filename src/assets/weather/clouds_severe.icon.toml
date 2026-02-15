@@ -9,14 +9,170 @@ fps = 0.7
 "o" = "#a8d8e1"
 "x" = "#01116a"
 
+# [[frames]]
+# bitmap = """
+#           # ##  
+#       xx #@#@@# 
+#   xx xoo#@@@@@# 
+#  xooxoooo#####  
+# xoooooXXoXOOX 
+#  xxxxXOOXOOOOX 
+#     XOOOOOOOOOX 
+#      XXXXXXXXX  
+# """
+
+# [[frames]]
+# bitmap = """
+#       # ##  
+#   xx #@#@@# 
+#  xoo#@@@@@xx
+# xoooo####xoo
+# ooXXoXOOxooo
+# xXOOXOOOOxxx
+# XOOOOOOOOOX 
+#  XXXXXXXXX  
+# """
+
 [[frames]]
 bitmap = """
-                
-      xx # ##   
-  xx xoo#@#@@#  
- xooxoo#@@@@@#  
-xoooooXX#####   
- xxxxXOOOOOOOXX 
-    XOOOOOOOOOOX
-     XXXXXXXXXX 
+      # ##  
+  xx #@#@@# 
+ xoo#@@@@@xx
+xoooo####xoo
+ooXXoXOOxooo
+xXOOXOOOOxxx
+XOOOOOOOOOX 
+ XXXXXXXXX  
+"""
+
+[[frames]]
+bitmap = """
+       # ## 
+   xx #@#@@#
+x xoo#@@@@@x
+oxoooo####xo
+oooXXoXOOxoo
+xxXOOXOOOOxx
+ XOOOOOOOOOX
+  XXXXXXXXX 
+"""
+
+[[frames]]
+bitmap = """
+        # ##
+#   xx #@#@@
+xx xoo#@@@@@
+ooxoooo####x
+ooooXXoXOOxo
+xxxXOOXOOOOx
+X XOOOOOOOOO
+   XXXXXXXXX
+"""
+
+[[frames]]
+bitmap = """
+#        # #
+@#   xx #@#@
+@xx xoo#@@@@
+xooxoooo####
+oooooXXoXOOx
+xxxxXOOXOOOO
+OX XOOOOOOOO
+X   XXXXXXXX
+"""
+
+[[frames]]
+bitmap = """
+##        # 
+@@#   xx #@#
+@@xx xoo#@@@
+#xooxoooo###
+xoooooXXoXOO
+OxxxxXOOXOOO
+OOX XOOOOOOO
+XX   XXXXXXX
+"""
+
+[[frames]]
+bitmap = """
+ ##        #
+#@@#   xx #@
+@@@xx xoo#@@
+##xooxoooo##
+OxoooooXXoXO
+OOxxxxXOOXOO
+OOOX XOOOOOO
+XXX   XXXXXX
+"""
+
+[[frames]]
+bitmap = """
+# ##        
+@#@@#   xx #
+@@@@xx xoo#@
+###xooxoooo#
+OOxoooooXXoX
+OOOxxxxXOOXO
+OOOOX XOOOOO
+XXXX   XXXXX
+"""
+
+[[frames]]
+bitmap = """
+ # ##       
+#@#@@#   xx 
+@@@@@xx xoo#
+####xooxoooo
+XOOxoooooXXo
+OOOOxxxxXOOX
+OOOOOX XOOOO
+XXXXX   XXXX
+"""
+
+[[frames]]
+bitmap = """
+  # ##      
+ #@#@@#   xx
+#@@@@@xx xoo
+o####xooxooo
+oXOOxoooooXX
+XOOOOxxxxXOO
+OOOOOOX XOOO
+XXXXXX   XXX
+"""
+
+[[frames]]
+bitmap = """
+   # ##     
+x #@#@@#   x
+o#@@@@@xx xo
+oo####xooxoo
+XoXOOxoooooX
+OXOOOOxxxxXO
+OOOOOOOX XOO
+XXXXXXX   XX
+"""
+
+[[frames]]
+bitmap = """
+    # ##    
+xx #@#@@#   
+oo#@@@@@xx x
+ooo####xooxo
+XXoXOOxooooo
+OOXOOOOxxxxX
+OOOOOOOOX XO
+XXXXXXXX   X
+"""
+
+[[frames]]
+bitmap = """
+     # ##   
+ xx #@#@@#  
+xoo#@@@@@xx 
+oooo####xoox
+oXXoXOOxoooo
+XOOXOOOOxxxx
+OOOOOOOOOX X
+XXXXXXXXX   
 """
