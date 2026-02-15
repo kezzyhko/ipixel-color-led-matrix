@@ -27,21 +27,9 @@ bitmap = """
   XOOXOOOOXX  
  XOOOOOOOOOOX 
   XXXXXXXXXX  
-    &         
               
               
-"""
-
-[[frames]]
-bitmap = """
-       XX     
-   XX XOOX    
-  XOOXOOOOXX  
- XOOOOOOOOOOX 
-  XXXXXXXXXX  
-    &    |    
-              
-              
+         &    
 """
 
 [[frames]]
@@ -52,32 +40,8 @@ bitmap = """
  XOOOOOOOOOOX 
   XXXXXXXXXX  
          |    
-     &  |     
               
-"""
-
-[[frames]]
-bitmap = """
-       XX     
-   XX XOOX    
-  XOOXOOOOXX  
- XOOOOOOOOOOX 
-  XXXXXXXXXX  
-         |    
-     &  |     
-         |    
-"""
-
-[[frames]]
-bitmap = """
-       XX     
-   XX XOOX    
-  XOOXOOOOXX  
- XOOOOOOOOOOX 
-  XXXXXXXXXX  
-         !    
-        !     
-      &  !    
+              
 """
 
 [[frames]]
@@ -89,7 +53,7 @@ bitmap = """
   XXXXXXXXXX  
   &      |    
         |     
-      &  |    
+              
 """
 
 [[frames]]
@@ -99,8 +63,20 @@ bitmap = """
   XOOXOOOOXX  
  XOOOOOOOOOOX 
   XXXXXXXXXX  
-  &      !    
-        !     
+  &      |    
+        |     
+         |    
+"""
+
+[[frames]]
+bitmap = """
+       XX     
+   XX XOOX    
+  XOOXOOOOXX  
+ XOOOOOOOOOOX 
+  XXXXXXXXXX  
+         !    
+   &    !     
          !    
 """
 
@@ -111,9 +87,9 @@ bitmap = """
   XOOXOOOOXX  
  XOOOOOOOOOOX 
   XXXXXXXXXX  
-              
-   &          
-              
+         |    
+   &    |     
+         |    
 """
 
 [[frames]]
@@ -123,9 +99,9 @@ bitmap = """
   XOOXOOOOXX  
  XOOOOOOOOOOX 
   XXXXXXXXXX  
-      |       
-   &          
-              
+         !    
+        !     
+    &    !    
 """
 
 [[frames]]
@@ -135,8 +111,8 @@ bitmap = """
   XOOXOOOOXX  
  XOOOOOOOOOOX 
   XXXXXXXXXX  
-      |       
-      |       
+              
+              
     &         
 """
 
@@ -147,33 +123,9 @@ bitmap = """
   XOOXOOOOXX  
  XOOOOOOOOOOX 
   XXXXXXXXXX  
-      |   &   
-      |       
-    &  |      
-"""
-
-[[frames]]
-bitmap = """
-       XX     
-   XX XOOX    
-  XOOXOOOOXX  
- XOOOOOOOOOOX 
-  XXXXXXXXXX  
-      !   &   
-      !       
-       !      
-"""
-
-[[frames]]
-bitmap = """
-       XX     
-   XX XOOX    
-  XOOXOOOOXX  
- XOOOOOOOOOOX 
-  XXXXXXXXXX  
-      |       
-      |    &  
        |      
+              
+              
 """
 
 [[frames]]
@@ -183,9 +135,57 @@ bitmap = """
   XOOXOOOOXX  
  XOOOOOOOOOOX 
   XXXXXXXXXX  
-      !       
-      !    &  
+       |   &  
+       |      
+              
+"""
+
+[[frames]]
+bitmap = """
+       XX     
+   XX XOOX    
+  XOOXOOOOXX  
+ XOOOOOOOOOOX 
+  XXXXXXXXXX  
+       |   & 
+       |      
+        |     
+"""
+
+[[frames]]
+bitmap = """
+       XX     
+   XX XOOX    
+  XOOXOOOOXX  
+ XOOOOOOOOOOX 
+  XXXXXXXXXX  
        !      
+       !    & 
+        !     
+"""
+
+[[frames]]
+bitmap = """
+       XX     
+   XX XOOX    
+  XOOXOOOOXX  
+ XOOOOOOOOOOX 
+  XXXXXXXXXX  
+       |      
+       |    & 
+        |     
+"""
+
+[[frames]]
+bitmap = """
+       XX     
+   XX XOOX    
+  XOOXOOOOXX  
+ XOOOOOOOOOOX 
+  XXXXXXXXXX  
+       !      
+       !      
+        !    &
 """
 
 [[frames]]
@@ -197,7 +197,7 @@ bitmap = """
   XXXXXXXXXX  
               
               
-            & 
+             &
 """
 
 [[frames]]
@@ -207,21 +207,9 @@ bitmap = """
   XOOXOOOOXX  
  XOOOOOOOOOOX 
   XXXXXXXXXX  
-   |  &       
-              
-            & 
-"""
-
-[[frames]]
-bitmap = """
-       XX     
-   XX XOOX    
-  XOOXOOOOXX  
- XOOOOOOOOOOX 
-  XXXXXXXXXX  
-   |  &       
     |         
               
+              
 """
 
 [[frames]]
@@ -231,9 +219,9 @@ bitmap = """
   XOOXOOOOXX  
  XOOOOOOOOOOX 
   XXXXXXXXXX  
-   |          
     |  &      
-    |         
+     |        
+              
 """
 
 [[frames]]
@@ -243,9 +231,21 @@ bitmap = """
   XOOXOOOOXX  
  XOOOOOOOOOOX 
   XXXXXXXXXX  
-   !          
-    !  &      
+    |  &      
+     |        
+     |        
+"""
+
+[[frames]]
+bitmap = """
+       XX     
+   XX XOOX    
+  XOOXOOOOXX  
+ XOOOOOOOOOOX 
+  XXXXXXXXXX  
     !         
+     !  &     
+     !        
 """
 
 [[frames]]
@@ -255,9 +255,9 @@ bitmap = """
   XOOXOOOOXX  
  XOOOOOOOOOOX 
   XXXXXXXXXX  
-   |          
     |         
-    |   &     
+     |  &     
+     |        
 """
 
 [[frames]]
@@ -267,7 +267,7 @@ bitmap = """
   XOOXOOOOXX  
  XOOOOOOOOOOX 
   XXXXXXXXXX  
-   !          
     !         
-    !   &     
+     !        
+     !   &    
 """
