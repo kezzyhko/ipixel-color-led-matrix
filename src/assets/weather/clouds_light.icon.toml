@@ -1,0 +1,354 @@
+[configuration]
+fps = 0.7
+
+[palette]
+"O" = "#9bb8cc"
+"X" = "#02005b"
+
+# [[frames]]
+# bitmap = """
+#    X XX       
+#   XOXOOX      
+#  XOOOOOX      
+#   XXXXX       
+#               
+#               
+#               
+#               
+# """
+
+[[frames]]
+bitmap = """
+   X XX       
+  XOXOOX      
+ XOOOOOX      
+  XXXXX       
+              
+              
+              
+              
+"""
+
+[[frames]]
+bitmap = """
+    X XX      
+   XOXOOX     
+  XOOOOOX     
+   XXXXX      
+              
+              
+              
+              
+"""
+
+[[frames]]
+bitmap = """
+     X XX     
+    XOXOOX    
+   XOOOOOX    
+    XXXXX     
+              
+              
+              
+              
+"""
+
+[[frames]]
+bitmap = """
+      X XX    
+     XOXOOX   
+    XOOOOOX   
+     XXXXX    
+              
+              
+              
+              
+"""
+
+[[frames]]
+bitmap = """
+       X XX   
+      XOXOOX  
+     XOOOOOX  
+      XXXXX   
+              
+              
+              
+              
+"""
+
+[[frames]]
+bitmap = """
+        X XX  
+       XOXOOX 
+      XOOOOOX 
+       XXXXX  
+              
+              
+              
+              
+"""
+
+[[frames]]
+bitmap = """
+         X XX 
+        XOXOOX
+       XOOOOOX
+        XXXXX 
+              
+              
+              
+              
+"""
+
+[[frames]]
+bitmap = """
+          X XX
+         XOXOO
+        XOOOOO
+         XXXXX
+              
+X             
+X             
+              
+"""
+
+[[frames]]
+bitmap = """
+           X X
+          XOXO
+         XOOOO
+          XXXX
+X             
+OX            
+OX            
+X             
+"""
+
+[[frames]]
+bitmap = """
+            X 
+           XOX
+          XOOO
+           XXX
+XX            
+OOX           
+OOX           
+XX            
+"""
+
+[[frames]]
+bitmap = """
+             X
+            XO
+           XOO
+            XX
+ XX           
+XOOX          
+OOOX          
+XXX           
+"""
+
+[[frames]]
+bitmap = """
+              
+             X
+            XO
+             X
+X XX          
+OXOOX         
+OOOOX         
+XXXX          
+"""
+
+[[frames]]
+bitmap = """
+              
+              
+             X
+              
+ X XX         
+XOXOOX        
+OOOOOX        
+XXXXX         
+"""
+
+[[frames]]
+bitmap = """
+              
+              
+              
+              
+  X XX        
+ XOXOOX       
+XOOOOOX       
+ XXXXX        
+"""
+
+[[frames]]
+bitmap = """
+              
+              
+              
+              
+   X XX       
+  XOXOOX      
+ XOOOOOX      
+  XXXXX       
+"""
+
+[[frames]]
+bitmap = """
+              
+              
+              
+              
+    X XX      
+   XOXOOX     
+  XOOOOOX     
+   XXXXX      
+"""
+
+[[frames]]
+bitmap = """
+              
+              
+              
+              
+     X XX     
+    XOXOOX    
+   XOOOOOX    
+    XXXXX     
+"""
+
+[[frames]]
+bitmap = """
+              
+              
+              
+              
+      X XX    
+     XOXOOX   
+    XOOOOOX   
+     XXXXX    
+"""
+
+[[frames]]
+bitmap = """
+              
+              
+              
+              
+       X XX   
+      XOXOOX  
+     XOOOOOX  
+      XXXXX   
+"""
+
+[[frames]]
+bitmap = """
+              
+              
+              
+              
+        X XX  
+       XOXOOX 
+      XOOOOOX 
+       XXXXX  
+"""
+
+[[frames]]
+bitmap = """
+              
+              
+              
+              
+         X XX 
+        XOXOOX
+       XOOOOOX
+        XXXXX 
+"""
+
+[[frames]]
+bitmap = """
+              
+X             
+X             
+              
+          X XX
+         XOXOO
+        XOOOOO
+         XXXXX
+"""
+
+[[frames]]
+bitmap = """
+X             
+OX            
+OX            
+X             
+           X X
+          XOXO
+         XOOOO
+          XXXX
+"""
+
+[[frames]]
+bitmap = """
+XX            
+OOX           
+OOX           
+XX            
+            X 
+           XOX
+          XOOO
+           XXX
+"""
+
+[[frames]]
+bitmap = """
+ XX           
+XOOX          
+OOOX          
+XXX           
+             X
+            XO
+           XOO
+            XX
+"""
+
+[[frames]]
+bitmap = """
+X XX          
+OXOOX         
+OOOOX         
+XXXX          
+              
+             X
+            XO
+             X
+"""
+
+[[frames]]
+bitmap = """
+ X XX         
+XOXOOX        
+OOOOOX        
+XXXXX         
+              
+              
+             X
+              
+"""
+
+[[frames]]
+bitmap = """
+  X XX        
+ XOXOOX       
+XOOOOOX       
+ XXXXX        
+              
+              
+              
+              
+"""

@@ -1,0 +1,21 @@
+[configuration]
+fps = 0.7
+
+[palette]
+"@" = "#4e6f85"
+"#" = "#010049"
+"O" = "#9bb8cc"
+"X" = "#02005b"
+"o" = "#a8d8e1"
+"x" = "#01116a"
+
+[[frames]]
+bitmap = """
+       xx           
+   xx xoox          
+  xooxooooxXX       
+ xoooooXXoXOOX      
+  xxxxXOOXOOOOXX    
+     XOOOOOOOOOOX   
+      XXXXXXXXXX    
+"""
