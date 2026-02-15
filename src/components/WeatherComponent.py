@@ -44,9 +44,10 @@ class WeatherComponent(Stack):
 		weather_type_info = WeatherTypeInfo.from_code(weather.weathercode)
 
 		# Determine celestial body (sun/moon)
-		hour = datetime.fromisoformat(weather.time).hour # TODO: Use time for actual sunrise/sunset
-		is_night_time = hour < 6 or hour >= 19
-		celestial_body = 'moon' if is_night_time else 'sun' #TODO: Include lunar phase? Detect rotation of moon based on location??
+		hour = datetime.fromisoformat(weather.time).hour
+		is_night_time = hour < 6 or hour >= 19 # TODO: Use time of the actual sunrise/sunset
+		celestial_body = 'moon' if is_night_time else 'sun'
+		#TODO: Include lunar phase? Detect rotation of moon based on location??
 		
 		# Choose power name
 		match weather_type_info.power:
