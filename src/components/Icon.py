@@ -58,6 +58,8 @@ class Icon(Component):
 		frame = Image.new('RGBA', (width, height), (0, 0, 0, 0))
 		for y, row in enumerate(bitmap):
 			for x, pixel in enumerate(row):
+				if pixel not in palette:
+					raise ValueError(f"Pixel '{pixel}' not in palette for icon (file: {self.path}, scene path: {self.get_full_path()})")
 				color = palette[pixel]
 				frame.putpixel((x, y), color)
 		return frame
