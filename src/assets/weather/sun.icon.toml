@@ -56,12 +56,12 @@ bitmap = """
 [[frames]]
 bitmap = """
   ----  
- -OOOO- 
+ --OO-- 
+--O--O--
 -O----O-
 -O----O-
--O----O-
--O----O-
- -OOOO- 
+--O--O--
+ --OO-- 
   ----  
 """
 
