@@ -2,10 +2,10 @@
 fps = 2
 
 [palette]
-"-" = "#05195a" # the moon's background
 "X" = "#00000000" # shadow of the earth onthe  moon
-"=" = "#072a9e" # start light on the moon (dim)
-"#" = "#0b3cdd" # star light on themoon (bright)
+"-" = "#05195a" # the moon's background
+"=" = "#05195a" # start light on the moon (dim)
+"#" = "#05195a" # star light on themoon (bright)
 "*" = "#fffb00" # star
 
 # [[frames]]
