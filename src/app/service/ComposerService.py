@@ -8,7 +8,12 @@ from helpers import Timer
 class ComposerService(Service):
 	def __init__(self, display_target: DisplayTarget, fps: float, debug_scene: bool = False, debug_render: bool = False, debug_placement: bool = False):
 		super().__init__()
-		self.scene = create_briefing_scene() # TODO: initial scene should be passed as argument
+
+		# TODO!: Scene switching - come up with system! Group with enabled/disabled components? Something in ComposerService?
+		# TODO! Implement root alignment! Scene with user_root and true_root components?????
+		# TODO!: Initial scene should be passed as an argument
+		self.scene = create_briefing_scene()
+
 		self.display_target = display_target
 		interval = datetime.timedelta(seconds=1.0/fps)
 		self._timer = Timer(interval, self._tick)

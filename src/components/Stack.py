@@ -54,7 +54,7 @@ class Stack(Group):
 			max_cross_size = max(max_cross_size, child._render_properties.size[cross_axis])
 
 		# Pass 3: calculate positions
-		#TODO LAYOUT implement alignment
+		#TODO! implement alignment along main axis?
 		main_position = pixels_padding
 		for child in enabled_children:
 			cross_position = 0

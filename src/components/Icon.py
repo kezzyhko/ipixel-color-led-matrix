@@ -7,6 +7,7 @@ from helpers import Color
 from . import SizingMode, Placement
 
 
+# TODO: add support for 'sliding window' and other animation types
 class Icon(Component):
 	def __init__(self, path: Path | str, name: str|None = None, placement: Placement|None = None):
 		super().__init__(name=name, placement=placement)
@@ -38,7 +39,7 @@ class Icon(Component):
 		with open(self.path, "rb") as f:
 			icon_data = tomllib.load(f)
 	
-		palette = {}
+		palette = {} #TODO: ability to include palette from a separate '.palette.toml' file
 		for character, color in icon_data['palette'].items():
 			palette[character] = Color(color).rgba_tuple_int
 		if " " not in palette:
