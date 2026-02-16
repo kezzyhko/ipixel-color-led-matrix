@@ -6,7 +6,7 @@ def create_briefing_scene() -> Group:
 		name = "root",
 		direction = 'horizontal',
 		alignment = 'center_center',
-		spacing = 3/64,
+		spacing = 7/64,
 		padding = 1/64,
 		children = [
 			Stack(
