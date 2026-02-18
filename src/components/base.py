@@ -276,13 +276,22 @@ class Group(Component):
 			child._render_properties._max_height = round((child.placement.height or 1) * max_height)
 
 	def _render_implementation(self) -> Image.Image:
-		size = (self._render_properties.max_width, self._render_properties.max_height) # TODO: shrink if necessary
-		image = Image.new("RGBA", size, self.background_color)
+		image = Image.new("RGBA", self._render_properties.max_size, self.background_color)
+
+		width = height = 0
 		for child in self.children:
-			child.render()
 			rendered_image = child._render_properties.rendered_image
 			mask = rendered_image if rendered_image.mode == "RGBA" else None
 			image.paste(rendered_image, child._render_properties.position, mask)
+			width = max(width, child._render_properties.x + child._render_properties.width)
+			height = max(height, child._render_properties.y + child._render_properties.height)
+
+		# TODO!: do not crop right/bottom paddings
+		if self.placement.width is None:
+			image = image.crop((0, 0, width, image.height))
+		if self.placement.height is None:
+			image = image.crop((0, 0, image.width, height))
+			
 		return image
 
 	def render(self):
