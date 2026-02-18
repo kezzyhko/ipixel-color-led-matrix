@@ -48,7 +48,10 @@ class Icon(Component):
 		self.frames = []
 		for frame in icon_data['frames']:
 			bitmap = frame['bitmap'].strip("\n").split("\n")
-			self.frames.append(self._parse_frame_bitmap(bitmap, palette))
+			image = self._parse_frame_bitmap(bitmap, palette)
+			length = frame.get('length', 1)
+			for _ in range(length):
+				self.frames.append(image)
 
 		self.frames_amount = len(self.frames)
 		self.fps = icon_data['configuration']['fps']
