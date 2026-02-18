@@ -185,8 +185,12 @@ class Component(metaclass=ABCMeta):
 
 	def init_scene_root(self, width: int, height: int):
 		self._init_render_pass()
+		self.placement.x = 0.0
+		self.placement.y = 0.0
 		self.placement.width = 1.0
 		self.placement.height = 1.0
+		self._render_properties._x = 0
+		self._render_properties._y = 0
 		self._render_properties._max_width = width
 		self._render_properties._max_height = height
 
@@ -230,7 +234,7 @@ class Component(metaclass=ABCMeta):
 			yield from terminal_helpers.add_indent(self.placement._get_tree_lines())
 		if include_placement_info and include_render_info:
 			yield ""
-		if include_render_info and self.parent is not None:
+		if include_render_info:
 			yield from terminal_helpers.add_indent(self._render_properties._get_tree_lines())
 
 
@@ -308,7 +312,6 @@ class Group(Component):
 			yield from terminal_helpers.add_indent(child._get_tree_lines(include_placement_info, include_render_info))
 			yield ""
 			
-
 	def add_child(self, child: Component):
 		if child in self.children:
 			return
