@@ -25,9 +25,7 @@ class ComposerService(Service):
 		await self.display_target.teardown()
 
 	async def _tick(self):
-		self.scene.init_render_pass()
-		self.scene._render_properties._max_width = self.display_target.width
-		self.scene._render_properties._max_height = self.display_target.height
+		self.scene.init_scene_root(self.display_target.width, self.display_target.height)
 		self.scene.update()
 		self.scene.update_sizing_mode()
 		self.scene.render()

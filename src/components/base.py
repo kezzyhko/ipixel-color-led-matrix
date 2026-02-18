@@ -183,7 +183,14 @@ class Component(metaclass=ABCMeta):
 		self._parent.remove_child(self)
 		self._parent = None
 
-	def init_render_pass(self):
+	def init_scene_root(self, width: int, height: int):
+		self._init_render_pass()
+		self.placement.width = 1.0
+		self.placement.height = 1.0
+		self._render_properties._max_width = width
+		self._render_properties._max_height = height
+
+	def _init_render_pass(self):
 		self._render_properties = RenderProperties(self)
 
 	@abstractmethod
@@ -235,10 +242,10 @@ class Group(Component):
 			self.add_child(child)
 		self.background_color = (0, 0, 0, 0)
 
-	def init_render_pass(self):
-		super().init_render_pass()
+	def _init_render_pass(self):
+		super()._init_render_pass()
 		for child in self.children:
-			child.init_render_pass()
+			child._init_render_pass()
 
 	def update(self):
 		for child in self.children:
