@@ -1,5 +1,5 @@
 [configuration]
-fps = 6
+fps = 2
 
 [palette]
 "*" = "#ffffff"
@@ -26,117 +26,9 @@ bitmap = """
   XOOXOOOOXX  
  XOOOOOOOOOOX 
   XXXXXXXXXX  
-  |  *        
-  |           
-              
-"""
-
-[[frames]]
-bitmap = """
-       XX     
-   XX XOOX    
-  XOOXOOOOXX  
- XOOOOOOOOOOX 
-  XXXXXXXXXX  
-  |  *        
-  |           
-              
-"""
-
-[[frames]]
-bitmap = """
-       XX     
-   XX XOOX    
-  XOOXOOOOXX  
- XOOOOOOOOOOX 
-  XXXXXXXXXX  
-     *        
-  |           
-  |           
-"""
-
-[[frames]]
-bitmap = """
-       XX     
-   XX XOOX    
-  XOOXOOOOXX  
- XOOOOOOOOOOX 
-  XXXXXXXXXX  
-              
-  |  *        
-  |           
-"""
-
-[[frames]]
-bitmap = """
-       XX     
-   XX XOOX    
-  XOOXOOOOXX  
- XOOOOOOOOOOX 
-  XXXXXXXXXX  
-        |     
-     *        
-  |           
-"""
-
-[[frames]]
-bitmap = """
-       XX     
-   XX XOOX    
-  XOOXOOOOXX  
- XOOOOOOOOOOX 
-  XXXXXXXXXX  
-        |     
-     *        
-  |           
-"""
-
-[[frames]]
-bitmap = """
-       XX     
-   XX XOOX    
-  XOOXOOOOXX  
- XOOOOOOOOOOX 
-  XXXXXXXXXX  
-        |  *  
-        |     
-     *        
-"""
-
-[[frames]]
-bitmap = """
-       XX     
-   XX XOOX    
-  XOOXOOOOXX  
- XOOOOOOOOOOX 
-  XXXXXXXXXX  
-        |  *  
-        |     
-     *        
-"""
-
-[[frames]]
-bitmap = """
-       XX     
-   XX XOOX    
-  XOOXOOOOXX  
- XOOOOOOOOOOX 
-  XXXXXXXXXX  
+    |         
            *  
-        |     
-     *  |     
-"""
-
-[[frames]]
-bitmap = """
-       XX     
-   XX XOOX    
-  XOOXOOOOXX  
- XOOOOOOOOOOX 
-  XXXXXXXXXX  
               
-        |  *  
-        |     
 """
 
 [[frames]]
@@ -146,32 +38,8 @@ bitmap = """
   XOOXOOOOXX  
  XOOOOOOOOOOX 
   XXXXXXXXXX  
-     |        
-           *  
-        |     
-"""
-
-[[frames]]
-bitmap = """
-       XX     
-   XX XOOX    
-  XOOXOOOOXX  
- XOOOOOOOOOOX 
-  XXXXXXXXXX  
-     |        
-           *  
-        |     
-"""
-
-[[frames]]
-bitmap = """
-       XX     
-   XX XOOX    
-  XOOXOOOOXX  
- XOOOOOOOOOOX 
-  XXXXXXXXXX  
-     |        
-     |        
+    |         
+    |         
            *  
 """
 
@@ -182,127 +50,67 @@ bitmap = """
   XOOXOOOOXX  
  XOOOOOOOOOOX 
   XXXXXXXXXX  
-     |        
-     |        
+      *       
+    |         
+    |         
+"""
+
+[[frames]]
+bitmap = """
+       XX     
+   XX XOOX    
+  XOOXOOOOXX  
+ XOOOOOOOOOOX 
+  XXXXXXXXXX  
+              
+      *       
+    |         
+"""
+
+[[frames]]
+bitmap = """
+       XX     
+   XX XOOX    
+  XOOXOOOOXX  
+ XOOOOOOOOOOX 
+  XXXXXXXXXX  
+        |     
+              
+      *       
+"""
+
+[[frames]]
+bitmap = """
+       XX     
+   XX XOOX    
+  XOOXOOOOXX  
+ XOOOOOOOOOOX 
+  XXXXXXXXXX  
+   *    |     
+        |     
+              
+"""
+
+[[frames]]
+bitmap = """
+       XX     
+   XX XOOX    
+  XOOXOOOOXX  
+ XOOOOOOOOOOX 
+  XXXXXXXXXX  
+              
+   *    |     
+        |     
+"""
+
+[[frames]]
+bitmap = """
+       XX     
+   XX XOOX    
+  XOOXOOOOXX  
+ XOOOOOOOOOOX 
+  XXXXXXXXXX  
            *  
-"""
-
-[[frames]]
-bitmap = """
-       XX     
-   XX XOOX    
-  XOOXOOOOXX  
- XOOOOOOOOOOX 
-  XXXXXXXXXX  
               
-     |        
-     |     *  
-"""
-
-[[frames]]
-bitmap = """
-       XX     
-   XX XOOX    
-  XOOXOOOOXX  
- XOOOOOOOOOOX 
-  XXXXXXXXXX  
-       *      
-     |        
-     |        
-"""
-
-[[frames]]
-bitmap = """
-       XX     
-   XX XOOX    
-  XOOXOOOOXX  
- XOOOOOOOOOOX 
-  XXXXXXXXXX  
-       *   |  
-              
-     |        
-"""
-
-[[frames]]
-bitmap = """
-       XX     
-   XX XOOX    
-  XOOXOOOOXX  
- XOOOOOOOOOOX 
-  XXXXXXXXXX  
-       *   |  
-              
-     |        
-"""
-
-[[frames]]
-bitmap = """
-       XX     
-   XX XOOX    
-  XOOXOOOOXX  
- XOOOOOOOOOOX 
-  XXXXXXXXXX  
-           |  
-       *   |  
-              
-"""
-
-[[frames]]
-bitmap = """
-       XX     
-   XX XOOX    
-  XOOXOOOOXX  
- XOOOOOOOOOOX 
-  XXXXXXXXXX  
-           |  
-       *   |  
-              
-"""
-
-[[frames]]
-bitmap = """
-       XX     
-   XX XOOX    
-  XOOXOOOOXX  
- XOOOOOOOOOOX 
-  XXXXXXXXXX  
-              
-       *   |  
-           |  
-"""
-
-[[frames]]
-bitmap = """
-       XX     
-   XX XOOX    
-  XOOXOOOOXX  
- XOOOOOOOOOOX 
-  XXXXXXXXXX  
-              
-           |  
-       *   |  
-"""
-
-[[frames]]
-bitmap = """
-       XX     
-   XX XOOX    
-  XOOXOOOOXX  
- XOOOOOOOOOOX 
-  XXXXXXXXXX  
-  |           
-              
-       *   |  
-"""
-
-[[frames]]
-bitmap = """
-       XX     
-   XX XOOX    
-  XOOXOOOOXX  
- XOOOOOOOOOOX 
-  XXXXXXXXXX  
-  |           
-              
-       *   |  
+   *    |     
 """
