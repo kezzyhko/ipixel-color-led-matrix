@@ -4,10 +4,10 @@ from PIL import Image
 
 
 Direction = Literal['vertical', 'horizontal']
-Alignment = Literal['left_top', 'left_center', 'left_bottom', 'center_top', 'center_center', 'center_bottom', 'right_top', 'right_center', 'right_bottom']
+Alignment = Literal['start', 'center', 'end']
 
 class Stack(Group):
-	def __init__(self, direction: Direction, alignment: Alignment = 'center_center', spacing: float = 0.0, padding: float = 0.0, children: Iterable[Component] = [], name: str|None = None, placement: Placement|None = None):
+	def __init__(self, direction: Direction, alignment: Alignment = 'center', spacing: float = 0.0, padding: float = 0.0, children: Iterable[Component] = [], name: str|None = None, placement: Placement|None = None):
 		super().__init__(name=name, placement=placement, children=children)
 		self._direction = direction
 		self._alignment = alignment
@@ -55,9 +55,18 @@ class Stack(Group):
 
 		# Pass 3: calculate positions
 		#TODO! implement alignment along main axis?
+		max_cross_size = min(max_cross_size, stack_size[cross_axis])
 		main_position = pixels_padding
 		for child in enabled_children:
-			cross_position = 0
+			cross_position = max_cross_size - child._render_properties.size[cross_axis]
+			match self._alignment:
+				case 'start':
+					cross_position *= 0.0
+				case 'center':
+					cross_position *= 0.5
+				case 'end':
+					cross_position *= 1.0
+			cross_position = round(cross_position)
 			child._render_properties.position = self._get_xy_from_maincross(main_position, cross_position)
 			main_position += child._render_properties.size[main_axis] + pixels_spacing
 
