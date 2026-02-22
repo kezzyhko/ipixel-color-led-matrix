@@ -183,7 +183,18 @@ class Component(metaclass=ABCMeta):
 		self._parent.remove_child(self)
 		self._parent = None
 
-	def init_render_pass(self):
+	def init_scene_root(self, width: int, height: int):
+		self._init_render_pass()
+		self.placement.x = 0.0
+		self.placement.y = 0.0
+		self.placement.width = 1.0
+		self.placement.height = 1.0
+		self._render_properties._x = 0
+		self._render_properties._y = 0
+		self._render_properties._max_width = width
+		self._render_properties._max_height = height
+
+	def _init_render_pass(self):
 		self._render_properties = RenderProperties(self)
 
 	@abstractmethod
@@ -223,7 +234,7 @@ class Component(metaclass=ABCMeta):
 			yield from terminal_helpers.add_indent(self.placement._get_tree_lines())
 		if include_placement_info and include_render_info:
 			yield ""
-		if include_render_info and self.parent is not None:
+		if include_render_info:
 			yield from terminal_helpers.add_indent(self._render_properties._get_tree_lines())
 
 
@@ -235,10 +246,10 @@ class Group(Component):
 			self.add_child(child)
 		self.background_color = (0, 0, 0, 0)
 
-	def init_render_pass(self):
-		super().init_render_pass()
+	def _init_render_pass(self):
+		super()._init_render_pass()
 		for child in self.children:
-			child.init_render_pass()
+			child._init_render_pass()
 
 	def update(self):
 		for child in self.children:
@@ -269,13 +280,22 @@ class Group(Component):
 			child._render_properties._max_height = round((child.placement.height or 1) * max_height)
 
 	def _render_implementation(self) -> Image.Image:
-		size = (self._render_properties.max_width, self._render_properties.max_height) # TODO: shrink if necessary
-		image = Image.new("RGBA", size, self.background_color)
+		image = Image.new("RGBA", self._render_properties.max_size, self.background_color)
+
+		width = height = 0
 		for child in self.children:
-			child.render()
 			rendered_image = child._render_properties.rendered_image
 			mask = rendered_image if rendered_image.mode == "RGBA" else None
 			image.paste(rendered_image, child._render_properties.position, mask)
+			width = max(width, child._render_properties.x + child._render_properties.width)
+			height = max(height, child._render_properties.y + child._render_properties.height)
+
+		# TODO!: do not crop right/bottom paddings
+		if self.placement.width is None:
+			image = image.crop((0, 0, width, image.height))
+		if self.placement.height is None:
+			image = image.crop((0, 0, image.width, height))
+			
 		return image
 
 	def render(self):
@@ -292,7 +312,6 @@ class Group(Component):
 			yield from terminal_helpers.add_indent(child._get_tree_lines(include_placement_info, include_render_info))
 			yield ""
 			
-
 	def add_child(self, child: Component):
 		if child in self.children:
 			return

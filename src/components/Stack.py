@@ -4,10 +4,10 @@ from PIL import Image
 
 
 Direction = Literal['vertical', 'horizontal']
-Alignment = Literal['left_top', 'left_center', 'left_bottom', 'center_top', 'center_center', 'center_bottom', 'right_top', 'right_center', 'right_bottom']
+Alignment = Literal['start', 'center', 'end']
 
 class Stack(Group):
-	def __init__(self, direction: Direction, alignment: Alignment = 'center_center', spacing: float = 0.0, padding: float = 0.0, children: Iterable[Component] = [], name: str|None = None, placement: Placement|None = None):
+	def __init__(self, direction: Direction, alignment: Alignment = 'center', spacing: float = 0.0, padding: float = 0.0, children: Iterable[Component] = [], name: str|None = None, placement: Placement|None = None):
 		super().__init__(name=name, placement=placement, children=children)
 		self._direction = direction
 		self._alignment = alignment
@@ -53,24 +53,20 @@ class Stack(Group):
 			max_cross_size = max(max_cross_size, child._render_properties.size[cross_axis])
 
 		# Pass 3: calculate positions
-		#TODO LAYOUT implement alignment
+		max_cross_size = min(max_cross_size, stack_size[cross_axis])
 		main_position = pixels_padding
 		for child in self.children:
-			cross_position = 0
+			cross_position = max_cross_size - child._render_properties.size[cross_axis]
+			match self._alignment:
+				case 'start':
+					cross_position *= 0.0
+				case 'center':
+					cross_position *= 0.5
+				case 'end':
+					cross_position *= 1.0
+			cross_position = round(cross_position)
 			child._render_properties.position = self._get_xy_from_maincross(main_position, cross_position)
 			main_position += child._render_properties.size[main_axis] + pixels_spacing
 
 	def _get_xy_from_maincross[T](self, main: T, cross: T) -> tuple[T, T]:
 		return (main, cross) if self._direction == 'horizontal' else (cross, main)
-
-	def _render_implementation(self) -> Image.Image:
-		image = Image.new("RGBA", self._render_properties.max_size, self.background_color)
-		width = height = 0
-		for child in self.children:
-			rendered_image = child._render_properties.rendered_image
-			mask = rendered_image if rendered_image.mode == "RGBA" else None
-			image.paste(rendered_image, child._render_properties.position, mask)
-			width = max(width, child._render_properties.x + child._render_properties.width)
-			height = max(height, child._render_properties.y + child._render_properties.height)
-		image = image.crop((0, 0, width, height))
-		return image

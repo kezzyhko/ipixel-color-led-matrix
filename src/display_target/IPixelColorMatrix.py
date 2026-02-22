@@ -1,3 +1,4 @@
+from typing import TypeGuard
 from . import DisplayTarget
 from PIL.Image import Image
 from bleak import BleakScanner
@@ -10,7 +11,7 @@ from helpers import image as image_helpers
 class IPixelColorMatrix(DisplayTarget):
 	def __init__(self, mac_address: str | None = None):
 		self._requested_mac_address = mac_address
-		self._client: AsyncClient
+		self._client: AsyncClient|None = None
 
 	@staticmethod
 	async def search_devices(timeout: float = 5.0) -> list[BLEDevice]:
@@ -38,17 +39,37 @@ class IPixelColorMatrix(DisplayTarget):
 			case _:
 				raise BleakDeviceNotFoundError(f"Multiple devices found: {devices}")
 
+	@staticmethod
+	def _is_connected(client: AsyncClient | None) -> TypeGuard[AsyncClient]:
+		return client is not None and client._session.is_connected  # pyright: ignore[reportAttributeAccessIssue]
+
 	@property
 	def is_connected(self) -> bool:
-		return self._client is not None and self._client._session.is_connected  # pyright: ignore[reportAttributeAccessIssue]
+		return IPixelColorMatrix._is_connected(self._client)
+
+	@property
+	def client(self) -> AsyncClient:
+		if not IPixelColorMatrix._is_connected(self._client):
+			raise ConnectionError("Not connected to device")
+		return self._client
+
+	@client.setter
+	def client(self, new_client: AsyncClient):
+		self._client = new_client
+
+	def _check_connection(self):
+		if not self.is_connected:
+			raise ConnectionError("Not connected to device")
 	
 	@property
 	def width(self) -> int:
-		return self._client.get_device_info().width
+		self._check_connection()
+		return self.client.get_device_info().width
 	
 	@property
 	def height(self) -> int:
-		return self._client.get_device_info().height
+		self._check_connection()
+		return self.client.get_device_info().height
 
 	async def setup(self):
 		if not self._client:
@@ -61,12 +82,10 @@ class IPixelColorMatrix(DisplayTarget):
 	async def teardown(self):
 		if not self.is_connected:
 			return
-		await self._client.set_fun_mode(False)
-		await self._client.disconnect()
+		await self.client.set_fun_mode(False)
+		await self.client.disconnect()
 
 	async def display(self, image: Image):
-		if not self.is_connected:
-			raise ConnectionError("Not connected to device")
-		
+		self._check_connection()
 		png_hex = image_helpers.convert_to_png_hex(image)
-		await self._client.send_image_hex(png_hex, ".png")
+		await self.client.send_image_hex(png_hex, ".png")

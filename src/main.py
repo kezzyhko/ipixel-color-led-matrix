@@ -51,6 +51,7 @@ class HelpFormatter(argparse.HelpFormatter):
 
 def parse_arguments():
 	parser = argparse.ArgumentParser(description="Led Matrix App", add_help=False, formatter_class=HelpFormatter)
+	# TODO: add --rtl flag to enable right-to-left layout
 
 	general = parser.add_argument_group('General')
 	general.add_argument('--help', '-h', action="help", help="Show this help message and exit")
