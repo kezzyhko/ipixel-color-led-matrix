@@ -8,7 +8,7 @@ git clone https://github.com/kezzyhko/led-matrix
 cd led-matrix
 conda env create
 conda activate led-matrix
-python .\src\main.py -c example_config.cfg --debug
+python ./src/main.py -c example_config.cfg --emulator
 ```
 
 ### Python
@@ -17,7 +17,7 @@ python .\src\main.py -c example_config.cfg --debug
 git clone https://github.com/kezzyhko/led-matrix
 cd led-matrix
 pip install -r requirements.txt
-python .\src\main.py -c example_config.cfg --debug
+python ./src/main.py -c example_config.cfg --emulator
 ```
 
 ## Honorable mentions

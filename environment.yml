@@ -6,10 +6,10 @@ dependencies:
   - python>=3.8
   - pillow=12.0.0
   - colorama=0.4.6
-  - bleak=2.0.0
   - configargparse=1.7.1
   - pip
+  # bleak: conda-forge has no aarch64/armv7l builds (Pi); install via pip (or piwheels on Pi)
   - pip:
+    - bleak==2.0.0
     - pypixelcolor==0.4.0
-    - rpi-rgb-led-matrix-scene-composer==0.1.1
     - freeweather==0.1.1
