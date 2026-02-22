@@ -3,7 +3,7 @@ fps = 2
 
 [palette]
 "-" = "#f9c434"
-"O" = "#f9aa34"
+"O" = "#ff7300"
 
 # [[frames]]
 # bitmap = """

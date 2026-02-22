@@ -39,6 +39,7 @@ class WeatherComponent(Stack):
 		self.temperature_text.text = f"{round(weather.temperature)}°C"
 		icon_name = self._get_icon_name(weather)
 		self.type_icon.path = get_asset_path(f"weather/{icon_name}.icon.toml")
+		# TODO!: fix cloud outline in all icons
 
 	def _get_icon_name(self, weather: CurrentWeather) -> str:
 		weather_type_info = WeatherTypeInfo.from_code(weather.weathercode)
