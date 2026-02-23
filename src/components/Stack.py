@@ -15,17 +15,18 @@ class Stack(Group):
 		self._padding = padding
 
 	def _calculate_children_constraints(self):
+		enabled_children = self._get_enabled_children()
 		main_axis, cross_axis = (0, 1) if self._direction == 'horizontal' else (1, 0)
 		stack_size = self._render_properties.max_size
 		pixels_spacing = round(self._spacing * stack_size[main_axis])
 		pixels_padding = round(self._padding * stack_size[main_axis])
 		
 		max_cross_size: int = 0
-		main_size_left: int = stack_size[main_axis] - pixels_spacing * (len(self.children) - 1) - pixels_padding * 2
+		main_size_left: int = stack_size[main_axis] - pixels_spacing * (len(enabled_children) - 1) - pixels_padding * 2
 		total_weight: float = 0.0
 
 		# Pass 1: render already defined sizes and get stats for pass 2
-		for child in self.children:
+		for child in enabled_children:
 			child_main_size = child.placement.size[main_axis]
 			child_cross_size = child.placement.size[cross_axis]
 			pixels_max_cross_size = round(child_cross_size * stack_size[cross_axis]) if child_cross_size is not None else stack_size[cross_axis]
@@ -43,7 +44,7 @@ class Stack(Group):
 				max_cross_size = max(max_cross_size, child_size[cross_axis])
 
 		# Pass 2: render rest of components by weight
-		for child in self.children:
+		for child in enabled_children:
 			if child._render_properties.is_max_size_axis_ready[main_axis]:
 				continue
 			pixels_max_main_size = round(main_size_left * child.placement.weight / total_weight)
@@ -53,9 +54,10 @@ class Stack(Group):
 			max_cross_size = max(max_cross_size, child._render_properties.size[cross_axis])
 
 		# Pass 3: calculate positions
+		#TODO! implement alignment along main axis?
 		max_cross_size = min(max_cross_size, stack_size[cross_axis])
 		main_position = pixels_padding
-		for child in self.children:
+		for child in enabled_children:
 			cross_position = max_cross_size - child._render_properties.size[cross_axis]
 			match self._alignment:
 				case 'start':

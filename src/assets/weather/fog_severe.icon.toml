@@ -1,0 +1,20 @@
+# TODO!: fix icon
+[configuration]
+fps = 1.5
+
+[palette]
+"-" = "#8a99a6"
+"+" = "#6e7d8a"
+"=" = "#343b42"
+
+[[frames]]
+bitmap = """
+                
+                
+                
+                
+                
+                
+                
+                
+"""

@@ -1,9 +1,10 @@
 from . import Stack
 from app import context
 from helpers import AsciiBitmapFont
-from helpers.weather import WeatherApi, WeatherLocation
+from helpers.weather import WeatherApi, WeatherLocation, WeatherTypeInfo, CurrentWeather
 from . import Icon, TextComponent, Placement
 from assets import get_asset_path
+from datetime import datetime
 
 
 class WeatherComponent(Stack):
@@ -11,7 +12,7 @@ class WeatherComponent(Stack):
 		location = location or context.weather_location.get()
 		self._weather_api: WeatherApi = WeatherApi(location)
 		
-		self.type_icon = Icon(name="weather_type_icon", path=get_asset_path("weather/rain.icon.toml"))
+		self.type_icon = Icon(name="weather_type_icon", path=get_asset_path("loading.icon.toml"))
 		self.temperature_text = TextComponent(name="temperature_text", text="", color=temperature_color, font=temperature_font)
 
 		super().__init__(
@@ -24,16 +25,42 @@ class WeatherComponent(Stack):
 			padding = 1/16,
 		)
 		
-		# TODO: add precipitation icon, wind speed bar, and temperature text as separate components
-		# TODO: add loading icon
+		# TODO: wind speed bar as separate component
 
 	def update(self):
 		super().update()
 		weather = self._weather_api.latest_current
-		is_loading = weather is None
-		# TODO: show/hide components
-		if is_loading:
+		if weather is None:
+			self.temperature_text.placement.enabled = False
+			self.type_icon.path = get_asset_path("loading.icon.toml")
 			return
 
+		self.temperature_text.placement.enabled = True
 		self.temperature_text.text = f"{round(weather.temperature)}°C"
-		# TODO: change other components' properties
+		icon_name = self._get_icon_name(weather)
+		self.type_icon.path = get_asset_path(f"weather/{icon_name}.icon.toml")
+		# TODO!: fix cloud outline in all icons
+
+	def _get_icon_name(self, weather: CurrentWeather) -> str:
+		weather_type_info = WeatherTypeInfo.from_code(weather.weathercode)
+
+		# Determine celestial body (sun/moon)
+		hour = datetime.fromisoformat(weather.time).hour
+		is_night_time = hour < 6 or hour >= 19 # TODO: Use time of the actual sunrise/sunset
+		celestial_body = 'moon' if is_night_time else 'sun'
+		#TODO: Include lunar phase? Detect rotation of moon based on location??
+		
+		# Choose power name
+		match weather_type_info.power:
+			case p if p > 0.66:
+				power_name = 'severe'
+			case p if p < 0.33:
+				power_name = 'light'
+			case _:
+				power_name = 'moderate'
+
+		# Choose and return icon name
+		if weather_type_info.type == 'clear':
+			return f"{weather_type_info.type}_{celestial_body}"
+		else:
+			return f"{weather_type_info.type}_{power_name}"

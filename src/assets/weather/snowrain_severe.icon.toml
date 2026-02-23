@@ -1,0 +1,128 @@
+[configuration]
+fps = 3
+
+[palette]
+"*" = "#ffffff"
+"|" = "#2c67ef"
+"O" = "#9bb8cc"
+"X" = "#02005b"
+
+# [[frames]]
+# bitmap = """
+#        XX     
+#    XX XOOX    
+#   XOOXOOOOXX  
+#  XOOOOOOOOOOX 
+#   XXXXXXXXXX  
+#               
+#               
+#               
+# """
+
+[[frames]]
+bitmap = """
+       XX     
+   XX XOOX    
+  XOOXOOOOXX  
+ XOOOOOOOOOOX 
+  XXXXXXXXXX  
+  * | |      
+      |   |   
+        * |   
+"""
+
+[[frames]]
+bitmap = """
+       XX     
+   XX XOOX    
+  XOOXOOOOXX  
+ XOOOOOOOOOOX 
+  XXXXXXXXXX  
+    |        
+  * | |       
+      |   |   
+"""
+
+[[frames]]
+bitmap = """
+       XX     
+   XX XOOX    
+  XOOXOOOOXX  
+ XOOOOOOOOOOX 
+  XXXXXXXXXX  
+        |    
+    |         
+  * | |       
+"""
+
+[[frames]]
+bitmap = """
+       XX     
+   XX XOOX    
+  XOOXOOOOXX  
+ XOOOOOOOOOOX 
+  XXXXXXXXXX  
+        | *  
+        |    
+    |         
+"""
+
+[[frames]]
+bitmap = """
+       XX     
+   XX XOOX    
+  XOOXOOOOXX  
+ XOOOOOOOOOOX 
+  XXXXXXXXXX  
+  |   *      
+        | *  
+        |     
+"""
+
+[[frames]]
+bitmap = """
+       XX     
+   XX XOOX    
+  XOOXOOOOXX  
+ XOOOOOOOOOOX 
+  XXXXXXXXXX  
+  | *        
+  |   *      
+        | *   
+"""
+
+[[frames]]
+bitmap = """
+       XX     
+   XX XOOX    
+  XOOXOOOOXX  
+ XOOOOOOOOOOX 
+  XXXXXXXXXX  
+             
+  | *        
+  |   *       
+"""
+
+[[frames]]
+bitmap = """
+       XX     
+   XX XOOX    
+  XOOXOOOOXX  
+ XOOOOOOOOOOX 
+  XXXXXXXXXX  
+        * |  
+             
+  | *         
+"""
+
+[[frames]]
+bitmap = """
+       XX     
+   XX XOOX    
+  XOOXOOOOXX  
+ XOOOOOOOOOOX 
+  XXXXXXXXXX  
+      |   |  
+        * |  
+              
+"""

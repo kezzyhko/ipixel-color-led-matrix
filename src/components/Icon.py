@@ -7,20 +7,39 @@ from helpers import Color
 from . import SizingMode, Placement
 
 
+# TODO: add support for 'sliding window' and other animation types
 class Icon(Component):
 	def __init__(self, path: Path | str, name: str|None = None, placement: Placement|None = None):
 		super().__init__(name=name, placement=placement)
-		self.path = path
+		self._path: Path
+		self._current_frame_index: float
+		self._last_update_time: float|None
+		self.frames: list[Image.Image] = []
+		self.frames_amount: int
+		self.fps: float
+		self._set_path_and_reload(Path(path))
+
+	@property
+	def path(self) -> Path:
+		return self._path
+
+	@path.setter
+	def path(self, new_path: Path):
+		if new_path == self._path:
+			return
+		self._set_path_and_reload(new_path)
+
+	def _set_path_and_reload(self, new_path: Path):
+		self._path = new_path
 		self._load_file()
-		
-		self._current_frame_index: float = 0
-		self._last_frame_time = None
+		self._current_frame_index = 0
+		self._last_update_time = None
 		
 	def _load_file(self):
 		with open(self.path, "rb") as f:
 			icon_data = tomllib.load(f)
 	
-		palette = {}
+		palette = {} #TODO: ability to include palette from a separate '.palette.toml' file
 		for character, color in icon_data['palette'].items():
 			palette[character] = Color(color).rgba_tuple_int
 		if " " not in palette:
@@ -29,7 +48,10 @@ class Icon(Component):
 		self.frames = []
 		for frame in icon_data['frames']:
 			bitmap = frame['bitmap'].strip("\n").split("\n")
-			self.frames.append(self._parse_frame_bitmap(bitmap, palette))
+			image = self._parse_frame_bitmap(bitmap, palette)
+			length = frame.get('length', 1)
+			for _ in range(length):
+				self.frames.append(image)
 
 		self.frames_amount = len(self.frames)
 		self.fps = icon_data['configuration']['fps']
@@ -40,6 +62,8 @@ class Icon(Component):
 		frame = Image.new('RGBA', (width, height), (0, 0, 0, 0))
 		for y, row in enumerate(bitmap):
 			for x, pixel in enumerate(row):
+				if pixel not in palette:
+					raise ValueError(f"Pixel '{pixel}' not in palette for icon (file: {self.path}, scene path: {self.get_full_path()})")
 				color = palette[pixel]
 				frame.putpixel((x, y), color)
 		return frame
@@ -49,10 +73,10 @@ class Icon(Component):
 
 	def update(self):
 		current_time = datetime.now().timestamp()
-		time_elapsed = (current_time - self._last_frame_time) if self._last_frame_time else 0
+		time_elapsed = (current_time - self._last_update_time) if self._last_update_time else 0
 		self._current_frame_index += time_elapsed * self.fps
 		self._current_frame_index %= self.frames_amount
-		self._last_frame_time = current_time
+		self._last_update_time = current_time
 
 	def _render_implementation(self) -> Image.Image:
 		return self.frames[int(self._current_frame_index)]
