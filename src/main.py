@@ -15,10 +15,17 @@ async def main():
 	))
 
 	display_target = GUIDisplayTarget(*args.emulator_size) if args.emulator else IPixelColorMatrix(args.mac_address)
-	app = LedMatrixApp(display_target=display_target, fps=args.fps, debug_system=args.debug_system)
+	app = LedMatrixApp(
+		display_target=display_target,
+		fps=args.fps,
+		auto_reconnect=args.auto_reconnect,
+		debug_system=args.debug_system,
+	)
 
 	try:
 		await app.run()
+	except KeyboardInterrupt or CancelledError:
+		print("Interrupted, stopping...")
 	finally:
 		await app.cleanup()
 
@@ -61,7 +68,8 @@ def parse_arguments():
 	display = parser.add_argument_group('Display')
 	display.add_argument('--emulator', '-e', action="store_true", help="Use GUI display instead of physical display")
 	display.add_argument('--emulator-size', metavar=('WIDTH', 'HEIGHT'), type=int, nargs=2, default=(64, 32), help="Defines the size of the terminal display. Ignored if --emulator is not specified.")
-	display.add_argument('--mac-address', type=str, default=None, help="MAC address of the iPixel Color Matrix. Ignored if --emulator is specified. Default: %(default)s - search for device and use it if only one device is found.")
+	display.add_argument('--mac-address', type=str, default=None, help="MAC address of the iPixel Color Matrix. Ignored if --emulator is specified. Default: %(default)s - search for device and use it if exactly one device is found.")
+	display.add_argument('--no-auto-reconnect', action="store_false", default=True, dest="auto_reconnect", help="Automatically reconnect to external display if the connection is lost. Ignored if --emulator is specified.")
 	display.add_argument('--fps', type=float, default=10.0, help="Update frequency.")
 
 	locale = parser.add_argument_group('Locale')

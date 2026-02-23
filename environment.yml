@@ -5,9 +5,11 @@ channels:
 dependencies:
   - python>=3.8
   - pillow=12.0.0
+  - numpy=2.4.1
   - colorama=0.4.6
   - bleak=2.0.0
   - configargparse=1.7.1
+  - blinker==1.9.0
   - pip
   - pip:
     - pypixelcolor==0.4.0

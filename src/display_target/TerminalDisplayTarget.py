@@ -8,8 +8,10 @@ from io import TextIOWrapper
 
 class TerminalDisplayTarget(DisplayTarget):
 	def __init__(self, width: int, height: int):
+		super().__init__()
 		self._width = width
 		self._height = height
+		self._is_available = True
 
 		output = sys.stdout
 		if sys.platform == "win32":
@@ -24,12 +26,23 @@ class TerminalDisplayTarget(DisplayTarget):
 	@property
 	def height(self) -> int:
 		return self._height
+
+	@property
+	def is_available(self) -> bool:
+		return self._is_available
 	
 	async def setup(self):
+		if self._is_available:
+			return
 		print("Using terminal as display")
 		terminal_helpers.set_alternate_screen(True, self.output)
+		self._is_available = True
 	
 	async def teardown(self):
+		if not self._is_available:
+			return
+		self._send_unavailable_event()
+		self._is_available = False
 		terminal_helpers.set_alternate_screen(False, self.output)
 		print("Exiting display emulator mode")
 
