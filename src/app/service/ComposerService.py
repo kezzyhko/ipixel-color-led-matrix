@@ -17,7 +17,7 @@ class ComposerService(Service):
 		# TODO!: Initial scene should be passed as an argument
 		self.scene = create_briefing_scene()
 
-		self._restarting = False
+		self._is_stopping = False
 		self.display_target = display_target
 		if auto_reconnect:
 			self.display_target.connect_unavailable(self._on_display_unavailable_sync)
@@ -38,13 +38,14 @@ class ComposerService(Service):
 		await self.on_start()
 
 	async def on_stop(self):
+		self._is_stopping = True
 		self._timer.stop()
 		await self.display_target.teardown()
+		self._is_stopping = False
 
 	async def _on_display_unavailable(self):
-		if self._restarting:
+		if self._is_stopping:
 			return
-		self._restarting = True
 		warnings.warn("Display target is unavailable, trying to reconnect...")
 		attempt_amount = 0
 		while not self.display_target.is_available:
@@ -58,7 +59,6 @@ class ComposerService(Service):
 				warnings.warn(f"Error during restart: {traceback.format_exc()}")
 			await asyncio.sleep(1.0)
 		warnings.warn("Reconnected, continuing...")
-		self._restarting = False
 
 	def _on_display_unavailable_sync(self):
 		asyncio.create_task(self._on_display_unavailable())
